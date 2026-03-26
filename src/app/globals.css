@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F9FAFB;
+  --foreground: #111827;
+  --primary: #111827;
+  --primary-accent: #D4AF37;
+  --surface: #FFFFFF;
+  --surface-muted: #F3F4F6;
+  --text-muted: #374151;
+  --border: #E5E7EB;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-accent: var(--primary-accent);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  
+  --font-serif: var(--font-playfair-display);
+  --font-sans: var(--font-inter);
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-semibold;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+  }
+  
+  .glass-dark {
+    @apply bg-primary/80 backdrop-blur-xl border border-white/10 shadow-2xl;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gold-gradient {
+    @apply bg-gradient-to-r from-[#D4AF37] to-[#E1C16E] bg-clip-text text-transparent;
+  }
+}
