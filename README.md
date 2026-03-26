@@ -1,6 +1,6 @@
 # 🏰 INMO3 — Real Estate (Xinzo de Limia, Spain)
 
-![INMO3 Branding](https://cdn.hlorenzoz.com/images/inmobiliary-inmo3/hero.webp)
+![INMO3 Branding](https://cdn.hlorenzoz.com/inmobiliary-inmo3/hero.webp)
 
 > **"Galician Luxury & Trust"** — Premium Real Estate services in Xinzo de Limia, Spain.
 
