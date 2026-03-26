@@ -50,7 +50,7 @@ export default function Home() {
           {/* Note: In a real deploy, these would be the R2 URLs */}
           <div className="absolute inset-0 bg-black/40 z-10" />
           <Image 
-            src="/images/hero.png" 
+            src="https://cdn.hlorenzoz.com/images/inmobiliary_inmo3/hero.webp" 
             alt="Interior de lujo en Xinzo de Limia" 
             fill 
             sizes="100vw"
@@ -113,7 +113,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass overflow-hidden rounded-[32px] flex flex-col lg:flex-row shadow-2xl">
             <div className="lg:w-1/2 relative h-80 lg:h-auto">
-              <Image src="/images/services.png" alt="Asesoramiento profesional" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+              <Image src="https://cdn.hlorenzoz.com/images/inmobiliary_inmo3/services.webp" alt="Asesoramiento profesional" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
             </div>
             <div className="lg:w-1/2 p-12 lg:p-20 flex flex-col justify-center">
               <motion.div {...animations.fadeIn}>
@@ -180,7 +180,7 @@ export default function Home() {
 
           <div className="mt-20 flex flex-col lg:flex-row items-center gap-12 p-8 glass rounded-[32px]">
             <div className="lg:w-1/3 relative h-[400px] w-full rounded-2xl overflow-hidden">
-              <Image src="/images/team.png" alt="Equipo INMO3" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+              <Image src="https://cdn.hlorenzoz.com/images/inmobiliary_inmo3/team.webp" alt="Equipo INMO3" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
             </div>
             <div className="lg:w-2/3">
               <h3 className="text-3xl font-serif mb-4">Más que una inmobiliaria, somos tu vecino.</h3>
