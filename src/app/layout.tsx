@@ -13,11 +13,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "INMO3 - Inmobiliaria de Confianza en Xinzo de Limia, Ourense, Spain",
+  title: "INMO3 - Inmobiliaria en Xinzo de Limia | Compra, Venta y Alquiler",
   description: "Encuentra tu hogar en Xinzo de Limia con INMO3. Inmobiliaria de confianza con atención personalizada, tasaciones gratuitas y profesionalismo garantizado.",
   keywords: ["inmobiliaria xinzo de limia", "viviendas ourense", "alquiler xinzo de limia", "tasacion propiedades galicia", "inmo3"],
   openGraph: {
-    title: "INMO3 - Inmobiliaria de Confianza en Xinzo de Limia, Ourense, Spain",
+    title: "INMO3 - Inmobiliaria de Confianza en Xinzo de Limia",
     description: "Profesionalismo y calidez humana en cada transacción inmobiliaria en la zona de A Limia.",
     url: "https://inmo3.es",
     siteName: "INMO3",
@@ -39,7 +39,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     "name": "INMO3 Inmobiliaria",
-    "image": "https://cdn.hlorenzoz.com/inmobiliary-inmo3/hero.webp",
+    "image": "https://cdn.hlorenzoz.com/images/inmobiliary_inmo3/hero.webp",
     "@id": "https://inmo3.es",
     "url": "https://inmo3.es",
     "telephone": "+34988461585",
