@@ -1,7 +1,7 @@
 {
-  "name": "inmo3_inmobiliaria",
+  "name": "demo_inmobiliary",
   "version": "0.1.0",
-  "description": "Website for INMO3 Inmobiliaria - Xinzo de Limia",
+  "description": "Base template for real estate websites (Multi-tenant)",
   "private": true,
   "scripts": {
     "dev": "next dev",

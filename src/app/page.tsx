@@ -69,7 +69,7 @@ export default function Home() {
               Inmobiliaria de Confianza en Xinzo
             </span>
             <h1 className="text-5xl md:text-7xl font-serif mb-6 leading-tight text-balance">
-              Encuentra tu lugar en <span className="gold-gradient">Xinzo de Limia</span>
+              Encuentra tu lugar en <span className="gold-gradient">Xinzo de Limia, Ourense, Spain</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed font-light">
               Profesionalismo, transparencia y calidez humana. Gestionamos tu propiedad en la comarca de A Limia con la excelencia que mereces.
