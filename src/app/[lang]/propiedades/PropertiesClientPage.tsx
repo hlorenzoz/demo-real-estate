@@ -7,6 +7,7 @@ import { BedDouble, Bath, Square, ArrowRight, SlidersHorizontal, MapPin, Check }
 import { motion, AnimatePresence } from "framer-motion";
 import { Dictionary } from "../../../get-dictionary";
 import { Property } from "../../../types/property";
+import PropertyCard from "../../../components/PropertyCard";
 
 interface PropertiesClientPageProps {
   properties: Property[];
@@ -16,6 +17,7 @@ interface PropertiesClientPageProps {
 
 export default function PropertiesClientPage({ properties, lang, dict }: PropertiesClientPageProps) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
+  const [activeContractType, setActiveContractType] = useState<string>("all");
   const [activeSort, setActiveSort] = useState<string>("default");
 
   const d = dict.properties_page;
@@ -34,12 +36,16 @@ export default function PropertiesClientPage({ properties, lang, dict }: Propert
       list = list.filter((p) => p.type === activeFilter);
     }
 
+    if (activeContractType !== "all") {
+      list = list.filter((p) => p.contractType === activeContractType);
+    }
+
     if (activeSort === "price_asc") list.sort((a, b) => a.price - b.price);
     else if (activeSort === "price_desc") list.sort((a, b) => b.price - a.price);
     else if (activeSort === "area") list.sort((a, b) => b.area - a.area);
 
     return list;
-  }, [properties, activeFilter, activeSort]);
+  }, [properties, activeFilter, activeContractType, activeSort]);
 
   const formatPrice = (p: number) =>
     new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", {
@@ -80,6 +86,27 @@ export default function PropertiesClientPage({ properties, lang, dict }: Propert
                 </button>
               );
             })}
+          </div>
+
+          {/* Contract Type Pills (Sale/Rent) */}
+          <div className="flex flex-wrap gap-3 mt-4 lg:mt-0">
+            {[
+              { id: "all", label: d.filter_all },
+              { id: "sale", label: dict.home.for_sale },
+              { id: "rent", label: dict.home.for_rent },
+            ].map((c) => (
+              <button
+                key={c.id}
+                onClick={() => setActiveContractType(c.id)}
+                className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border-2 ${
+                  activeContractType === c.id
+                    ? "bg-primary text-white border-primary shadow-lg"
+                    : "bg-white text-text-muted border-slate-100 hover:border-primary hover:text-primary"
+                }`}
+              >
+                {c.label}
+              </button>
+            ))}
           </div>
 
           {/* Sort + Count */}
@@ -125,92 +152,12 @@ export default function PropertiesClientPage({ properties, lang, dict }: Propert
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: i * 0.06 }}
                 >
-                  <Link
-                    href={`/${lang}/propiedades/${property.id}`}
-                    className="bg-white rounded-[40px] overflow-hidden border border-slate-50 group shadow-sm hover:shadow-[0_48px_100px_-20px_rgba(0,0,0,0.1)] transition-all flex flex-col h-full block"
-                  >
-                    <div className="relative h-72 overflow-hidden">
-                      <Image
-                        src={property.image}
-                        alt={property.location}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-700"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                        priority={i < 4}
-                      />
-                      <div className="absolute top-6 left-6 flex gap-2">
-                        <span className="bg-white/95 backdrop-blur px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary shadow-lg border border-white/20">
-                          {typeLabel(property.type)}
-                        </span>
-                        <span className={`backdrop-blur px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg border border-white/20 ${
-                          property.contractType === "rent" 
-                            ? "bg-secondary-accent/90 text-white" 
-                            : "bg-primary-accent/90 text-primary"
-                        }`}>
-                          {property.contractType === "rent" 
-                            ? dict.home.for_rent
-                            : dict.home.for_sale
-                          }
-                        </span>
-                        {property.featured && (
-                          <span className="bg-white/95 backdrop-blur px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary shadow-lg">
-                            ★
-                          </span>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="p-10 flex flex-col flex-grow">
-                      <div className="mb-4">
-                        {property.city && (
-                          <div className="flex items-center gap-1 text-xs text-text-muted font-bold mb-2">
-                            <MapPin size={10} />
-                            {property.city}
-                          </div>
-                        )}
-                        <h2 className="text-2xl font-serif text-primary leading-tight mb-2 tracking-tight">
-                          {property.location}
-                        </h2>
-                        <div className="text-2xl font-black text-primary-accent italic">
-                          {formatPrice(property.price)}
-                        </div>
-                      </div>
-
-                      {((lang === "es" ? property.description_es : property.description_en)) && (
-                        <p className="text-sm text-text-muted leading-relaxed mb-6 line-clamp-2">
-                          {lang === "es" ? property.description_es : property.description_en}
-                        </p>
-                      )}
-
-                      <div className="flex items-center justify-between py-5 border-y border-slate-50 mb-6">
-                        <div className="flex flex-col items-center gap-1">
-                          <BedDouble size={18} className="text-text-muted opacity-40" />
-                          <span className="text-xs font-black text-text-muted">
-                            {property.bedrooms} {dict.home.beds}
-                          </span>
-                        </div>
-                        <div className="w-px h-8 bg-slate-50" />
-                        <div className="flex flex-col items-center gap-1">
-                          <Bath size={18} className="text-text-muted opacity-40" />
-                          <span className="text-xs font-black text-text-muted">
-                            {property.bathrooms} {dict.home.baths}
-                          </span>
-                        </div>
-                        <div className="w-px h-8 bg-slate-50" />
-                        <div className="flex flex-col items-center gap-1">
-                          <Square size={16} className="text-text-muted opacity-40" />
-                          <span className="text-xs font-black text-text-muted">
-                            {property.area} m²
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="mt-auto w-full py-4 rounded-2xl border-2 border-slate-50 text-text-muted flex items-center justify-center gap-3 font-black uppercase text-[10px] tracking-widest group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all">
-                        {d.view_detail}
-                        <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
+                  <PropertyCard 
+                    property={property} 
+                    lang={lang} 
+                    dict={dict.home} 
+                    priority={i < 4}
+                  />
                 </motion.div>
               ))}
             </motion.div>

@@ -50,7 +50,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
           <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-text-muted mt-1 opacity-60">Real Estate</span>
         </Link>
         <div className="hidden md:flex items-center gap-10">
-          <Link href={getLocalizedPath(lang, 'propiedades')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.propiedades}</Link>
+          <Link href={getLocalizedPath(lang, 'listings')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.listings}</Link>
           <Link href={getLocalizedPath(lang, 'alquiler')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.rentals}</Link>
           <Link href={`/${lang}/#vender`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.vender}</Link>
           <Link href={`/${lang}/#nosotros`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.nosotros}</Link>

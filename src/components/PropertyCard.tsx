@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BedDouble, Bath, Square, Heart, ArrowRight } from "lucide-react";
@@ -21,6 +21,21 @@ import { getLocalizedPath } from "../lib/routes";
 export default function PropertyCard({ property, lang, dict, priority }: PropertyCardProps) {
   const propertyPath = getLocalizedPath(lang, 'propiedades');
   
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    const liked = localStorage.getItem(`property-liked-${property.id}`);
+    if (liked === "true") setIsLiked(true);
+  }, [property.id]);
+
+  const toggleLike = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newState = !isLiked;
+    setIsLiked(newState);
+    localStorage.setItem(`property-liked-${property.id}`, String(newState));
+  };
+
   const formattedPrice = new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", {
     style: "currency",
     currency: "EUR",
@@ -57,11 +72,15 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
             </span>
         </div>
         <button 
-          className="absolute top-6 right-6 w-12 h-12 rounded-2xl bg-white/95 backdrop-blur flex items-center justify-center text-primary-accent shadow-lg border border-white/20 hover:bg-primary-accent hover:text-white transition-all"
-          onClick={(e) => e.preventDefault()}
+          className={`absolute top-6 right-6 w-12 h-12 rounded-2xl bg-white/95 backdrop-blur flex items-center justify-center shadow-lg border border-white/20 transition-all ${
+            isLiked 
+              ? "text-red-500 bg-white" 
+              : "text-primary-accent hover:bg-primary-accent hover:text-white"
+          }`}
+          onClick={toggleLike}
           aria-label="Save property"
         >
-          <Heart size={20} />
+          <Heart size={20} fill={isLiked ? "currentColor" : "none"} />
         </button>
       </div>
 

@@ -1,7 +1,7 @@
 {
   "navbar": {
     "home": "Home",
-    "propiedades": "Properties",
+    "listings": "Listings",
     "vender": "Services",
     "nosotros": "About Us",
     "blog": "Blog",
@@ -11,6 +11,7 @@
   },
   "paths": {
     "propiedades": "properties",
+    "listings": "listings",
     "vender": "sell",
     "nosotros": "about-us",
     "blog": "blog",
@@ -29,12 +30,12 @@
     "search_button": "Search"
   },
   "home": {
-    "property_title": "Featured Properties",
+    "property_title": "Listings",
     "property_subtitle": "Discover our exclusive selection of properties in your city and surroundings.",
     "cta_banner": "Your next property",
     "cta_banner_accent": "deserves excellence.",
     "cta_banner_desc": "Every detail matters. From the first visit to the signing before a notary, we are by your side.",
-    "cta_catalog": "Check Catalog",
+    "cta_catalog": "Check Listings",
     "view_property": "View Property",
     "for_rent": "For Rent",
     "for_sale": "For Sale",

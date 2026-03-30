@@ -78,7 +78,7 @@ export default async function Home({
         }}
       />
       <Navbar lang={locale} dict={dict.navbar} />
-      <HeroClient dict={dict.hero} />
+      <HeroClient dict={dict.hero} lang={locale} />
 
       {/* Featured Properties (Sale) */}
       <section id="propiedades" className="py-32 px-6 bg-white overflow-hidden">
@@ -92,7 +92,7 @@ export default async function Home({
                 {dict.home.property_subtitle}
               </p>
             </div>
-            <Link href={getLocalizedPath(locale, 'propiedades')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent border-b-2 border-primary-accent pb-2 hover:opacity-70 transition-all">
+            <Link href={getLocalizedPath(locale, 'listings')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent border-b-2 border-primary-accent pb-2 hover:opacity-70 transition-all">
               {dict.home.cta_catalog} <ArrowRight size={18} />
             </Link>
           </MotionWrapper>
@@ -180,7 +180,7 @@ export default async function Home({
             <MotionWrapper className="max-w-xl text-white">
               <h2 className="text-4xl md:text-6xl font-serif mb-6 leading-tight">{dict.home.cta_banner} <br/> <span className="gold-gradient italic">{dict.home.cta_banner_accent}</span></h2>
               <p className="text-xl text-gray-200 mb-10 font-bold">{dict.home.cta_banner_desc}</p>
-              <Link href={getLocalizedPath(locale, 'propiedades')} className="bg-primary-accent text-primary px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl inline-block">
+              <Link href={getLocalizedPath(locale, 'listings')} className="bg-primary-accent text-primary px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl inline-block">
                 {dict.home.cta_catalog}
               </Link>
             </MotionWrapper>

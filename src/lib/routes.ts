@@ -6,6 +6,7 @@ export const routeMappings: Record<string, Record<string, string>> = {
     'about-us': 'about-us',
     'faq': 'faq',
     'rentals': 'alquiler',
+    'listings': 'listings',
     'blog': 'blog'
   },
   es: {
@@ -15,6 +16,7 @@ export const routeMappings: Record<string, Record<string, string>> = {
     'nosotros': 'about-us',
     'faq': 'faq',
     'alquiler': 'alquiler',
+    'listados': 'listings',
     'blog': 'blog'
   }
 };
@@ -24,7 +26,7 @@ export const reverseMappings: Record<string, Record<string, string>> = {
   es: Object.fromEntries(Object.entries(routeMappings.es).map(([k, v]) => [v, k]))
 };
 
-export type InternalRoute = 'propiedades' | 'contact' | 'vender' | 'about-us' | 'blog' | 'faq' | 'page' | 'alquiler';
+export type InternalRoute = 'propiedades' | 'contact' | 'vender' | 'about-us' | 'blog' | 'faq' | 'page' | 'alquiler' | 'listings';
 
 /**
  * Returns the localized path prefix and slug for a given internal route.

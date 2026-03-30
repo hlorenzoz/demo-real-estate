@@ -5,20 +5,22 @@ import { Search, MapPin, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Dictionary } from "../get-dictionary";
+import { Dictionary, Locale } from "../get-dictionary";
+import { getLocalizedPath } from "../lib/routes";
 
 interface HeroProps {
   dict: Dictionary["hero"];
+  lang: Locale;
 }
 
 
-export default function HeroClient({ dict }: HeroProps) {
+export default function HeroClient({ dict, lang }: HeroProps) {
   return (
     <section className="relative h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10 shadow-[inset_0_-200px_400px_-100px_rgba(0,0,0,0.8)]" />
         <Image 
-          src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero.webp" 
+          src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero-1.webp" 
           alt="Luxury Interior in your City" 
           fill 
           sizes="100vw"
@@ -45,7 +47,7 @@ export default function HeroClient({ dict }: HeroProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
             <Link 
-              href="#propiedades" 
+              href={getLocalizedPath(lang, 'propiedades')} 
               className="bg-primary-accent text-primary px-10 py-5 rounded-2xl flex items-center justify-center gap-3 font-black uppercase text-xs tracking-widest hover:scale-105 transition-all group shadow-2xl"
             >
               {dict.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
