@@ -12,10 +12,10 @@ describe("PWAInstaller", () => {
     render(<PWAInstaller />);
     
     // Create and dispatch event
-    const event = new Event("beforeinstallprompt");
-    (event as any).preventDefault = vi.fn();
-    (event as any).prompt = vi.fn();
-    (event as any).userChoice = Promise.resolve({ outcome: "accepted" });
+    const event = new Event("beforeinstallprompt") as Event & { prompt: () => void; userChoice: Promise<{outcome: string}> };
+    event.preventDefault = vi.fn();
+    event.prompt = vi.fn();
+    event.userChoice = Promise.resolve({ outcome: "accepted" });
     
     act(() => {
       window.dispatchEvent(event);
@@ -30,10 +30,10 @@ describe("PWAInstaller", () => {
     render(<PWAInstaller />);
     
     const promptSpy = vi.fn();
-    const event = new Event("beforeinstallprompt");
-    (event as any).preventDefault = vi.fn();
-    (event as any).prompt = promptSpy;
-    (event as any).userChoice = Promise.resolve({ outcome: "accepted" });
+    const event = new Event("beforeinstallprompt") as Event & { prompt: () => void; userChoice: Promise<{outcome: string}> };
+    event.preventDefault = vi.fn();
+    event.prompt = promptSpy;
+    event.userChoice = Promise.resolve({ outcome: "accepted" });
     
     act(() => {
       window.dispatchEvent(event);
