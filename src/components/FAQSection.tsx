@@ -5,7 +5,6 @@ import { ChevronDown, HelpCircle, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import MotionWrapper from "./MotionWrapper";
 import FAQSchema from "./FAQSchema";
-import { Dictionary } from "../get-dictionary";
 
 interface FAQItem {
   q: string;

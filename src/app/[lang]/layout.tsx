@@ -26,6 +26,14 @@ export async function generateMetadata(
   const dict = await getDictionary(lang as Locale);
 
   return {
+    metadataBase: new URL("https://demo-realestate.com"),
+    alternates: {
+      canonical: `/${lang}`,
+      languages: {
+        "en-US": "/en",
+        "es-ES": "/es",
+      },
+    },
     title: "Demo Website | Real Estate",
     description: dict.metadata.description,
     keywords: dict.metadata.keywords.split(",").map((k: string) => k.trim()),
@@ -34,6 +42,7 @@ export async function generateMetadata(
       description: dict.metadata.description,
       locale: lang === "es" ? "es_ES" : "en_US",
       type: "website",
+      url: `https://demo-realestate.com/${lang}`,
     },
     icons: {
       icon: [

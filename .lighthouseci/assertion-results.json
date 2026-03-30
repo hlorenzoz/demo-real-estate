@@ -1,20 +1,6 @@
 [
   {
     "name": "minScore",
-    "expected": 0.9,
-    "actual": 0.48,
-    "values": [
-      0.48
-    ],
-    "operator": ">=",
-    "passed": false,
-    "auditProperty": "performance",
-    "auditId": "categories",
-    "level": "warn",
-    "url": "http://localhost:3000/en"
-  },
-  {
-    "name": "minScore",
     "expected": 0.95,
     "actual": 0.81,
     "values": [

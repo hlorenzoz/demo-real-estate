@@ -105,6 +105,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-3 bg-primary/5 rounded-2xl text-primary hover:bg-primary/10 transition-colors"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMenuOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
           </button>
