@@ -31,7 +31,7 @@ export default function HeroClient({ dict, lang }: HeroProps) {
         />
       </div>
       
-      <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-[-5vh]">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-[-10vh]">
         <motion.div 
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
@@ -63,7 +63,7 @@ export default function HeroClient({ dict, lang }: HeroProps) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="absolute bottom-20 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block"
       >
         <div className="glass p-3 rounded-[32px] flex items-center gap-4 shadow-2xl border border-white/20 backdrop-blur-3xl">
           <div className="flex-1 flex items-center gap-5 px-6">
