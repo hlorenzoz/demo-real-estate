@@ -1,0 +1,339 @@
+{
+  "agency": {
+    "name": "Real Estate Agency",
+    "owner": "Expert Team",
+    "location": "Metropolis City, Region",
+    "gmb_url": "https://maps.google.com"
+  },
+  "reviews": [
+    {
+      "author": "Client A",
+      "date": "1 year ago",
+      "rating": 5,
+      "content": "A perfect balance between professionalism and human warmth. The team provided everything I needed and took the time to listen to me. It's rare to find someone so complete in their work: professional, transparent, and with exceptional human treatment. I felt accompanied every step of the process and their personalized attention made the difference. In short, more than a manager, they are genuine people who care about your needs. Thank you so much for everything!"
+    },
+    {
+      "author": "Client B",
+      "date": "2 years ago",
+      "rating": 5,
+      "content": "The experience with the agency has been extraordinary. They are great professionals. I sold my house and felt advised at all times. And of course, I must highlight their human value. Thank you for helping me so much!"
+    },
+    {
+      "author": "Client C",
+      "date": "1 year ago",
+      "rating": 5,
+      "content": "We had a rewarding experience. This professional team is highly recommended for their efficiency and friendliness."
+    },
+    {
+      "author": "Client D",
+      "date": "5 years ago",
+      "rating": 5,
+      "content": "Very cordial and pleasant treatment."
+    },
+    {
+      "author": "Client E",
+      "date": "2 years ago",
+      "rating": 5,
+      "content": "Excellent service and professionalism from start to finish."
+    },
+    {
+      "author": "Client F",
+      "date": "5 years ago",
+      "rating": 5,
+      "content": "Everything was easy and transparent. Highly recommended."
+    },
+    {
+      "author": "Client G",
+      "date": "6 years ago",
+      "rating": 5,
+      "content": "The best real estate experience I've ever had."
+    },
+    {
+      "author": "Client H",
+      "date": "7 years ago",
+      "rating": 5,
+      "content": "Professional and trustworthy."
+    }
+  ],
+  "stats": {
+    "average": 5,
+    "count": 8,
+    "label": "Excellent",
+    "platform": "Google"
+  },
+  "properties": [
+    {
+      "id": "penthouse-skyline-1",
+      "type": "Ático",
+      "price": 380000,
+      "location": "Downtown Tower",
+      "city": "Madrid City Center",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "area": 120,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-4.webp",
+      "featured": true,
+      "contractType": "sale",
+      "year_built": 2021,
+      "garage": 1,
+      "pool": false,
+      "garden": false,
+      "elevator": true,
+      "features": [
+        "Floor-to-ceiling windows",
+        "City skyline views",
+        "Modern kitchen island",
+        "Fireplace",
+        "Concierge service",
+        "Premium appliances"
+      ],
+      "description_en": "Exceptional penthouse with breathtaking city skyline views. Floor-to-ceiling windows flood every room with natural light. Thoughtfully designed open-plan living space with a gourmet kitchen and private terrace. The pinnacle of urban luxury living.",
+      "description_es": "Un ático moderno impresionante con vistas panorámicas increíbles al centro de la ciudad."
+    },
+    {
+      "id": "rustic-estate-1",
+      "type": "Finca",
+      "price": 850000,
+      "location": "Countryside Estate",
+      "city": "Costa Brava, Girona",
+      "bedrooms": 6,
+      "bathrooms": 4,
+      "area": 500,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-5.webp",
+      "featured": true,
+      "contractType": "sale",
+      "year_built": 1890,
+      "garage": 3,
+      "pool": true,
+      "garden": true,
+      "elevator": false,
+      "features": [
+        "Stone facade",
+        "Infinity pool",
+        "Vineyard views",
+        "Bougainvillea gardens",
+        "Guest house",
+        "Wine cellar",
+        "Terracotta roofing"
+      ],
+      "description_en": "An authentic Catalan stone masía dating back to 1890, fully restored to contemporary standards. Set among vineyards and olive groves with panoramic Mediterranean views. A rare estate offering total privacy, a private pool, and a guest house.",
+      "description_es": "Una hermosa finca en el campo con terreno extenso y características clásicas."
+    },
+    {
+      "id": "beach-villa-1",
+      "type": "Villa",
+      "price": 620000,
+      "location": "Beachfront Villa",
+      "city": "Marbella, Costa del Sol",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "area": 280,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-6.webp",
+      "featured": true,
+      "contractType": "sale",
+      "year_built": 2018,
+      "garage": 2,
+      "pool": true,
+      "garden": true,
+      "elevator": false,
+      "features": [
+        "Infinity pool",
+        "Direct sea access",
+        "Stone & glass architecture",
+        "Sun terrace",
+        "Outdoor kitchen",
+        "Smart home system"
+      ],
+      "description_en": "A stunning contemporary beachfront villa where the infinity pool seems to merge seamlessly with the Mediterranean Sea. Designed for effortless indoor-outdoor living with expansive terraces, mature gardens, and direct beach access.",
+      "description_es": "Fantástica villa frente al mar con acceso directo a la playa y vistas al mar en cada habitación."
+    },
+    {
+      "id": "suburban-house-1",
+      "type": "Casa",
+      "price": 295000,
+      "location": "Upscale Residential",
+      "city": "Pozuelo de Alarcón, Madrid",
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "area": 320,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-7.webp",
+      "featured": true,
+      "contractType": "sale",
+      "year_built": 2010,
+      "garage": 2,
+      "pool": false,
+      "garden": true,
+      "elevator": false,
+      "features": [
+        "Stone facade",
+        "Circular driveway",
+        "Manicured garden",
+        "Double garage",
+        "Cellar",
+        "Open fireplace"
+      ],
+      "description_en": "An elegant stone-facade family home in the most sought-after residential area. The magnificent manicured garden with a circular driveway creates an unforgettable first impression. The interior combines classic craftsmanship with modern comfort across five generous bedrooms.",
+      "description_es": "Residencia de lujo ubicada en el barrio cerrado más exclusivo. Totalmente amueblada por los mejores diseñadores internacionales."
+    },
+    {
+      "id": "loft-industrial-1",
+      "type": "Loft",
+      "price": 175000,
+      "location": "Arts District Loft",
+      "city": "Barcelona, Eixample",
+      "bedrooms": 1,
+      "bathrooms": 2,
+      "area": 95,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-8.webp",
+      "featured": true,
+      "contractType": "sale",
+      "year_built": 2015,
+      "garage": 0,
+      "pool": false,
+      "garden": false,
+      "elevator": true,
+      "features": [
+        "Exposed concrete ceilings",
+        "Steel-framed windows",
+        "Polished concrete floors",
+        "Kitchen island",
+        "City skyline views",
+        "Open-plan layout"
+      ],
+      "description_en": "A spectacular industrial-chic loft in the heart of Barcelona's vibrant arts district. Exposed concrete ceilings soar above polished floors, while massive steel-framed windows frame the city skyline. A canvas for modern urban living.",
+      "description_es": "Elegante loft estilo industrial ubicado en el dinámico distrito de las artes, a pasos de las principales galerías y cafeterías."
+    },
+    {
+      "id": "flat-renovated-1",
+      "type": "Piso",
+      "price": 125000,
+      "location": "Renovated City Flat",
+      "city": "Valencia, Historic Center",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "area": 110,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-9.webp",
+      "featured": false,
+      "contractType": "sale",
+      "year_built": 1970,
+      "garage": 0,
+      "pool": false,
+      "garden": true,
+      "elevator": true,
+      "features": [
+        "Full renovation 2023",
+        "Wide-plank oak floors",
+        "Scandinavian kitchen",
+        "Garden views",
+        "Natural light",
+        "High ceilings"
+      ],
+      "description_en": "A beautifully renovated bright apartment in the heart of Valencia's historic center. The Scandinavian-inspired interior features wide-plank oak floors, crisp white walls, and a stunning open kitchen. Large windows overlook a tranquil communal garden.",
+      "description_es": "A beautifully renovated bright apartment in the heart of Valencia's historic center. The Scandinavian-inspired interior features wide-plank oak floors, crisp white walls, and a stunning open kitchen. Large windows overlook a tranquil communal garden. (Traducido al español)"
+    },
+    {
+      "id": "penthouse-sky-rent",
+      "type": "Ático",
+      "price": 2500,
+      "location": "Skyline Penthouse",
+      "city": "Madrid City Center",
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "area": 110,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-10.webp",
+      "featured": true,
+      "contractType": "rent",
+      "year_built": 2022,
+      "garage": 1,
+      "pool": true,
+      "garden": false,
+      "elevator": true,
+      "features": [
+        "Terrace with city views",
+        "Luxury finishings",
+        "Home automation",
+        "Concierge"
+      ],
+      "description_en": "Live above the city in this spectacular penthouse. Enjoy sunsets from your private terrace and the comfort of a high-tech smart home.",
+      "description_es": "Vive por encima de la ciudad en este espectacular ático. Disfruta de los atardeceres desde tu terraza privada y de la comodidad de una casa inteligente de alta tecnología."
+    },
+    {
+      "id": "urban-studio-rent",
+      "type": "Estudio",
+      "price": 950,
+      "location": "Modern Downtown Studio",
+      "city": "Barcelona, Gótico",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": 45,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-11.webp",
+      "featured": false,
+      "contractType": "rent",
+      "year_built": 2019,
+      "garage": 0,
+      "pool": false,
+      "garden": false,
+      "elevator": true,
+      "features": [
+        "Central location",
+        "Fully furnished",
+        "Natural light",
+        "Quiet area"
+      ],
+      "description_en": "A perfect city hideaway. This studio combines historic charm with modern amenities in the HEART of Barcelona.",
+      "description_es": "Un escondite perfecto en la ciudad. Este estudio combina encanto histórico con comodidades modernas en el CORAZÓN de Barcelona."
+    },
+    {
+      "id": "suburban-villa-rent",
+      "type": "Chalet",
+      "price": 4500,
+      "location": "Quiet Suburban Villa",
+      "city": "Valencia, Bétera",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "area": 250,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-12.webp",
+      "featured": true,
+      "contractType": "rent",
+      "year_built": 2015,
+      "garage": 2,
+      "pool": true,
+      "garden": true,
+      "elevator": false,
+      "features": [
+        "Private pool",
+        "Large garden",
+        "Security system",
+        "Near international schools"
+      ],
+      "description_en": "The ideal home for families. Large spaces, private garden, and a safe environment just minutes from the city.",
+      "description_es": "El hogar ideal para familias. Amplios espacios, jardín privado y un entorno seguro a pocos minutos de la ciudad."
+    },
+    {
+      "id": "arts-loft-rent",
+      "type": "Loft",
+      "price": 1800,
+      "location": "Creative Arts Loft",
+      "city": "Sevilla, Soho",
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "area": 85,
+      "image": "https://cdn.hlorenzoz.com/demo-real-estate/real-estate/property-13.webp",
+      "featured": false,
+      "contractType": "rent",
+      "year_built": 2018,
+      "garage": 0,
+      "pool": false,
+      "garden": false,
+      "elevator": true,
+      "features": [
+        "Exposed brickwork",
+        "Modern art lighting",
+        "Open floor plan",
+        "Air conditioning"
+      ],
+      "description_en": "Unique loft space in the artistic hub of Sevilla. High ceilings and industrial details make this a one-of-a-kind rental.",
+      "description_es": "Loft único en el centro artístico de Sevilla. Techos altos y detalles industriales hacen de este un alquiler inigualable."
+    }
+  ]
+}

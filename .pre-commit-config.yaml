@@ -1,0 +1,21 @@
+repos:
+  - repo: local
+    hooks:
+      - id: playwright-tests
+        name: Run Playwright E2E Tests
+        entry: bun run test:e2e
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: lint
+        name: Lint Check
+        entry: bun run lint
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: lighthouse-test
+        name: Run Lighthouse CI Tests
+        entry: bun run test:lighthouse
+        language: system
+        pass_filenames: false
+        always_run: true

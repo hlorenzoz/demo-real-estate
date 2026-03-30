@@ -1,0 +1,203 @@
+{
+  "navbar": {
+    "home": "Home",
+    "propiedades": "Properties",
+    "vender": "Services",
+    "nosotros": "About Us",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contactar": "Contact",
+    "rentals": "Rentals"
+  },
+  "paths": {
+    "propiedades": "properties",
+    "vender": "sell",
+    "nosotros": "about-us",
+    "blog": "blog",
+    "faq": "faq",
+    "contactar": "contact",
+    "rentals": "rentals"
+  },
+  "hero": {
+    "badge": "Trusted Real Estate in your City",
+    "title": "Where every home tells a",
+    "title_accent": "unique story",
+    "subtitle": "Real estate management with human warmth and transparent professionalism in your region.",
+    "cta": "Explore Properties",
+    "search_placeholder": "What are you looking for? (Flat, House, Land...)",
+    "location_label": "Location",
+    "search_button": "Search"
+  },
+  "home": {
+    "property_title": "Featured Properties",
+    "property_subtitle": "Discover our exclusive selection of properties in your city and surroundings.",
+    "cta_banner": "Your next property",
+    "cta_banner_accent": "deserves excellence.",
+    "cta_banner_desc": "Every detail matters. From the first visit to the signing before a notary, we are by your side.",
+    "cta_catalog": "Check Catalog",
+    "view_property": "View Property",
+    "for_rent": "For Rent",
+    "for_sale": "For Sale",
+    "property_types": {
+      "Piso": "Flat",
+      "Casa": "House",
+      "Chalet": "Villa",
+      "Terreno": "Land",
+      "Ático": "Penthouse",
+      "Finca": "Country Estate",
+      "Villa": "Beachfront Villa",
+      "Loft": "Loft"
+    },
+    "beds": "Beds",
+    "baths": "Baths",
+    "about_title": "More than real estate, we are your neighbor.",
+    "about_desc": "Our expert team believes the key to real estate success is total transparency and humanity. We are not a cold chain; we are locals who want to see our community grow properly.",
+    "about_transparency": "total transparency",
+    "years_exp": "Years experience",
+    "success_rate": "Management Success",
+    "whatsapp_prompt": "How can we help you?"
+  },
+  "services": {
+    "title": "Exclusive Services",
+    "description": "Accompanying you in every step of the real estate process with maximum rigor.",
+    "tasacion": "Free Appraisal",
+    "tasacion_desc": "Detailed market study to sell at the best price.",
+    "gestion": "Full Management",
+    "gestion_desc": "We take care of all bureaucracy and legal formalities.",
+    "inversion": "Investment Advisory",
+    "inversion_desc": "Guaranteed profitability on selected assets."
+  },
+  "reviews": {
+    "title": "Verified Trust",
+    "description": "Real-time sync with our latest satisfied client ratings.",
+    "stats_label": "Excellent",
+    "based_on": "Based on",
+    "reviews_count": "verified reviews",
+    "view_all": "View all",
+    "read_more": "Read more",
+    "no_content": "5-star rating with no additional comments."
+  },
+  "blog_page": {
+    "title": "Real Estate Insights",
+    "description": "Stay updated with our latest news, market trends and home improvement advice.",
+    "featured": "Featured Article",
+    "featured_post": {
+      "title": "Real Estate Market Trends for 2024",
+      "date": "Mar 28, 2024",
+      "read_time": "5 min read"
+    },
+    "latest": "Recent Posts",
+    "coming_soon": "Our blog is currently being updated with new premium content. Check back soon for the latest market insights in your area."
+  },
+  "footer": {
+    "agency_desc": "Your trusted real estate agency. Specialists in turning your life projects into reality with trust and rigor.",
+    "contact": "Contact",
+    "follow": "Follow Us",
+    "excellence": "Real Estate Excellence",
+    "address": "Main Street, 123, 28001 City, Region",
+    "phone": "+34 900 000 000",
+    "email": "contact@youragency.com"
+  },
+  "contact_page": {
+    "title": "Contact Us",
+    "description": "We are here to help you find your ideal home.",
+    "form_name": "Full Name",
+    "form_email": "Email Address",
+    "form_message": "How can we help you?",
+    "form_submit": "Send Message",
+    "visit_us": "Visit Our Office",
+    "working_hours": "Working Hours",
+    "mon_fri": "Mon - Fri: 9:00 - 14:00, 16:00 - 19:30",
+    "sat": "Sat: 10:00 - 13:30",
+    "mon_fri_label": "Monday - Friday",
+    "sat_label": "Saturday",
+    "sun_label": "Sunday",
+    "closed": "Closed",
+    "phone": "Phone",
+    "email": "Email",
+    "maps_placeholder": "Google Maps integration coming soon"
+  },
+  "metadata": {
+    "title": "Demo Website | Real Estate",
+    "description": "Your trusted real estate agency with personalized attention, free appraisals and guaranteed professionalism.",
+    "keywords": "real estate, homes, rentals, property appraisal, real estate demo"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "We answer all your questions about the real estate market.",
+    "cta_all": "View all questions",
+    "items": [
+      {
+        "q": "What is the first step to sell my property?",
+        "a": "The first step is a free professional appraisal. Our expert team will visit your property to carry out a detailed market study and advise you on the optimal asking price."
+      },
+      {
+        "q": "What documents do I need to prepare for the sale?",
+        "a": "You will need the owners' ID (DNI), the Property Deed, the latest IBI receipt, the Energy Efficiency Certificate, and the Habitability Certificate (if applicable). We help you process whatever you are missing."
+      },
+      {
+        "q": "How long does it take on average to sell a home?",
+        "a": "The time varies depending on the price and condition, but our average sale time is between 3 and 6 months thanks to our active buyer database and specialized marketing."
+      },
+      {
+        "q": "How do you promote my property to find buyers?",
+        "a": "We use a multi-channel approach: leading real estate portals, social networks, our physical showcase, and our extensive network of local contacts."
+      },
+      {
+        "q": "What are your management fees?",
+        "a": "Our fees are competitive and transparent. They are agreed upon in advance and only paid at the time of sale before a notary. There are no hidden costs or maintenance fees."
+      },
+      {
+        "q": "Do you accompany me during the signing before a notary?",
+        "a": "Absolutely. We accompany you from the first visit to the signing of the public deed and the change of utility supplies. Your peace of mind is our priority."
+      },
+      {
+        "q": "Do you also manage the Energy Efficiency Certificate?",
+        "a": "Yes, we collaborate with authorized technicians to manage your energy certificate quickly and easily so you don't have to worry about anything."
+      },
+      {
+        "q": "Do you have experience in managing inheritances and rustic properties?",
+        "a": "Yes, we are specialists in managing a wide range of properties. We understand the complexity of rustic properties and inheritances, and we work with local experts to ensure that everything is legal and transparent."
+      },
+      {
+        "q": "Do you offer secure rental services?",
+        "a": "Yes, we manage rentals with rigorous tenant filtering and non-payment insurance to guarantee the security of your investment and your peace of mind as an owner."
+      },
+      {
+        "q": "Why choose us over a large national franchise?",
+        "a": "Because we are local experts. We know every street and every neighborhood personally. We offer human treatment, without pressure, and with the transparency that only someone you trust can give you."
+      }
+    ]
+  },
+  "properties_page": {
+    "title": "Property Catalog",
+    "subtitle": "Explore our full selection of properties. Find the home that suits your lifestyle.",
+    "filter_all": "All",
+    "filter_featured": "Featured",
+    "sort_price_asc": "Lowest price",
+    "sort_price_desc": "Highest price",
+    "sort_area": "Largest area",
+    "contact_cta": "Request information",
+    "contact_desc": "Interested in this property? Our team is available for visits and consultations without obligation.",
+    "year_built": "Year built",
+    "garage": "Garage",
+    "pool": "Pool",
+    "garden": "Garden",
+    "elevator": "Elevator",
+    "yes": "Yes",
+    "no": "No",
+    "features": "Features",
+    "back_to_catalog": "Back to catalog",
+    "share": "Share",
+    "schedule_visit": "Schedule visit",
+    "request_info": "Request info",
+    "similar_properties": "Similar properties",
+    "beds_label": "bedrooms",
+    "baths_label": "bathrooms",
+    "area_label": "m² usable",
+    "results": "properties found",
+    "no_results": "No properties found with these filters.",
+    "view_detail": "View details",
+    "detail_meta_desc": "Exclusive property managed by our real estate agency. Request information or schedule a visit with no obligation."
+  }
+}

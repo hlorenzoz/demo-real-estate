@@ -1,0 +1,203 @@
+{
+  "navbar": {
+    "home": "Inicio",
+    "propiedades": "Propiedades",
+    "vender": "Servicios",
+    "nosotros": "Nosotros",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contactar": "Contactar",
+    "rentals": "Alquiler"
+  },
+  "paths": {
+    "propiedades": "propiedades",
+    "vender": "vender",
+    "nosotros": "nosotros",
+    "blog": "blog",
+    "faq": "faq",
+    "contactar": "contactar",
+    "rentals": "alquiler"
+  },
+  "hero": {
+    "badge": "Inmobiliaria de Confianza en tu Ciudad",
+    "title": "Donde cada vivienda cuenta una",
+    "title_accent": "historia única",
+    "subtitle": "Gestión inmobiliaria con calidez humana y profesionalismo transparente en toda tu región.",
+    "cta": "Explorar Propiedades",
+    "search_placeholder": "¿Qué buscas hoy? (Piso, Casa, Terreno...)",
+    "location_label": "Ubicación",
+    "search_button": "Buscar"
+  },
+  "home": {
+    "property_title": "Propiedades Destacadas",
+    "property_subtitle": "Descubre nuestra selección exclusiva de viviendas en tu ciudad y alrededores.",
+    "cta_banner": "Tu próxima propiedad",
+    "cta_banner_accent": "merece excelencia.",
+    "cta_banner_desc": "Cada detalle importa. Desde la primera visita hasta la firma ante notario, estamos a tu lado.",
+    "cta_catalog": "Consultar Catálogo",
+    "view_property": "Ver Propiedad",
+    "for_rent": "En Alquiler",
+    "for_sale": "En Venta",
+    "property_types": {
+      "Piso": "Piso",
+      "Casa": "Casa",
+      "Chalet": "Chalet",
+      "Terreno": "Terreno",
+      "Ático": "Ático",
+      "Finca": "Finca",
+      "Villa": "Villa",
+      "Loft": "Loft"
+    },
+    "beds": "Hab",
+    "baths": "Baños",
+    "about_title": "Más que una inmobiliaria, somos tu vecino.",
+    "about_desc": "Nuestro equipo experto cree que la clave del éxito inmobiliario es la transparencia total y la humanidad. No somos una gran cadena fría; somos residentes que quieren ver crecer a su comunidad de la mejor manera.",
+    "about_transparency": "transparencia total",
+    "years_exp": "Años experiencia",
+    "success_rate": "Éxito gestión",
+    "whatsapp_prompt": "¿En qué podemos ayudarte?"
+  },
+  "services": {
+    "title": "Servicios exclusivos",
+    "description": "Acompañandote en cada paso del proceso inmobiliario con el máximo rigor.",
+    "tasacion": "Tasación Gratuita",
+    "tasacion_desc": "Estudio de mercado detallado para vender al mejor precio.",
+    "gestion": "Gestión Integral",
+    "gestion_desc": "Nos encargamos de toda la burocracia y trámites legales.",
+    "inversion": "Asesoría Inversión",
+    "inversion_desc": "Rentabilidad garantizada en activos seleccionados."
+  },
+  "reviews": {
+    "title": "Confianza verificada",
+    "description": "Sincronización en tiempo real con nuestras últimas valoraciones de clientes satisfechos.",
+    "stats_label": "Excelente",
+    "based_on": "Basado en",
+    "reviews_count": "reseñas reales",
+    "view_all": "Ver todas",
+    "read_more": "Leer más",
+    "no_content": "Calificación de 5 estrellas sin comentarios adicionales."
+  },
+  "blog_page": {
+    "title": "Actualidad Inmobiliaria",
+    "description": "Mantente informado con nuestras últimas noticias, tendencias del mercado y consejos para el hogar.",
+    "featured": "Artículo Destacado",
+    "featured_post": {
+      "title": "Tendencias del mercado inmobiliario para 2024",
+      "date": "28 Mar, 2024",
+      "read_time": "Lectura 5 min"
+    },
+    "latest": "Últimas Entradas",
+    "coming_soon": "Nuestro blog está siendo actualizado con nuevo contenido premium. Vuelve pronto para conocer las últimas noticias del mercado en tu zona."
+  },
+  "footer": {
+    "agency_desc": "Tu inmobiliaria de confianza. Especialistas en hacer realidad tus proyectos de vida con confianza y rigor.",
+    "contact": "Contacto",
+    "follow": "Síguenos",
+    "excellence": "Real Estate Excellence",
+    "address": "Calle Principal, 123, 28001 Ciudad, Provincia",
+    "phone": "+34 900 000 000",
+    "email": "contacto@tuinmobiliaria.com"
+  },
+  "contact_page": {
+    "title": "Contacta con nosotros",
+    "description": "Estamos aquí para ayudarte a encontrar tu hogar ideal.",
+    "form_name": "Nombre completo",
+    "form_email": "Correo electrónico",
+    "form_message": "¿En qué podemos ayudarte?",
+    "form_submit": "Enviar mensaje",
+    "visit_us": "Visita nuestra oficina",
+    "working_hours": "Horario de atención",
+    "mon_fri": "Lunes - Viernes: 9:00 - 14:00, 16:00 - 19:30",
+    "sat": "Sábado: 10:00 - 13:30",
+    "mon_fri_label": "Lunes - Viernes",
+    "sat_label": "Sábado",
+    "sun_label": "Domingo",
+    "closed": "Cerrado",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "maps_placeholder": "Integración con Google Maps próximamente"
+  },
+  "metadata": {
+    "title": "Demo Website | Real Estate",
+    "description": "Tu inmobiliaria de confianza con atención personalizada, tasaciones gratuitas y profesionalismo garantizado.",
+    "keywords": "inmobiliaria, viviendas, alquiler, tasacion propiedades, real estate demo"
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "subtitle": "Resolvemos todas tus dudas sobre el mercado inmobiliario.",
+    "cta_all": "Ver todas las preguntas",
+    "items": [
+      {
+        "q": "¿Cuál es el primer paso para vender mi propiedad?",
+        "a": "El primer paso es una valoración profesional gratuita. Nuestro equipo experto visitará tu propiedad para realizar un estudio de mercado detallado y asesorarte sobre el precio óptimo de salida."
+      },
+      {
+        "q": "¿Qué documentos necesito tener preparados para la venta?",
+        "a": "Necesitarás el DNI de los propietarios, la Escritura de Propiedad, el último recibo del IBI, el Certificado de Eficiencia Energética y la Cédula de Habitabilidad (si aplica). Nosotros te ayudamos a tramitar lo que te falte."
+      },
+      {
+        "q": "¿Cuánto tiempo se tarda de media en vender una vivienda?",
+        "a": "El tiempo varía según el precio y estado, pero nuestra media de venta es de entre 3 y 6 meses gracias a nuestra base de datos de compradores activos y marketing especializado."
+      },
+      {
+        "q": "¿Cómo promocionáis mi propiedad para encontrar compradores?",
+        "a": "Utilizamos un enfoque multicanal: portales inmobiliarios líderes, redes sociales, nuestro escaparate físico y nuestra amplia red de contactos locales."
+      },
+      {
+        "q": "¿Cuáles son vuestros honorarios de gestión?",
+        "a": "Nuestros honorarios son competitivos y transparentes. Se acuerdan previamente y solo se abonan en el momento de la venta ante notario. No hay costes ocultos ni cuotas de mantenimiento."
+      },
+      {
+        "q": "¿Me acompañáis durante la firma ante notario?",
+        "a": "Absolutamente. Te acompañamos desde la primera visita hasta la firma de la escritura pública y el cambio de suministros. Tu tranquilidad es nuestra prioridad."
+      },
+      {
+        "q": "¿Gestionáis también el Certificado de Eficiencia Energética?",
+        "a": "Sí, colaboramos con técnicos autorizados para gestionar tu certificado energético de forma rápida y sencilla para que no tengas que preocuparte por nada."
+      },
+      {
+        "q": "¿Tenéis experiencia en la gestión de herencias y fincas rústicas?",
+        "a": "Sí, somos especialistas en la gestión de diversos tipos de propiedades. Entendemos la complejidad de las fincas rústicas y las herencias, y trabajamos con expertos locales para asegurar que todo sea legal y transparente."
+      },
+      {
+        "q": "¿Ofrecéis servicios de alquiler seguro?",
+        "a": "Sí, gestionamos alquileres con un riguroso filtrado de inquilinos y seguros de impago para garantizar la seguridad de tu inversión y tu tranquilidad como propietario."
+      },
+      {
+        "q": "¿Por qué elegirnos frente a una gran franquicia nacional?",
+        "a": "Porque somos expertos locales. Conocemos cada calle y cada barrio personalmente. Ofrecemos un trato humano, sin presiones y con la transparencia que solo alguien de confianza puede darte."
+      }
+    ]
+  },
+  "properties_page": {
+    "title": "Catálogo de Propiedades",
+    "subtitle": "Explora nuestra selección completa de inmuebles. Encuentra el hogar que se adapta a tu estilo de vida.",
+    "filter_all": "Todos",
+    "filter_featured": "Destacados",
+    "sort_price_asc": "Menor precio",
+    "sort_price_desc": "Mayor precio",
+    "sort_area": "Mayor superficie",
+    "contact_cta": "Solicitar información",
+    "contact_desc": "¿Te interesa esta propiedad? Nuestro equipo está disponible para visitas y consultas sin compromiso.",
+    "year_built": "Año construcción",
+    "garage": "Garaje",
+    "pool": "Piscina",
+    "garden": "Jardín",
+    "elevator": "Ascensor",
+    "yes": "Sí",
+    "no": "No",
+    "features": "Características",
+    "back_to_catalog": "Volver al catálogo",
+    "share": "Compartir",
+    "schedule_visit": "Agendar visita",
+    "request_info": "Pedir información",
+    "similar_properties": "Propiedades similares",
+    "beds_label": "habitaciones",
+    "baths_label": "baños",
+    "area_label": "m² útiles",
+    "results": "propiedades encontradas",
+    "no_results": "No se encontraron propiedades con estos filtros.",
+    "view_detail": "Ver detalle",
+    "detail_meta_desc": "Propiedad exclusiva gestionada por nuestra agencia inmobiliaria. Solicita información o agenda una visita sin compromiso."
+  }
+}
