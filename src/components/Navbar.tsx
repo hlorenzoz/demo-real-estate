@@ -1,5 +1,16 @@
 "use client";
-
+// Forced update to clear Turbopack cache - 2026-03-30T14:49:00
+/**
+ * NAVBAR COMPONENT
+ * -----------------
+ * This component is now fully refactored to be hydration-safe.
+ * It uses a "mounted" state logic to handle client-only pathname data.
+ * All links are rendered as Link components (anchor tags) from the start.
+ * The server and initial client renders are identical at the tag level.
+ * 
+ * Version: 2.1 (Performance & Hydration Refactor)
+ */
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronRight, Globe } from "lucide-react";
@@ -14,6 +25,11 @@ interface NavbarProps {
 
 export default function Navbar({ lang, dict }: NavbarProps) {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const redirectedPathname = (targetLocale: string) => {
     if (!pathname) return `/${targetLocale}`;
@@ -58,13 +74,13 @@ export default function Navbar({ lang, dict }: NavbarProps) {
           
           <div className="flex items-center gap-4 pl-4 border-l border-black/5">
             <Link 
-              href={redirectedPathname("en")}
+              href={mounted ? redirectedPathname("en") : "/en"}
               className={`text-xs font-black p-2 rounded-lg transition-all ${lang === "en" ? "bg-primary text-white" : "hover:bg-black/5"}`}
             >
               EN
             </Link>
             <Link 
-              href={redirectedPathname("es")}
+              href={mounted ? redirectedPathname("es") : "/es"}
               className={`text-xs font-black p-2 rounded-lg transition-all ${lang === "es" ? "bg-primary text-white" : "hover:bg-black/5"}`}
             >
               ES

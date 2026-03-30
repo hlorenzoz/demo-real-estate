@@ -1,13 +1,33 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 export type Locale = 'en' | 'es';
 
-const dictionaries = {
-  en: () => import('./dictionaries/en.json').then((module) => module.default),
-  es: () => import('./dictionaries/es.json').then((module) => module.default),
+export type Dictionary = any;
+
+const VALID_LOCALES: Locale[] = ['en', 'es'];
+
+export const getDictionary = async (locale: Locale): Promise<any> => {
+  // Validate locale to prevent errors when Next.js dynamic routes match assets (like favicon.ico)
+  const safeLocale = VALID_LOCALES.includes(locale) ? locale : 'es';
+
+  try {
+    // We use fs.readFileSync to ensure we always get the LATEST version from disk
+    // and bypass any module caching artifacts (especially with Turbopack)
+    const filePath = path.join(process.cwd(), 'src', 'dictionaries', `${safeLocale}.json`);
+    const fileContent = fs.readFileSync(filePath, 'utf-8');
+    return JSON.parse(fileContent);
+  } catch (error) {
+    console.error(`Error loading dictionary for ${safeLocale}:`, error);
+    
+    // Final fallback to es
+    try {
+      const fallbackPath = path.join(process.cwd(), 'src', 'dictionaries', `es.json`);
+      const fallbackContent = fs.readFileSync(fallbackPath, 'utf-8');
+      return JSON.parse(fallbackContent);
+    } catch (fallbackError) {
+      console.error('CRITICAL: Dictionary fallback failed.', fallbackError);
+      return {};
+    }
+  }
 };
-
-export type Dictionary = Awaited<ReturnType<typeof dictionaries.en>>;
-
-export const getDictionary = async (locale: Locale): Promise<Dictionary> => {
-  return dictionaries[locale] ? dictionaries[locale]() : dictionaries.es();
-};
-
