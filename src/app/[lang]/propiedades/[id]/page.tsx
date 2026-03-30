@@ -266,14 +266,14 @@ export default async function PropertyDetailPage({ params }: Props) {
 
                   <div className="space-y-4">
                     <Link
-                      href={getLocalizedPath(lang, 'contactar')}
+                      href={getLocalizedPath(lang, 'contact')}
                       className="w-full bg-primary text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:opacity-90 transition-all flex items-center justify-center gap-3 shadow-lg"
                     >
                       <Phone size={14} />
                       {d.request_info}
                     </Link>
                     <Link
-                      href={getLocalizedPath(lang, 'contactar')}
+                      href={getLocalizedPath(lang, 'contact')}
                       className="w-full bg-primary-accent text-primary py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all flex items-center justify-center gap-3 shadow-md"
                     >
                       {d.schedule_visit}
