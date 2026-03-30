@@ -31,12 +31,12 @@ export default async function BlogPage({
           {/* Featured Post Placeholder */}
           <MotionWrapper delay={0.2} className="relative h-[500px] rounded-[64px] overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] mb-20 cursor-pointer">
             <Image 
-                src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/luxury-interior.webp"
-                alt="Featured article"
-                fill
-                sizes="(max-width: 1280px) 100vw, 1280px"
-                className="object-cover group-hover:scale-105 transition-transform duration-1000"
-                priority
+              src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/luxury-interior.webp"
+              alt="Featured article"
+              fill
+              sizes="(max-width: 768px) 100vw, 1280px"
+              className="object-cover group-hover:scale-105 transition-transform duration-1000"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent flex flex-col justify-end p-12 md:p-20">
                 <div className="max-w-2xl text-white">

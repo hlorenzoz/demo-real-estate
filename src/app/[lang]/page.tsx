@@ -177,8 +177,9 @@ export default async function Home({
             src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero.webp" 
             alt="Villas exclusivas" 
             fill 
-            sizes="(max-width: 1280px) 100vw, 1280px"
+            sizes="100vw"
             className="object-cover group-hover:scale-110 transition-transform duration-1000" 
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-12 md:p-24">
             <MotionWrapper className="max-w-xl text-white">

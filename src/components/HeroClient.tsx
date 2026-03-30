@@ -130,9 +130,9 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block z-[100]"
+        className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 lg:px-6 z-[100]"
       >
-        <div className="glass p-3 rounded-[32px] flex items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-[100]">
+        <div className="glass p-2 lg:p-3 rounded-[32px] flex flex-col lg:flex-row lg:items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-[100] gap-2 lg:gap-0">
           
           {/* General Search Input */}
           <div className="flex-1 relative" ref={searchRef}>
@@ -163,7 +163,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
                 >
                   <div className="p-2">
                     {filteredSearch.map((property) => (
@@ -173,7 +173,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                         className="flex items-center gap-4 p-3 hover:bg-primary/5 rounded-2xl transition-all group"
                       >
                         <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
-                          <Image src={property.image} alt={property.location} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                          <Image src={property.image} alt={property.location} fill sizes="64px" className="object-cover group-hover:scale-110 transition-transform duration-500" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-black text-primary truncate tracking-tight">{property.location}</div>
@@ -188,7 +188,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
             </AnimatePresence>
           </div>
 
-          <div className="w-px h-12 bg-black/5" />
+          <div className="hidden lg:block w-px h-12 bg-black/5" />
 
           {/* Location Search Input */}
           <div className="flex-[0.6] relative" ref={locationRef}>
@@ -217,7 +217,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
                 >
                   <div className="p-2">
                     {filteredLocations.map((loc, i) => (
@@ -246,7 +246,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
 
           <button 
             onClick={handleSearch}
-            className="bg-primary text-white px-12 py-5 rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-sm tracking-widest shadow-xl ml-2"
+            className="bg-primary text-white px-8 lg:px-12 py-4 lg:py-5 rounded-[24px] lg:rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-xs lg:text-sm tracking-widest shadow-xl lg:ml-2"
           >
             {dict.search_button}
           </button>

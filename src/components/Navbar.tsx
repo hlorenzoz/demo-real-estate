@@ -59,7 +59,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 px-6 py-8">
+    <nav className="fixed top-0 w-full z-[9999] px-6 py-8">
       <div className="max-w-7xl mx-auto flex items-center justify-between glass rounded-3xl px-8 py-5 border border-white/40 shadow-2xl backdrop-blur-3xl">
         <Link href={`/${lang}`} className="flex flex-col">
           <span className="text-3xl font-serif text-primary tracking-tighter leading-none">Real Estate</span>
