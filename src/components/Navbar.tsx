@@ -119,7 +119,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
               initial={{ opacity: 0, y: -20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
-              className="absolute top-[calc(100%+12px)] left-0 right-0 glass rounded-[32px] border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.2)] p-6 min-[1100px]:hidden z-[10000] backdrop-blur-3xl"
+              className="absolute top-[calc(100%+12px)] left-0 right-0 bg-white/95 backdrop-blur-3xl rounded-[32px] border border-white/40 shadow-[0_20px_50px_rgba(0,0,0,0.2)] p-6 min-[1100px]:hidden z-[10000]"
             >
               <div className="flex flex-col gap-4">
                 <Link href={getLocalizedPath(lang, 'listings')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.listings}</Link>
