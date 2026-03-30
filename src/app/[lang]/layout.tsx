@@ -35,6 +35,15 @@ export async function generateMetadata(
       locale: lang === "es" ? "es_ES" : "en_US",
       type: "website",
     },
+    icons: {
+      icon: [
+        { url: "/favicon.png", sizes: "192x192", type: "image/png" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
+      ],
+      apple: [
+        { url: "/favicon.png", sizes: "180x180", type: "image/png" },
+      ],
+    },
   };
 }
 
