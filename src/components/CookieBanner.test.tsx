@@ -26,7 +26,7 @@ describe("CookieBanner", () => {
     vi.clearAllMocks();
   });
 
-  it("renders with English translations", async () => {
+  it("renders with English translations correctly", async () => {
     render(<CookieBanner dict={mockDict} />);
     // Wait for the setTimeout(..., 0) in useEffect
     await waitFor(() => {
@@ -36,7 +36,7 @@ describe("CookieBanner", () => {
     expect(screen.getByRole('button', { name: /Decline/i })).toBeInTheDocument();
   });
 
-  it("renders with Spanish translations", async () => {
+  it("renders with Spanish translations correctly", async () => {
     render(<CookieBanner dict={mockDictEs} />);
     await waitFor(() => {
       expect(screen.getByText(/Respetamos su privacidad/i)).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe("CookieBanner", () => {
     expect(screen.getByRole('button', { name: /Rechazar/i })).toBeInTheDocument();
   });
 
-  it("closes and saves preference when Accept All is clicked", async () => {
+  it("closes and saves 'accepted' preference when Accept All is clicked", async () => {
     render(<CookieBanner dict={mockDict} />);
     await waitFor(() => {
       expect(screen.getByRole('button', { name: /Accept All/i })).toBeInTheDocument();
@@ -55,13 +55,36 @@ describe("CookieBanner", () => {
     fireEvent.click(acceptBtn);
     
     expect(localStorage.getItem('cookie_consent')).toBe('accepted');
+    expect(screen.queryByText(/We respect your privacy/i)).not.toBeInTheDocument();
   });
 
-  it("doesn't render if choice already made", async () => {
+  it("closes and saves 'declined' preference when Decline is clicked", async () => {
+    render(<CookieBanner dict={mockDict} />);
+    await waitFor(() => {
+      expect(screen.getByRole('button', { name: /Decline/i })).toBeInTheDocument();
+    });
+    
+    const declineBtn = screen.getByRole('button', { name: /Decline/i });
+    fireEvent.click(declineBtn);
+    
+    expect(localStorage.getItem('cookie_consent')).toBe('declined');
+    expect(screen.queryByText(/We respect your privacy/i)).not.toBeInTheDocument();
+  });
+
+  it("doesn't render if choice already made (accepted)", async () => {
     localStorage.setItem('cookie_consent', 'accepted');
     render(<CookieBanner dict={mockDict} />);
     
-    // Wait a bit to ensure it doesn't show up
+    await act(async () => {
+      await new Promise(r => setTimeout(r, 10));
+    });
+    expect(screen.queryByText(/We respect your privacy/i)).not.toBeInTheDocument();
+  });
+
+  it("doesn't render if choice already made (declined)", async () => {
+    localStorage.setItem('cookie_consent', 'declined');
+    render(<CookieBanner dict={mockDict} />);
+    
     await act(async () => {
       await new Promise(r => setTimeout(r, 10));
     });
