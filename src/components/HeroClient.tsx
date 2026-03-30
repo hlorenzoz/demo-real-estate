@@ -93,7 +93,6 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
           sizes="100vw"
           className="object-cover scale-105"
           priority
-          // @ts-ignore
           fetchPriority="high"
         />
       </div>

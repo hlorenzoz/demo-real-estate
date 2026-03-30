@@ -7,7 +7,7 @@ import {
   BedDouble, Bath, Square, MapPin, ArrowLeft, ArrowRight,
   Calendar, Car, Waves, TreePine, Building2, Check, Share2, Phone
 } from "lucide-react";
-import { Dictionary, getDictionary } from "../../../../get-dictionary";
+import { getDictionary } from "../../../../get-dictionary";
 import { Property } from "../../../../types/property";
 import Navbar from "../../../../components/Navbar";
 import Footer from "../../../../components/Footer";
@@ -126,7 +126,6 @@ export default async function PropertyDetailPage({ params }: Props) {
             priority
             className="object-cover"
             sizes="100vw"
-            // @ts-ignore
             fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

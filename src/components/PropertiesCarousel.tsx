@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import PropertyCard from "./PropertyCard";
 import { Property } from "../types/property";
 import { Dictionary } from "../get-dictionary";

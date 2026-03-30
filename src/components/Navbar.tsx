@@ -13,7 +13,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, Globe, Menu, X as CloseIcon } from "lucide-react";
+import { ChevronRight, Menu, X as CloseIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Dictionary } from "../get-dictionary";
@@ -30,12 +30,19 @@ export default function Navbar({ lang, dict }: NavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Avoid synchronous setState in effect for React 19 hydration safety
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   // Close menu on navigation
   useEffect(() => {
-    setIsMenuOpen(false);
+    const frame = requestAnimationFrame(() => {
+      setIsMenuOpen(false);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
 
   const redirectedPathname = (targetLocale: string) => {

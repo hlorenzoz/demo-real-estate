@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { BedDouble, Bath, Square, Heart, ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 import { Dictionary } from "../get-dictionary";
 import { Property } from "../types/property";
+import { getLocalizedPath } from "../lib/routes";
 
 interface PropertyCardProps {
   property: Property;
@@ -16,16 +16,17 @@ interface PropertyCardProps {
   priority?: boolean;
 }
 
-import { getLocalizedPath } from "../lib/routes";
-
 export default function PropertyCard({ property, lang, dict, priority }: PropertyCardProps) {
   const propertyPath = getLocalizedPath(lang, 'propiedades');
   
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    const liked = localStorage.getItem(`property-liked-${property.id}`);
-    if (liked === "true") setIsLiked(true);
+    const frame = requestAnimationFrame(() => {
+      const liked = localStorage.getItem(`property-liked-${property.id}`);
+      if (liked === "true") setIsLiked(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [property.id]);
 
   const toggleLike = (e: React.MouseEvent) => {

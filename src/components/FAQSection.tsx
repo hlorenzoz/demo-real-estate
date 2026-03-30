@@ -7,8 +7,18 @@ import MotionWrapper from "./MotionWrapper";
 import FAQSchema from "./FAQSchema";
 import { Dictionary } from "../get-dictionary";
 
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
 interface FAQSectionProps {
-  dict: Dictionary["faq"];
+  dict: {
+    title: string;
+    subtitle: string;
+    cta_all: string;
+    items: FAQItem[];
+  };
   lang: string;
   limit?: number;
 }

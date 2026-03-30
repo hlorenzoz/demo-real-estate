@@ -66,10 +66,14 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
   };
 
   useEffect(() => {
-    setMounted(true);
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+      checkScroll();
+    });
     const timer = setTimeout(checkScroll, 500);
     window.addEventListener("resize", checkScroll);
     return () => {
+      cancelAnimationFrame(frame);
       clearTimeout(timer);
       window.removeEventListener("resize", checkScroll);
     };
