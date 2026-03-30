@@ -201,5 +201,11 @@
     "no_results": "No se encontraron propiedades con estos filtros.",
     "view_detail": "Ver detalle",
     "detail_meta_desc": "Propiedad exclusiva gestionada por nuestra agencia inmobiliaria. Solicita información o agenda una visita sin compromiso."
+  },
+  "cookie_banner": {
+    "title": "Respetamos su privacidad",
+    "description": "Utilizamos cookies para analizar el tráfico del sitio y mejorar su experiencia. Al hacer clic en \"Aceptar todas\", consiente nuestro uso de cookies.",
+    "decline": "Rechazar",
+    "accept": "Aceptar todas"
   }
 }

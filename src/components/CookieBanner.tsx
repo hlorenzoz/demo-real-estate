@@ -3,8 +3,9 @@
 import { useState, useEffect } from "react";
 import { Cookie, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Dictionary } from "../get-dictionary";
 
-export function CookieBanner() {
+export function CookieBanner({ dict }: { dict: Dictionary }) {
   const [show, setShow] = useState(false);
 
   const injectCloudflareAnalytics = () => {
@@ -62,9 +63,9 @@ export function CookieBanner() {
                 <Cookie size={20} />
               </div>
               <div className="text-sm">
-                <p className="font-bold text-primary mb-1">We respect your privacy</p>
+                <p className="font-bold text-primary mb-1">{dict.cookie_banner.title}</p>
                 <p className="text-text-muted">
-                  We use cookies to analyze site traffic and enhance your experience. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
+                  {dict.cookie_banner.description}
                 </p>
               </div>
             </div>
@@ -74,13 +75,13 @@ export function CookieBanner() {
                 onClick={handleDecline}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors"
               >
-                Decline
+                {dict.cookie_banner.decline}
               </button>
               <button
                 onClick={handleAccept}
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-accent transition-colors"
               >
-                Accept All
+                {dict.cookie_banner.accept}
               </button>
             </div>
             

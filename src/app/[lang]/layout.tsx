@@ -69,13 +69,14 @@ export default async function RootLayout({
 }>) {
   const { lang } = await params;
   const locale = lang as Locale;
+  const dict = await getDictionary(locale);
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         {children}
         <PWAInstaller />
-        <CookieBanner />
+        <CookieBanner dict={dict} />
       </body>
     </html>
   );

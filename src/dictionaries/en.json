@@ -201,5 +201,11 @@
     "no_results": "No properties found with these filters.",
     "view_detail": "View details",
     "detail_meta_desc": "Exclusive property managed by our real estate agency. Request information or schedule a visit with no obligation."
+  },
+  "cookie_banner": {
+    "title": "We respect your privacy",
+    "description": "We use cookies to analyze site traffic and enhance your experience. By clicking \"Accept All\", you consent to our use of cookies.",
+    "decline": "Decline",
+    "accept": "Accept All"
   }
 }
