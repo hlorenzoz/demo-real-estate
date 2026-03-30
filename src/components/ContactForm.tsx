@@ -34,7 +34,8 @@ export default function ContactForm({ dict, lang }: ContactFormProps) {
       
       // Reset after 5 seconds to allow new messages
       setTimeout(() => setStatus("idle"), 5000);
-    } catch (err) {
+    } catch (error) {
+      console.error('Error sending message:', error);
       setStatus("error");
       setTimeout(() => setStatus("idle"), 5000);
     }

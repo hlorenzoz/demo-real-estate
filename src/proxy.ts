@@ -22,12 +22,11 @@ function getLocale(request: NextRequest) {
   return defaultLocale;
 }
 
-export function proxy(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const segments = pathname.split("/"); 
   const localeFromPath = segments[1]; 
   const slugFromPath = segments[2]; 
-
 
   // 1. Language detection and redirection if pathname HAS NO locale
   const pathnameHasLocale = locales.some(

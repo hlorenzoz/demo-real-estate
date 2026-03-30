@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { BedDouble, Bath, Square, ArrowRight, SlidersHorizontal, MapPin, Check } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dictionary } from "../../../get-dictionary";
 import { Property } from "../../../types/property";
 import PropertyCard from "../../../components/PropertyCard";
 import { getLocalizedPath } from "../../../lib/routes";
+import { Dictionary, Locale } from "../../../get-dictionary";
 
 interface PropertiesClientPageProps {
   properties: Property[];
-  lang: "en" | "es";
-  dict: any;
+  lang: Locale;
+  dict: Dictionary;
   showContractFilters?: boolean;
 }
 
@@ -30,8 +29,8 @@ export default function PropertiesClientPage({
   const [activeSort, setActiveSort] = useState<string>("default");
 
   // Get initial values from URL if present
-  const [q, setQ] = useState(searchParams.get("q") || "");
-  const [locationParam, setLocationParam] = useState(searchParams.get("location") || "");
+  const [q] = useState(() => searchParams.get("q") || "");
+  const [locationParam] = useState(() => searchParams.get("location") || "");
 
   const d = dict.properties_page;
 
@@ -74,17 +73,10 @@ export default function PropertiesClientPage({
 
     if (activeSort === "price_asc") list.sort((a, b) => a.price - b.price);
     else if (activeSort === "price_desc") list.sort((a, b) => b.price - a.price);
-    else if (activeSort === "area") list.sort((a, b) => b.area - a.area);
+    else if (activeSort === "area") list.sort((a, b) => a.area - b.area);
 
     return list;
   }, [properties, activeFilter, activeContractType, activeSort, q, locationParam]);
-
-  const formatPrice = (p: number) =>
-    new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", {
-      style: "currency",
-      currency: "EUR",
-      maximumFractionDigits: 0,
-    }).format(p);
 
   const typeLabel = (type: string) =>
     (dict.home.property_types as Record<string, string>)[type] || type;

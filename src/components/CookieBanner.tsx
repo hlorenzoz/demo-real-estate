@@ -7,16 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 export function CookieBanner() {
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    // Check local storage for consent.
-    const consent = localStorage.getItem("cookie_consent");
-    if (!consent) {
-      setShow(true);
-    } else if (consent === "accepted") {
-      injectCloudflareAnalytics();
-    }
-  }, []);
-
   const injectCloudflareAnalytics = () => {
     // Only inject if token is available
     const token = process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
@@ -32,6 +22,19 @@ export function CookieBanner() {
       }
     }
   };
+
+  useEffect(() => {
+    // Avoid synchronous setState in effect for React 19 by deferring it
+    const timer = setTimeout(() => {
+      const consent = localStorage.getItem("cookie_consent");
+      if (!consent) {
+        setShow(true);
+      } else if (consent === "accepted") {
+        injectCloudflareAnalytics();
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleAccept = () => {
     localStorage.setItem("cookie_consent", "accepted");
@@ -61,7 +64,7 @@ export function CookieBanner() {
               <div className="text-sm">
                 <p className="font-bold text-primary mb-1">We respect your privacy</p>
                 <p className="text-text-muted">
-                  We use cookies to analyze site traffic and enhance your experience. By clicking "Accept All", you consent to our use of cookies.
+                  We use cookies to analyze site traffic and enhance your experience. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                 </p>
               </div>
             </div>

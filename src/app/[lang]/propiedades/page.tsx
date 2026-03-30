@@ -1,13 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Metadata } from "next";
 import { getDictionary } from "../../../get-dictionary";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import MotionWrapper from "../../../components/MotionWrapper";
 import PropertiesClientPage from "./PropertiesClientPage";
-import { BedDouble, Bath, Square, ArrowRight, Home } from "lucide-react";
+import { Home } from "lucide-react";
 import { getLocalizedPath } from "../../../lib/routes";
 
 import baseContent from "../../../../base-content.json";
@@ -59,11 +58,13 @@ export default async function PropiedadesPage({ params }: Props) {
       </section>
 
       {/* Properties Grid with Client-side Filtering */}
-      <PropertiesClientPage
-        properties={baseContent.properties as Property[]}
-        lang={lang}
-        dict={dict}
-      />
+      <React.Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary-accent border-t-transparent rounded-full animate-spin" /></div>}>
+        <PropertiesClientPage
+          properties={baseContent.properties as Property[]}
+          lang={lang}
+          dict={dict}
+        />
+      </React.Suspense>
 
       <Footer dict={dict.footer} lang={lang} />
     </main>

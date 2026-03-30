@@ -1,11 +1,10 @@
 import React from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { getDictionary } from "../../../get-dictionary";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import MotionWrapper from "../../../components/MotionWrapper";
 import ContactForm from "../../../components/ContactForm";
-
 
 export default async function ContactPage({
   params,

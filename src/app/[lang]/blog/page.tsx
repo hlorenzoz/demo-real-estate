@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Sparkles, Calendar, Clock, ChevronRight } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { getDictionary } from "../../../get-dictionary";
 import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";

@@ -63,12 +63,14 @@ export default async function ListingsPage({ params }: Props) {
       </section>
 
       {/* Properties Grid with Client-side Filtering */}
-      <PropertiesClientPage
-        properties={saleProperties}
-        lang={lang}
-        dict={dict}
-        showContractFilters={false}
-      />
+      <React.Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-8 h-8 border-4 border-primary-accent border-t-transparent rounded-full animate-spin" /></div>}>
+        <PropertiesClientPage
+          properties={saleProperties}
+          lang={lang}
+          dict={dict}
+          showContractFilters={false}
+        />
+      </React.Suspense>
 
       <Footer dict={dict.footer} lang={lang} />
     </main>

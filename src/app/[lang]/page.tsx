@@ -1,29 +1,12 @@
 import React from "react";
-// Forced update to clear Turbopack cache - 2026-03-30T14:36:30
+// Forced update to clear Turbopack cache - 2026-03-30T18:04:35
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Building2, 
-  Search, 
-  Heart, 
-  Sparkles, 
-  MapPin, 
-  ArrowRight, 
-  Key, 
-  ShieldCheck, 
-  TrendingUp,
-  Mail,
-  Phone,
-  Instagram,
-  Facebook,
-  MessageCircle,
-  ExternalLink
-} from "lucide-react";
+import { Sparkles, ArrowRight, ShieldCheck, TrendingUp, MessageCircle } from "lucide-react";
 import { getLocalizedPath } from "../../lib/routes";
 import { getDictionary } from "../../get-dictionary";
 import Navbar from "../../components/Navbar";
 import HeroClient from "../../components/HeroClient";
-import PropertyCard from "../../components/PropertyCard";
 import PropertiesCarousel from "../../components/PropertiesCarousel";
 import ReviewsCarousel from "../../components/ReviewsCarousel";
 import Footer from "../../components/Footer";
@@ -36,8 +19,18 @@ import baseContentRaw from "../../../base-content.json";
 
 const baseContent = baseContentRaw as {
   properties: Property[];
-  reviews: any[];
-  stats: any;
+  reviews: {
+    author: string;
+    date: string;
+    rating: number;
+    content: string;
+  }[];
+  stats: {
+    average: number;
+    count: number;
+    label: string;
+    platform: string;
+  };
 };
 
 export default async function Home({
