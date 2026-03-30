@@ -13,3 +13,4 @@ cf_token.txt
 playwright-report/
 test-results/
 .lighthouseci/
+coverage/
