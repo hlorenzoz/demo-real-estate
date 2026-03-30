@@ -130,9 +130,9 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block z-[100]"
       >
-        <div className="glass p-3 rounded-[32px] flex items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-50">
+        <div className="glass p-3 rounded-[32px] flex items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-[100]">
           
           {/* General Search Input */}
           <div className="flex-1 relative" ref={searchRef}>
@@ -163,7 +163,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[60]"
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
                 >
                   <div className="p-2">
                     {filteredSearch.map((property) => (
@@ -217,7 +217,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[60]"
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[110]"
                 >
                   <div className="p-2">
                     {filteredLocations.map((loc, i) => (
