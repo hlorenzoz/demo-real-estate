@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { BedDouble, Bath, Square, ArrowRight, SlidersHorizontal, MapPin, Check } from "lucide-react";
@@ -8,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Dictionary } from "../../../get-dictionary";
 import { Property } from "../../../types/property";
 import PropertyCard from "../../../components/PropertyCard";
+import { getLocalizedPath } from "../../../lib/routes";
 
 interface PropertiesClientPageProps {
   properties: Property[];
@@ -22,9 +24,14 @@ export default function PropertiesClientPage({
   dict,
   showContractFilters = true
 }: PropertiesClientPageProps) {
+  const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [activeContractType, setActiveContractType] = useState<string>("all");
   const [activeSort, setActiveSort] = useState<string>("default");
+
+  // Get initial values from URL if present
+  const [q, setQ] = useState(searchParams.get("q") || "");
+  const [locationParam, setLocationParam] = useState(searchParams.get("location") || "");
 
   const d = dict.properties_page;
 
@@ -36,6 +43,25 @@ export default function PropertiesClientPage({
   const filtered = useMemo(() => {
     let list = [...properties];
 
+    // URL Params Filtering
+    if (q) {
+      const searchTerms = q.toLowerCase();
+      list = list.filter(p => 
+        p.location.toLowerCase().includes(searchTerms) || 
+        (p.city && p.city.toLowerCase().includes(searchTerms)) ||
+        p.type.toLowerCase().includes(searchTerms)
+      );
+    }
+
+    if (locationParam) {
+      const locTerms = locationParam.toLowerCase();
+      list = list.filter(p => 
+        p.city?.toLowerCase().includes(locTerms) || 
+        p.location.toLowerCase().includes(locTerms)
+      );
+    }
+
+    // UI Filters
     if (activeFilter === "featured") {
       list = list.filter((p) => p.featured);
     } else if (activeFilter !== "all") {
@@ -51,7 +77,7 @@ export default function PropertiesClientPage({
     else if (activeSort === "area") list.sort((a, b) => b.area - a.area);
 
     return list;
-  }, [properties, activeFilter, activeContractType, activeSort]);
+  }, [properties, activeFilter, activeContractType, activeSort, q, locationParam]);
 
   const formatPrice = (p: number) =>
     new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", {
@@ -181,7 +207,7 @@ export default function PropertiesClientPage({
             <p className="text-white/70 text-lg font-bold">{d.contact_desc}</p>
           </div>
           <Link
-            href={`/${lang}/contactar`}
+            href={getLocalizedPath(lang, 'contact')}
             className="bg-primary-accent text-primary px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl whitespace-nowrap flex items-center gap-3"
           >
             {d.contact_cta} <ArrowRight size={16} />

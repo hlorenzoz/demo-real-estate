@@ -1,27 +1,94 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Search, MapPin, ArrowRight } from "lucide-react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Search, MapPin, ArrowRight, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { Dictionary, Locale } from "../get-dictionary";
 import { getLocalizedPath } from "../lib/routes";
+import { Property } from "../types/property";
 
 interface HeroProps {
   dict: Dictionary["hero"];
   lang: Locale;
+  properties: Property[];
 }
 
+export default function HeroClient({ dict, lang, properties }: HeroProps) {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [locationQuery, setLocationQuery] = useState("");
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  
+  const searchRef = useRef<HTMLDivElement>(null);
+  const locationRef = useRef<HTMLDivElement>(null);
 
-export default function HeroClient({ dict, lang }: HeroProps) {
+  // Close dropdowns on click outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setShowSearchDropdown(false);
+      }
+      if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
+        setShowLocationDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Filter properties for general search
+  const filteredSearch = useMemo(() => {
+    if (!searchQuery || searchQuery.length < 2) return [];
+    const q = searchQuery.toLowerCase();
+    return properties.filter(p => 
+      p.location.toLowerCase().includes(q) || 
+      (p.city && p.city.toLowerCase().includes(q)) ||
+      p.type.toLowerCase().includes(q)
+    ).slice(0, 5);
+  }, [searchQuery, properties]);
+
+  // Filter unique cities/locations for location search
+  const filteredLocations = useMemo(() => {
+    if (!locationQuery || locationQuery.length < 2) return [];
+    const q = locationQuery.toLowerCase();
+    
+    const uniqueLocs = new Set<string>();
+    const results: { city: string; location: string }[] = [];
+    
+    properties.forEach(p => {
+      const city = p.city || "";
+      const loc = p.location || "";
+      const key = `${city}-${loc}`;
+      
+      if (!uniqueLocs.has(key) && (city.toLowerCase().includes(q) || loc.toLowerCase().includes(q))) {
+        uniqueLocs.add(key);
+        results.push({ city, location: loc });
+      }
+    });
+    
+    return results.slice(0, 5);
+  }, [locationQuery, properties]);
+
+  const handleSearch = () => {
+    const params = new URLSearchParams();
+    if (searchQuery) params.set("q", searchQuery);
+    if (locationQuery) params.set("location", locationQuery);
+    
+    router.push(`${getLocalizedPath(lang, 'listings')}?${params.toString()}`);
+  };
+
   return (
     <section className="relative h-screen flex items-center pt-20 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black/40 z-10 shadow-[inset_0_-200px_400px_-100px_rgba(0,0,0,0.8)]" />
         <Image 
           src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero-1.webp" 
-          alt="Luxury Interior in your City" 
+          alt="Luxury Interior" 
           fill 
           sizes="100vw"
           className="object-cover scale-105"
@@ -65,21 +132,122 @@ export default function HeroClient({ dict, lang }: HeroProps) {
         transition={{ delay: 0.4, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-6 hidden lg:block"
       >
-        <div className="glass p-3 rounded-[32px] flex items-center gap-4 shadow-2xl border border-white/20 backdrop-blur-3xl">
-          <div className="flex-1 flex items-center gap-5 px-6">
-            <Search className="text-primary/20 w-6 h-6" />
-            <input 
-              type="text" 
-              placeholder={dict.search_placeholder} 
-              className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-lg placeholder:text-primary/30" 
-            />
+        <div className="glass p-3 rounded-[32px] flex items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-50">
+          
+          {/* General Search Input */}
+          <div className="flex-1 relative" ref={searchRef}>
+            <div className="flex items-center gap-5 px-6">
+              <Search className="text-primary/20 w-6 h-6" />
+              <input 
+                type="text" 
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setShowSearchDropdown(true);
+                }}
+                onFocus={() => setShowSearchDropdown(true)}
+                placeholder={dict.search_placeholder} 
+                className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-lg placeholder:text-primary/30 py-4" 
+              />
+              {searchQuery && (
+                <button onClick={() => setSearchQuery("")} className="text-primary/20 hover:text-primary">
+                  <X size={16} />
+                </button>
+              )}
+            </div>
+
+            {/* General Search Results Dropdown */}
+            <AnimatePresence>
+              {showSearchDropdown && filteredSearch.length > 0 && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[60]"
+                >
+                  <div className="p-2">
+                    {filteredSearch.map((property) => (
+                      <Link 
+                        key={property.id}
+                        href={`${getLocalizedPath(lang, 'propiedades')}/${property.id}`}
+                        className="flex items-center gap-4 p-3 hover:bg-primary/5 rounded-2xl transition-all group"
+                      >
+                        <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
+                          <Image src={property.image} alt={property.location} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-black text-primary truncate tracking-tight">{property.location}</div>
+                          <div className="text-[10px] uppercase font-black text-primary-accent tracking-widest">{property.type} • {property.city}</div>
+                        </div>
+                        <ArrowRight size={14} className="text-primary-accent opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
+
           <div className="w-px h-12 bg-black/5" />
-          <div className="px-6 flex items-center gap-3 cursor-pointer hover:bg-black/5 rounded-2xl py-4 transition-all text-primary">
-            <MapPin className="text-primary-accent w-6 h-6" />
-            <span className="text-base font-bold tracking-tight">{dict.location_label}</span>
+
+          {/* Location Search Input */}
+          <div className="flex-[0.6] relative" ref={locationRef}>
+            <div 
+              className="px-6 flex items-center gap-3 cursor-pointer hover:bg-black/5 rounded-2xl py-4 transition-all text-primary"
+              onClick={() => setShowLocationDropdown(true)}
+            >
+              <MapPin className="text-primary-accent w-6 h-6" />
+              <input 
+                type="text"
+                value={locationQuery}
+                onChange={(e) => {
+                  setLocationQuery(e.target.value);
+                  setShowLocationDropdown(true);
+                }}
+                onFocus={() => setShowLocationDropdown(true)}
+                placeholder={dict.location_label}
+                className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-base placeholder:text-primary/40 p-0"
+              />
+            </div>
+
+            {/* Location Search Results Dropdown */}
+            <AnimatePresence>
+              {showLocationDropdown && filteredLocations.length > 0 && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  className="absolute bottom-full left-0 w-full mb-4 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl border border-white/40 overflow-hidden z-[60]"
+                >
+                  <div className="p-2">
+                    {filteredLocations.map((loc, i) => (
+                      <button
+                        key={i}
+                        onClick={() => {
+                          setLocationQuery(loc.city || loc.location);
+                          setShowLocationDropdown(false);
+                        }}
+                        className="w-full flex items-center gap-4 p-4 hover:bg-primary/5 rounded-2xl transition-all group text-left"
+                      >
+                        <div className="w-10 h-10 rounded-xl bg-primary-accent/10 flex items-center justify-center text-primary-accent">
+                          <MapPin size={18} />
+                        </div>
+                        <div className="flex-1">
+                          <div className="text-sm font-black text-primary tracking-tight">{loc.city}</div>
+                          <div className="text-[10px] uppercase font-black text-text-muted tracking-widest">{loc.location}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
-          <button className="bg-primary text-white px-12 py-5 rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-sm tracking-widest shadow-xl">
+
+          <button 
+            onClick={handleSearch}
+            className="bg-primary text-white px-12 py-5 rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-sm tracking-widest shadow-xl ml-2"
+          >
             {dict.search_button}
           </button>
 

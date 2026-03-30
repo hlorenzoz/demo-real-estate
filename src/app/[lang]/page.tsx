@@ -78,7 +78,11 @@ export default async function Home({
         }}
       />
       <Navbar lang={locale} dict={dict.navbar} />
-      <HeroClient dict={dict.hero} lang={locale} />
+      <HeroClient 
+        dict={dict.hero} 
+        lang={locale} 
+        properties={baseContent.properties} 
+      />
 
       {/* Featured Properties (Sale) */}
       <section id="propiedades" className="py-32 px-6 bg-white overflow-hidden">
