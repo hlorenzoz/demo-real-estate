@@ -71,6 +71,7 @@ export default async function AlquilerPage({ params }: Props) {
         properties={rentalProperties}
         lang={lang}
         dict={dict}
+        showContractFilters={false}
       />
 
       <Footer dict={dict.footer} lang={lang} />

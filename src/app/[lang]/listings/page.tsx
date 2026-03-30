@@ -67,6 +67,7 @@ export default async function ListingsPage({ params }: Props) {
         properties={saleProperties}
         lang={lang}
         dict={dict}
+        showContractFilters={false}
       />
 
       <Footer dict={dict.footer} lang={lang} />

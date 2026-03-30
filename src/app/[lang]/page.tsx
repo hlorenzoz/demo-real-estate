@@ -114,7 +114,7 @@ export default async function Home({
               </p>
             </div>
             <Link href={getLocalizedPath(locale, 'alquiler')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-secondary-accent border-b-2 border-secondary-accent pb-2 hover:opacity-70 transition-all">
-              {dict.home.cta_catalog} <ArrowRight size={18} />
+              {dict.home.cta_rentals} <ArrowRight size={18} />
             </Link>
           </MotionWrapper>
 

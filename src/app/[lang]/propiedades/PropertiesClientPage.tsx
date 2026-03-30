@@ -12,10 +12,16 @@ import PropertyCard from "../../../components/PropertyCard";
 interface PropertiesClientPageProps {
   properties: Property[];
   lang: "en" | "es";
-  dict: Dictionary;
+  dict: any;
+  showContractFilters?: boolean;
 }
 
-export default function PropertiesClientPage({ properties, lang, dict }: PropertiesClientPageProps) {
+export default function PropertiesClientPage({ 
+  properties, 
+  lang, 
+  dict,
+  showContractFilters = true
+}: PropertiesClientPageProps) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [activeContractType, setActiveContractType] = useState<string>("all");
   const [activeSort, setActiveSort] = useState<string>("default");
@@ -89,25 +95,27 @@ export default function PropertiesClientPage({ properties, lang, dict }: Propert
           </div>
 
           {/* Contract Type Pills (Sale/Rent) */}
-          <div className="flex flex-wrap gap-3 mt-4 lg:mt-0">
-            {[
-              { id: "all", label: d.filter_all },
-              { id: "sale", label: dict.home.for_sale },
-              { id: "rent", label: dict.home.for_rent },
-            ].map((c) => (
-              <button
-                key={c.id}
-                onClick={() => setActiveContractType(c.id)}
-                className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border-2 ${
-                  activeContractType === c.id
-                    ? "bg-primary text-white border-primary shadow-lg"
-                    : "bg-white text-text-muted border-slate-100 hover:border-primary hover:text-primary"
-                }`}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
+          {showContractFilters && (
+            <div className="flex flex-wrap gap-3 mt-4 lg:mt-0">
+              {[
+                { id: "all", label: d.filter_all },
+                { id: "sale", label: dict.home.for_sale },
+                { id: "rent", label: dict.home.for_rent },
+              ].map((c) => (
+                <button
+                  key={c.id}
+                  onClick={() => setActiveContractType(c.id)}
+                  className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all border-2 ${
+                    activeContractType === c.id
+                      ? "bg-primary text-white border-primary shadow-lg"
+                      : "bg-white text-text-muted border-slate-100 hover:border-primary hover:text-primary"
+                  }`}
+                >
+                  {c.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Sort + Count */}
           <div className="flex items-center gap-4">

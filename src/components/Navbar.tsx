@@ -53,7 +53,6 @@ export default function Navbar({ lang, dict }: NavbarProps) {
           <Link href={getLocalizedPath(lang, 'listings')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.listings}</Link>
           <Link href={getLocalizedPath(lang, 'alquiler')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.rentals}</Link>
           <Link href={`/${lang}/#vender`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.vender}</Link>
-          <Link href={`/${lang}/#nosotros`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.nosotros}</Link>
           <Link href={getLocalizedPath(lang, 'blog')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.blog}</Link>
           <Link href={getLocalizedPath(lang, 'faq')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.faq}</Link>
           
@@ -73,7 +72,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
           </div>
         </div>
         <Link 
-          href={getLocalizedPath(lang, 'contactar')}
+          href={getLocalizedPath(lang, 'contact')}
           className="bg-primary text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-primary-accent hover:text-primary transition-all group shadow-xl"
         >
           <span className="flex items-center gap-2">
