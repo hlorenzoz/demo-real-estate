@@ -32,6 +32,6 @@ test.describe('Real Estate Template Home Page Verification', () => {
   test('should show the free appraisal section', async ({ page }) => {
     await page.goto('/en', { waitUntil: 'networkidle' });
     // In ServicesSection: "Free Appraisal"
-    await expect(page.getByText(/Free Appraisal/i).first()).toBeVisible();
+    await expect(page.getByText(/Free Home Valuation/i).first()).toBeVisible();
   });
 });
