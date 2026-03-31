@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { ArrowRight, ShieldCheck, MessageCircle, Calculator, Megaphone, Users, Scale, Check } from "lucide-react";
-import { getLocalizedPath } from "../../lib/routes";
+import { getLocalizedPath, reverseMappings } from "../../lib/routes";
 import { getDictionary } from "../../get-dictionary";
 import Navbar from "../../components/Navbar";
 import HeroClient from "../../components/HeroClient";
@@ -70,6 +70,11 @@ export default async function Home({
   const featuredProperties = baseContent.properties.filter(p => p.featured && p.contractType === 'sale');
   const rentalProperties = baseContent.properties.filter(p => p.contractType === 'rent');
 
+  const propiedadesId = reverseMappings[locale]?.['propiedades'] || 'propiedades';
+  const alquilerId = reverseMappings[locale]?.['alquiler'] || 'alquiler';
+  const venderId = reverseMappings[locale]?.['vender'] || 'vender';
+  const nosotrosId = reverseMappings[locale]?.['about-us'] || 'about-us';
+
   return (
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">
       <script
@@ -102,7 +107,7 @@ export default async function Home({
       />
 
       {/* Featured Properties (Sale) */}
-      <section id="propiedades" className="py-32 px-6 bg-white overflow-hidden">
+      <section id={propiedadesId} className="py-32 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-2xl">
@@ -123,7 +128,7 @@ export default async function Home({
       </section>
 
       {/* Featured Rentals */}
-      <section id="alquiler" className="py-32 px-6 bg-[#F8F9FB] overflow-hidden">
+      <section id={alquilerId} className="py-32 px-6 bg-[#F8F9FB] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-2xl">
@@ -144,7 +149,7 @@ export default async function Home({
       </section>
 
       {/* 2. Services Section */}
-      <section id="vender" className="py-32 px-6 bg-white overflow-hidden">
+      <section id={venderId} className="py-32 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-serif mb-6 text-primary tracking-tight italic">
@@ -286,7 +291,7 @@ export default async function Home({
       </section>
 
       {/* 4. Social Proof */}
-      <section id="nosotros" className="py-32 bg-white overflow-hidden relative">
+      <section id={nosotrosId} className="py-32 bg-white overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-6">
           <MotionWrapper className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-serif mb-6 text-primary tracking-tight">

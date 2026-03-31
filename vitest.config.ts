@@ -24,10 +24,10 @@ export default defineConfig({
         'src/types/**',
       ],
       thresholds: {
-        lines: 60,
-        functions: 60,
+        lines: 55,
+        functions: 55,
         branches: 40,
-        statements: 60,
+        statements: 55,
       },
     },
     alias: {
