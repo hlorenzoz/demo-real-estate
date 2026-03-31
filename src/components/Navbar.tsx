@@ -82,7 +82,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
         <div className="hidden min-[1100px]:flex items-center gap-8 xl:gap-10">
           <Link href={getLocalizedPath(lang, 'listings')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.listings}</Link>
           <Link href={getLocalizedPath(lang, 'alquiler')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.rentals}</Link>
-          <Link href={`/${lang}/#vender`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.vender}</Link>
+          <Link href={`/${lang}/#${reverseMappings[lang]?.['vender'] || 'vender'}`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.vender}</Link>
           <Link href={getLocalizedPath(lang, 'blog')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.blog}</Link>
           <Link href={getLocalizedPath(lang, 'faq')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.faq}</Link>
           
@@ -101,24 +101,26 @@ export default function Navbar({ lang, dict }: NavbarProps) {
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-4 min-[1100px]:hidden">
-          <button 
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="p-3 bg-primary/5 rounded-2xl text-primary hover:bg-primary/10 transition-colors"
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          >
-            {isMenuOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
+        <div className="flex items-center gap-4">
+          <div className="min-[1100px]:hidden">
+            <button 
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-3 bg-primary/5 rounded-2xl text-primary hover:bg-primary/10 transition-colors"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <CloseIcon size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
 
-        <Link 
-          href={getLocalizedPath(lang, 'contact')}
-          className="hidden sm:flex bg-primary text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-primary-accent hover:text-primary transition-all group shadow-xl shrink-0"
-        >
-          <span className="flex items-center gap-2">
-            {dict.contactar} <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
-          </span>
-        </Link>
+          <Link 
+            href={getLocalizedPath(lang, 'contact')}
+            className="hidden sm:flex bg-primary text-white px-8 py-4 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-primary-accent hover:text-primary transition-all group shadow-xl shrink-0"
+          >
+            <span className="flex items-center gap-2">
+              {dict.contactar} <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+            </span>
+          </Link>
+        </div>
 
         {/* Mobile/Tablet Menu */}
         <AnimatePresence>
@@ -132,7 +134,7 @@ export default function Navbar({ lang, dict }: NavbarProps) {
               <div className="flex flex-col gap-4">
                 <Link href={getLocalizedPath(lang, 'listings')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.listings}</Link>
                 <Link href={getLocalizedPath(lang, 'alquiler')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.rentals}</Link>
-                <Link href={`/${lang}/#vender`} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.vender}</Link>
+                <Link href={`/${lang}/#${reverseMappings[lang]?.['vender'] || 'vender'}`} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.vender}</Link>
                 <Link href={getLocalizedPath(lang, 'blog')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.blog}</Link>
                 <Link href={getLocalizedPath(lang, 'faq')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest">{dict.faq}</Link>
                 
