@@ -95,4 +95,4 @@ jobs:
       - name: Run Lighthouse
         run: bun run test:lighthouse
         env:
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN || secrets.GITHUB_TOKEN }}
+          LHCI_GITHUB_TOKEN: ${{ secrets.LHCI_GITHUB_TOKEN || secrets.LHCI_GITHUB_APP_TOKEN || secrets.GITHUB_TOKEN }}

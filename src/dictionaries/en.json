@@ -60,14 +60,21 @@
     "whatsapp_prompt": "How can we help you?"
   },
   "services": {
-    "title": "Exclusive Services",
-    "description": "Accompanying you in every step of the real estate process with maximum rigor.",
-    "tasacion": "Free Appraisal",
-    "tasacion_desc": "Detailed market study to sell at the best price.",
-    "gestion": "Full Management",
-    "gestion_desc": "We take care of all bureaucracy and legal formalities.",
-    "inversion": "Investment Advisory",
-    "inversion_desc": "Guaranteed profitability on selected assets."
+    "title": "Real Estate Services Portfolio",
+    "description": "Strategic solutions tailored to your wealth goals with rigor and exclusivity.",
+    "tasacion": "Free Home Valuation",
+    "tasacion_desc": "Offering a precise, no-obligation property valuation using advanced market algorithms and deep local knowledge of the Ourense region. The first step toward a successful transaction.",
+    "tasacion_detail": "€0 cost for professional valuation.",
+    "venta": "Property Sales",
+    "venta_desc": "Maximizing property exposure through cutting-edge digital marketing strategies and an exclusive network of international buyers.",
+    "alquiler": "Guaranteed Rental",
+    "alquiler_desc": "Total legal security and rigorous tenant selection. Handling everything so your investment generates profitability without worries.",
+    "alquiler_pillars": ["Insured collection", "Contract management", "Technical maintenance"],
+    "asesoria": "Personalized Advisory",
+    "asesoria_desc": "Tailored strategic plans adapted to your specific goals, whether for investment, relocation, or wealth expansion.",
+    "legal": "Legal and Tax Advisory",
+    "legal_desc": "Expert navigation of Ourense region regulations. Specialists in Galician real estate law, inheritances, and tax optimization for large estates.",
+    "legal_expertise": "Specialists in the Xinzo de Limia zone."
   },
   "reviews": {
     "title": "Verified Trust",

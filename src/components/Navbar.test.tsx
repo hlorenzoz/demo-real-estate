@@ -89,4 +89,16 @@ describe("Navbar", () => {
     const esLinks = screen.getAllByText(/ES/);
     expect(esLinks[0]).toHaveAttribute('href', '/es');
   });
+
+  it("calculates redirected path correctly for root language path", async () => {
+    const { usePathname } = await import("next/navigation");
+    vi.mocked(usePathname).mockReturnValue("/en");
+    
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
+    
+    const esLinks = screen.getAllByText(/ES/);
+    expect(esLinks[0]).toHaveAttribute('href', '/es');
+  });
 });

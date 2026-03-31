@@ -1,4 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512" fill="none">
-    <path fill="#1E3A8A" d="M11 20H5c-1.103 0-2-.897-2-2v-7.669c0-.466.166-.917.472-1.272l6-6.918a1.328 1.328 0 0 1 2.056 0l6 6.918c.306.355.472.806.472 1.272V18c0 1.103-.897 2-2 2h-6Z"/>
-    <path fill="#FBBF24" d="M12 21a1 1 0 0 1-1-1v-5h2v5a1 1 0 0 1-1 1Z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Map Perspective Base -->
+  <path d="M60 380 L256 460 L452 380 L256 300 Z" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="8"/>
+  <path d="M60 380 L256 460 L256 475 L60 395 Z" fill="#94A3B8" />
+  <path d="M256 460 L452 380 L452 395 L256 475 Z" fill="#64748B" />
+  
+  <!-- Map Grid Lines -->
+  <path d="M158 340 L354 420" stroke="#E2E8F0" stroke-width="4"/>
+  <path d="M354 340 L158 420" stroke="#E2E8F0" stroke-width="4"/>
+
+  <!-- Red Location Pin (The "Budget" location icon) -->
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="10" />
+    <feOffset dx="0" dy="15" />
+    <feComponentTransfer>
+      <feFuncA type="linear" slope="0.3" />
+    </feComponentTransfer>
+    <feMerge>
+      <feMergeNode />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+  
+  <g filter="url(#shadow)">
+    <path d="M256 40 C180 40 120 100 120 176 C120 280 256 420 256 420 C256 420 392 280 392 176 C392 100 332 40 256 40 Z" fill="#EF4444" />
+    <circle cx="256" cy="176" r="60" fill="white" opacity="0.9" />
+    <circle cx="256" cy="176" r="30" fill="#EF4444" />
+  </g>
 </svg>

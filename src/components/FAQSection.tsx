@@ -53,7 +53,7 @@ export default function FAQSection({ dict, lang, limit }: FAQSectionProps) {
                 >
                   <div className="flex items-center gap-6">
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                      openIndex === i ? "bg-primary text-white rotate-[360deg]" : "bg-slate-50 text-primary-accent group-hover:bg-primary-accent group-hover:text-white"
+                      openIndex === i ? "bg-primary text-white rotate-[360deg]" : "bg-slate-50 text-primary-accent-dark group-hover:bg-primary-accent group-hover:text-white"
                     }`}>
                       <HelpCircle size={24} />
                     </div>
@@ -65,7 +65,7 @@ export default function FAQSection({ dict, lang, limit }: FAQSectionProps) {
                   </div>
                   <ChevronDown 
                     className={`text-slate-300 transition-transform duration-500 ease-in-out ${
-                      openIndex === i ? "rotate-180 text-primary-accent" : ""
+                      openIndex === i ? "rotate-180 text-primary-accent-dark" : ""
                     }`} 
                     size={24} 
                   />

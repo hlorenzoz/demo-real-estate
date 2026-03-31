@@ -147,7 +147,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                   {/* Card Header */}
                   <div className="flex items-center justify-between mb-8">
                     <div className="flex items-center gap-6">
-                      <div className="w-16 h-16 rounded-3xl bg-slate-50 flex items-center justify-center text-primary-accent font-black text-2xl border border-white shadow-sm transition-colors group-hover/card:bg-primary group-hover/card:text-white">
+                      <div className="w-16 h-16 rounded-3xl bg-slate-50 flex items-center justify-center text-primary-accent-dark font-black text-2xl border border-white shadow-sm transition-colors group-hover/card:bg-primary group-hover/card:text-white">
                         {review.author[0]}
                       </div>
                       <div>
@@ -200,7 +200,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                 !canScrollLeft ? "opacity-0 invisible" : "opacity-100 visible"
               }`}
             >
-              <ChevronLeft size={32} className="text-primary-accent" />
+              <ChevronLeft size={32} className="text-primary-accent-dark" />
             </button>
             <button
               onClick={() => scroll("right")}
@@ -209,7 +209,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                 !canScrollRight ? "opacity-0 invisible" : "opacity-100 visible"
               }`}
             >
-              <ChevronRight size={32} className="text-primary-accent" />
+              <ChevronRight size={32} className="text-primary-accent-dark" />
             </button>
           </div>
         </div>

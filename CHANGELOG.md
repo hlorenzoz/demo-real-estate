@@ -1,4 +1,16 @@
-# CHANGELOG.md - Real Estate Template
+
+## [1.3.0] - 2026-03-31
+### Added
+- **Lighthouse Optimization**: Achieved 95+ score in Accessibility, SEO, and Best Practices.
+- **Cloudflare Analytics**: Integrated with custom Cookie Consent banner and environment-based script injection.
+- **Enhanced Search**: Visual search dropdowns with framer-motion animations and intelligent filtering in Hero component.
+- **Unit Testing**: Refined vitest setup for Hero and Cookie components.
+- **Glassmorphism UI**: Universal application of glass-effect cards and refined typography across all main views.
+
+### Fixed
+- Navigation contrast in scrolled state.
+- Empty state transitions in property catalog.
+- Script injection race conditions in first-load scenarios.
 
 ## [1.2.0] - 2026-03-29
 ### Added

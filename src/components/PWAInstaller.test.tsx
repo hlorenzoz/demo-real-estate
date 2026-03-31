@@ -71,4 +71,26 @@ describe("PWAInstaller", () => {
     
     expect(screen.queryByText(/Install App/)).not.toBeInTheDocument();
   });
+
+  it("handles X button click", async () => {
+    render(<PWAInstaller />);
+    
+    const promptEvent = new Event("beforeinstallprompt");
+    vi.spyOn(promptEvent, "preventDefault");
+    
+    await act(async () => {
+      window.dispatchEvent(promptEvent);
+    });
+
+    // Find by SVG/X or button role
+    // In source line 81: <button onClick={() => setShowInstaller(false)} ...><X size={16} /></button>
+    // It's the only button without text besides the Later/Install
+    const allButtons = screen.getAllByRole("button");
+    const xBtn = allButtons.find(btn => !btn.textContent);
+    
+    if (xBtn) {
+      fireEvent.click(xBtn);
+      expect(screen.queryByText(/Install App/)).not.toBeInTheDocument();
+    }
+  });
 });

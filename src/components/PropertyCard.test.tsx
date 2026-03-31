@@ -112,4 +112,13 @@ describe("PropertyCard", () => {
     // In Spanish locale for EUR, it often uses dot for thousands
     expect(screen.getByText(/500.000/)).toBeInTheDocument();
   });
+
+  it("falls back to property type string if not in dictionary", async () => {
+    const unknownTypeProperty = { ...mockProperty, type: "Mansion" };
+    await act(async () => {
+      render(<PropertyCard property={unknownTypeProperty} lang="en" dict={mockDict} />);
+    });
+    
+    expect(screen.getByText(/Mansion/)).toBeInTheDocument();
+  });
 });

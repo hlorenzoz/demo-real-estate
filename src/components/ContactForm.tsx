@@ -28,6 +28,11 @@ export default function ContactForm({ dict, lang }: ContactFormProps) {
 
     // Simulate API call
     try {
+      // For testing purposes: allow triggering different states
+      if (formData.name === "TriggerError") {
+        throw new Error("Simulated API error");
+      }
+      
       await new Promise(resolve => setTimeout(resolve, 2000));
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });

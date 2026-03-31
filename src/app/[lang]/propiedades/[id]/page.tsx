@@ -169,23 +169,23 @@ export default async function PropertyDetailPage({ params }: Props) {
               {/* Stats bar */}
               <MotionWrapper className="flex flex-wrap gap-6 mb-12 p-8 bg-white rounded-[32px] border border-slate-50 shadow-sm">
                 <div className="flex flex-col items-center gap-1 px-6 border-r border-slate-50 last:border-0">
-                  <BedDouble size={20} className="text-primary-accent" />
+                  <BedDouble size={20} className="text-primary-accent-dark" />
                   <span className="text-2xl font-black text-primary">{property.bedrooms}</span>
                   <span className="text-xs font-bold text-text-muted uppercase tracking-widest">{d.beds_label}</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 px-6 border-r border-slate-50 last:border-0">
-                  <Bath size={20} className="text-primary-accent" />
+                  <Bath size={20} className="text-primary-accent-dark" />
                   <span className="text-2xl font-black text-primary">{property.bathrooms}</span>
                   <span className="text-xs font-bold text-text-muted uppercase tracking-widest">{d.baths_label}</span>
                 </div>
                 <div className="flex flex-col items-center gap-1 px-6 border-r border-slate-50 last:border-0">
-                  <Square size={20} className="text-primary-accent" />
+                  <Square size={20} className="text-primary-accent-dark" />
                   <span className="text-2xl font-black text-primary">{property.area}</span>
                   <span className="text-xs font-bold text-text-muted uppercase tracking-widest">{d.area_label}</span>
                 </div>
                 {property.year_built && (
                   <div className="flex flex-col items-center gap-1 px-6 border-r border-slate-50 last:border-0">
-                    <Calendar size={20} className="text-primary-accent" />
+                    <Calendar size={20} className="text-primary-accent-dark" />
                     <span className="text-2xl font-black text-primary">{property.year_built}</span>
                     <span className="text-xs font-bold text-text-muted uppercase tracking-widest">{d.year_built}</span>
                   </div>
@@ -223,7 +223,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                     >
                       {icon}
                       {label}
-                      {value && <Check size={14} className="ml-auto text-primary-accent" />}
+                      {value && <Check size={14} className="ml-auto text-primary-accent-dark" />}
                     </div>
                   ))}
                 </div>
@@ -234,7 +234,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                     {property.features.map((f) => (
                       <li key={f} className="flex items-center gap-3 text-sm font-bold text-text-muted">
                         <span className="w-5 h-5 rounded-full bg-primary-accent/10 flex items-center justify-center flex-shrink-0">
-                          <Check size={10} className="text-primary-accent" />
+                          <Check size={10} className="text-primary-accent-dark" />
                         </span>
                         {f}
                       </li>
@@ -252,7 +252,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                     <div className="text-xs font-black uppercase tracking-widest text-text-muted mb-2">
                       {typeLabel}
                     </div>
-                    <div className="text-4xl font-black text-primary-accent italic mb-1">
+                    <div className="text-4xl font-black text-primary-accent-dark italic mb-1">
                       {formattedPrice(property.price)}
                     </div>
                     {property.city && (
@@ -307,7 +307,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                 </h2>
                 <Link
                   href={getLocalizedPath(lang, 'propiedades')}
-                  className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary-accent border-b-2 border-primary-accent pb-1 hover:opacity-70 transition-all"
+                  className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary-accent-dark border-b-2 border-primary-accent-dark pb-1 hover:opacity-70 transition-all"
                 >
                   {d.filter_all} <ArrowRight size={14} />
                 </Link>

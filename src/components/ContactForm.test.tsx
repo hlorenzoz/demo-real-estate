@@ -95,4 +95,29 @@ describe("ContactForm", () => {
     expect(screen.getByText(/¡Mensaje Enviado!/i)).toBeInTheDocument();
     expect(screen.getByText(/Nos pondremos en contacto contigo lo antes posible./i)).toBeInTheDocument();
   });
+
+  it("handles form submission error", async () => {
+    render(<ContactForm dict={mockDict} lang="en" />);
+    
+    const nameInput = screen.getByLabelText(/Name/i);
+    const emailInput = screen.getByLabelText(/Email/i);
+    const messageInput = screen.getByLabelText(/Message/i);
+    const submitBtn = screen.getByText(/Send Message/i);
+    
+    await act(async () => {
+      fireEvent.change(nameInput, { target: { value: "TriggerError", name: "name" } });
+      fireEvent.change(emailInput, { target: { value: "john@example.com", name: "email" } });
+      fireEvent.change(messageInput, { target: { value: "Hello", name: "message" } });
+    });
+
+    // Mock console.error to avoid noise in tests
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+
+    await act(async () => {
+      fireEvent.click(submitBtn);
+    });
+    
+    expect(screen.getByText(/Error sending message. Please try again./i)).toBeInTheDocument();
+    consoleSpy.mockRestore();
+  });
 });
