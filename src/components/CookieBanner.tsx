@@ -87,9 +87,10 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
             
             <button
               onClick={() => setShow(false)}
-              className="absolute top-4 right-4 sm:hidden text-slate-400"
+              className="absolute top-4 right-4 sm:hidden text-slate-400 p-2"
+              aria-label="Dismiss"
             >
-              <X size={20} />
+              <X size={24} />
             </button>
           </div>
         </motion.div>

@@ -46,10 +46,17 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
   return (
     <Link
       href={`${propertyPath}/${property.id}`}
-      className="bg-white rounded-[40px] overflow-hidden border border-slate-50 group shadow-sm hover:shadow-[0_48px_100px_-20px_rgba(0,0,0,0.1)] transition-all flex flex-col h-full block"
+      className="bg-white rounded-[40px] overflow-hidden border border-slate-50 group shadow-sm hover:shadow-[0_48px_100px_-20px_rgba(0,0,0,0.1)] transition-all flex flex-col h-full"
     >
       <div className="relative h-72 overflow-hidden">
-        <Image src={property.image} alt={property.location} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px" className="object-cover group-hover:scale-110 transition-transform duration-700" priority={priority} />
+        <Image 
+          src={property.image} 
+          alt={property.location} 
+          fill 
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" 
+          className="object-cover group-hover:scale-110 transition-transform duration-700" 
+          priority={priority} 
+        />
         <div className="absolute top-6 left-6 flex gap-2">
             <span className="bg-white/95 backdrop-blur px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest text-primary shadow-lg border border-white/20">
               {dict.property_types[property.type as keyof typeof dict.property_types] || property.type}

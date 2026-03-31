@@ -67,6 +67,9 @@ export async function generateMetadata(
         { url: "/favicon.png", sizes: "180x180", type: "image/png" },
       ],
     },
+    other: {
+      "preconnect": "https://cdn.hlorenzoz.com",
+    },
   };
 }
 

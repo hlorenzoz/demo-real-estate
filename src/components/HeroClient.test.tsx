@@ -1,8 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import HeroClient from "./HeroClient";
 
-export const pushMock = vi.fn();
+const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
   useRouter: () => ({
     push: pushMock,
@@ -37,6 +37,10 @@ const mockProperties = [
 ];
 
 describe("HeroClient", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("renders correctly", () => {
     render(<HeroClient dict={mockDict} lang="en" properties={mockProperties} />);
     
@@ -55,13 +59,79 @@ describe("HeroClient", () => {
     });
   });
 
-  it("handles search button click", () => {
+  it("clears search query when X is clicked", async () => {
     render(<HeroClient dict={mockDict} lang="en" properties={mockProperties} />);
+    
+    const input = screen.getByPlaceholderText(/Search location.../);
+    fireEvent.change(input, { target: { value: "Costa" } });
+    
+    const clearBtn = screen.getByRole('button', { name: "" }); // The small X button
+    fireEvent.click(clearBtn);
+    
+    expect(input).toHaveValue("");
+  });
+
+  it("updates location query and shows location dropdown", async () => {
+    render(<HeroClient dict={mockDict} lang="en" properties={mockProperties} />);
+    
+    const locationInput = screen.getByPlaceholderText(/Where\?/);
+    fireEvent.change(locationInput, { target: { value: "Mar" } });
+    
+    await waitFor(() => {
+      expect(screen.getByText(/Marbella/)).toBeInTheDocument();
+    });
+  });
+
+  it("selects a location from the dropdown", async () => {
+    render(<HeroClient dict={mockDict} lang="en" properties={mockProperties} />);
+    
+    const locationInput = screen.getByPlaceholderText(/Where\?/);
+    fireEvent.change(locationInput, { target: { value: "Mar" } });
+    
+    await waitFor(() => {
+      const option = screen.getByText(/Marbella/);
+      fireEvent.click(option);
+    });
+    
+    expect(locationInput).toHaveValue("Marbella");
+  });
+
+  it("handles search button click with parameters", () => {
+    render(<HeroClient dict={mockDict} lang="en" properties={mockProperties} />);
+    
+    const input = screen.getByPlaceholderText(/Search location.../);
+    fireEvent.change(input, { target: { value: "Costa" } });
+    
+    const locationInput = screen.getByPlaceholderText(/Where\?/);
+    fireEvent.change(locationInput, { target: { value: "Marbella" } });
     
     const searchBtn = screen.getByText(/Search Now/);
     fireEvent.click(searchBtn);
     
-    // Should navigate to listings
-    // Note: mock might need to be set before render
+    expect(pushMock).toHaveBeenCalledWith(expect.stringContaining("q=Costa"));
+    expect(pushMock).toHaveBeenCalledWith(expect.stringContaining("location=Marbella"));
+  });
+
+  it("closes dropdowns when clicking outside", async () => {
+    render(
+      <div>
+        <div data-testid="outside">Outside</div>
+        <HeroClient dict={mockDict} lang="en" properties={mockProperties} />
+      </div>
+    );
+    
+    const input = screen.getByPlaceholderText(/Search location.../);
+    fireEvent.focus(input);
+    fireEvent.change(input, { target: { value: "Mar" } });
+    
+    await waitFor(() => {
+      expect(screen.getByText(/Marbella/)).toBeInTheDocument();
+    });
+    
+    fireEvent.mouseDown(screen.getByTestId("outside"));
+    
+    await waitFor(() => {
+      expect(screen.queryByText(/Marbella/)).not.toBeInTheDocument();
+    });
   });
 });

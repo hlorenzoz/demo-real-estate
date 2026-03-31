@@ -4,7 +4,7 @@
   --background: #F9FAFB;
   --foreground: #111827;
   --primary: #111827;
-  --primary-accent: #D4AF37;
+  --primary-accent: #6b550e; /* Darkened gold for better contrast on white backgrounds */
   --secondary-accent: #0f172a;
   --surface: #FFFFFF;
   --surface-muted: #F3F4F6;
@@ -42,7 +42,7 @@
 
 @layer utilities {
   .glass {
-    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+    @apply bg-white/95 backdrop-blur-xl border border-white/20 shadow-xl;
   }
   
   .glass-dark {
@@ -54,7 +54,7 @@
   }
 
   .gold-gradient {
-    @apply bg-gradient-to-r from-[#D4AF37] to-[#E1C16E] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#9e7e16] to-[#b79633] bg-clip-text text-transparent;
   }
 
   .scrollbar-hide::-webkit-scrollbar {

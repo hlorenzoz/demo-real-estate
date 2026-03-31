@@ -1,6 +1,10 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import Navbar from "./Navbar";
+
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(() => "/en/listings"),
+}));
 
 const mockDict = {
   listings: "Listings",
@@ -13,8 +17,19 @@ const mockDict = {
 };
 
 describe("Navbar", () => {
-  it("renders correctly in English", () => {
-    render(<Navbar lang="en" dict={mockDict} />);
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // Reset requestAnimationFrame mock for each test
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+      cb(0);
+      return 0;
+    });
+  });
+
+  it("renders correctly in English", async () => {
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
     
     expect(screen.getByText(/Listings/)).toBeInTheDocument();
     expect(screen.getByText(/Rentals/)).toBeInTheDocument();
@@ -22,25 +37,56 @@ describe("Navbar", () => {
     expect(screen.getByText(/Contact/)).toBeInTheDocument();
   });
 
-  it("handles dropdown toggle in mobile", async () => {
-    // Force mobile viewport simulation in Vitest window
-    window.innerWidth = 500;
-    render(<Navbar lang="en" dict={mockDict} />);
+  it("handles mobile menu toggle", async () => {
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
     
-    // Check for Menu button (hamburger icon)
     const menuBtn = screen.getByLabelText(/Open menu/i);
-    expect(menuBtn).toBeInTheDocument();
+    fireEvent.click(menuBtn);
     
-    // Initially menu not open
+    expect(screen.getByLabelText(/Close menu/i)).toBeInTheDocument();
+    expect(screen.getByText(/Language/i)).toBeInTheDocument();
+    
+    fireEvent.click(screen.getByLabelText(/Close menu/i));
     expect(screen.queryByText(/Language/i)).not.toBeInTheDocument();
   });
 
-  it("changes language when EN/ES is clicked", () => {
-    render(<Navbar lang="en" dict={mockDict} />);
-    const enLinks = screen.getAllByText(/EN/);
-    const esLinks = screen.getAllByText(/ES/);
+  it("calculates redirected path correctly for simple routes", async () => {
+    const { usePathname } = await import("next/navigation");
+    vi.mocked(usePathname).mockReturnValue("/en/blog");
     
-    expect(enLinks.length).toBeGreaterThan(0);
-    expect(esLinks[0]).toHaveAttribute('href', expect.stringContaining('/es'));
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
+    
+    const esLinks = screen.getAllByText(/ES/);
+    expect(esLinks[0]).toHaveAttribute('href', '/es/blog');
+  });
+
+  it("calculates redirected path correctly for mapped routes", async () => {
+    const { usePathname } = await import("next/navigation");
+    vi.mocked(usePathname).mockReturnValue("/en/properties");
+    
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
+    
+    const esLinks = screen.getAllByText(/ES/);
+    // 'properties' is the English slug for the internal 'propiedades'
+    // in Spanish it should stay 'propiedades' (or whatever is in reverseMappings)
+    expect(esLinks[0]).toHaveAttribute('href', '/es/propiedades');
+  });
+
+  it("falls back gracefully when pathname is empty", async () => {
+    const { usePathname } = await import("next/navigation");
+    vi.mocked(usePathname).mockReturnValue(null as unknown as string);
+    
+    await act(async () => {
+      render(<Navbar lang="en" dict={mockDict} />);
+    });
+    
+    const esLinks = screen.getAllByText(/ES/);
+    expect(esLinks[0]).toHaveAttribute('href', '/es');
   });
 });

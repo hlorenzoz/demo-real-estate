@@ -86,6 +86,7 @@ vi.mock('framer-motion', () => {
       nav: createMockComponent('nav'),
       li: createMockComponent('li'),
       ul: createMockComponent('ul'),
+      form: createMockComponent('form'),
     },
     AnimatePresence: function AnimatePresence({ children }: { children: React.ReactNode }) { return <>{children}</>; },
     useScroll: () => ({ scrollYProgress: { get: () => 0 } }),

@@ -1,17 +1,21 @@
 import React from "react";
-// Forced update to clear Turbopack cache - 2026-03-30T18:04:35
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Sparkles, ArrowRight, ShieldCheck, TrendingUp, MessageCircle } from "lucide-react";
 import { getLocalizedPath } from "../../lib/routes";
 import { getDictionary } from "../../get-dictionary";
 import Navbar from "../../components/Navbar";
 import HeroClient from "../../components/HeroClient";
-import PropertiesCarousel from "../../components/PropertiesCarousel";
-import ReviewsCarousel from "../../components/ReviewsCarousel";
 import Footer from "../../components/Footer";
-import FAQSection from "../../components/FAQSection";
-import MotionWrapper from "../../components/MotionWrapper";
+
+// Lazy load off-screen components
+const PropertiesCarousel = dynamic(() => import("../../components/PropertiesCarousel"), { 
+  loading: () => <div className="h-[400px] bg-slate-50 animate-pulse rounded-[48px]" />
+});
+const ReviewsCarousel = dynamic(() => import("../../components/ReviewsCarousel"));
+const FAQSection = dynamic(() => import("../../components/FAQSection"));
+const MotionWrapper = dynamic(() => import("../../components/MotionWrapper"));
 
 // Data from JSON in root dir
 import { Property } from "../../types/property";
