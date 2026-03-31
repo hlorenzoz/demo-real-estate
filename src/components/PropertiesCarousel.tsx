@@ -92,15 +92,18 @@ export default function PropertiesCarousel({ properties, lang, dict }: Propertie
       </div>
 
       {/* Pagination dots (mobile only) */}
-      <div className="mt-8 flex justify-center gap-2 md:hidden">
+      <div className="mt-8 flex justify-center gap-4 md:hidden">
         {Array.from({ length: totalItems }).map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            className={`w-2 h-2 rounded-full transition-all ${
-              currentIndex === i ? "bg-primary w-6" : "bg-slate-200"
-            }`}
-          />
+            className="group relative p-2"
+            aria-label={`Go to slide ${i + 1}`}
+          >
+            <div className={`w-2.5 h-2.5 rounded-full transition-all group-hover:scale-125 ${
+              currentIndex === i ? "bg-primary w-8" : "bg-slate-300"
+            }`} />
+          </button>
         ))}
       </div>
     </div>

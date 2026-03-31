@@ -92,14 +92,14 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
           fill 
           sizes="100vw"
           className="object-cover scale-105"
-          priority
+          priority={true}
           fetchPriority="high"
         />
       </div>
       
       <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-[-10vh]">
         <motion.div 
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 1, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="max-w-2xl text-white"
@@ -110,7 +110,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
           <h1 className="text-6xl md:text-8xl font-serif mb-8 leading-[1.1] tracking-tighter">
             {dict.title} <span className="gold-gradient italic">{dict.title_accent}</span>
           </h1>
-          <p className="text-xl md:text-2xl text-gray-200/90 mb-12 leading-relaxed font-light max-w-xl">
+          <p className="text-xl md:text-2xl text-white mb-12 leading-relaxed font-light max-w-xl">
             {dict.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-6">

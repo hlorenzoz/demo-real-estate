@@ -53,6 +53,18 @@
       "date": "7 years ago",
       "rating": 5,
       "content": "Professional and trustworthy."
+    },
+    {
+      "author": "Client I",
+      "date": "3 months ago",
+      "rating": 5,
+      "content": "Truly exceptional experience. They understood my needs perfectly and found the home of my dreams."
+    },
+    {
+      "author": "Client J",
+      "date": "1 year ago",
+      "rating": 5,
+      "content": "High quality service and very friendly staff. Very satisfied with the outcome."
     }
   ],
   "stats": {

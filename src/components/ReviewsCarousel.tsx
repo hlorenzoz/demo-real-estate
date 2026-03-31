@@ -27,7 +27,7 @@ interface ReviewsCarouselProps {
 }
 
 const GoogleLogo = () => (
-  <div className="flex items-center gap-[1px] font-bold text-2xl tracking-tighter">
+  <div className="flex items-center gap-[1px] font-bold text-2xl tracking-tighter" aria-label="Google">
     <span className="text-blue-500">G</span>
     <span className="text-red-500">o</span>
     <span className="text-yellow-500">o</span>
@@ -106,8 +106,8 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
               <div className="h-4 w-[2px] bg-slate-100 hidden md:block" />
               <StarRating rating={5} size={32} />
             </div>
-            <p className="text-lg font-bold text-slate-400">
-              {dict.based_on} <span className="underline decoration-slate-200 decoration-2 underline-offset-4 text-slate-600">{stats.count} {dict.reviews_count}</span>
+            <p className="text-lg font-bold text-slate-600">
+              {dict.based_on} <span className="underline decoration-slate-200 decoration-2 underline-offset-4 text-slate-700">{stats.count} {dict.reviews_count}</span>
             </p>
           </div>
           
@@ -116,7 +116,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
             <a 
               href="https://maps.google.com" 
               target="_blank"
-              className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors bg-blue-50 px-5 py-2 rounded-full"
+              className="inline-flex items-center gap-2 text-sm font-bold text-blue-700 hover:text-blue-900 transition-colors bg-blue-50 px-5 py-2 rounded-full"
             >
               {dict.view_all} <ExternalLink size={14} />
             </a>
@@ -152,7 +152,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                       </div>
                       <div>
                         <div className="font-black text-slate-900 text-lg leading-tight tracking-tight">{review.author}</div>
-                        <div className="text-sm font-bold text-slate-300 uppercase tracking-widest mt-1">{review.date}</div>
+                        <div className="text-sm font-bold text-slate-500 uppercase tracking-widest mt-1">{review.date}</div>
                       </div>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-50 flex items-center justify-center font-black text-xs text-blue-500">
@@ -180,6 +180,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                       href="https://maps.google.com" 
                       target="_blank"
                       className="text-yellow-600 font-black text-sm uppercase tracking-[0.2em] transition-all hover:translate-x-2"
+                      aria-label={`${dict.read_more} for review by ${review.author}`}
                     >
                       {dict.read_more}
                     </a>
@@ -194,6 +195,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
           <div className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 z-40 flex justify-between px-2 md:flex lg:px-4">
              <button
               onClick={() => scroll("left")}
+              aria-label="Previous reviews"
               className={`pointer-events-auto w-14 h-14 rounded-full bg-white/95 backdrop-blur shadow-2xl border border-slate-100 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 ${
                 !canScrollLeft ? "opacity-0 invisible" : "opacity-100 visible"
               }`}
@@ -202,6 +204,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
             </button>
             <button
               onClick={() => scroll("right")}
+              aria-label="Next reviews"
               className={`pointer-events-auto w-14 h-14 rounded-full bg-white/95 backdrop-blur shadow-2xl border border-slate-100 flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 ${
                 !canScrollRight ? "opacity-0 invisible" : "opacity-100 visible"
               }`}

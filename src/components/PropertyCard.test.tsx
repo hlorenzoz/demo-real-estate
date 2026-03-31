@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import PropertyCard from "./PropertyCard";
 import { Property } from "../types/property";
 
@@ -46,29 +46,70 @@ const mockProperty: Property = {
 };
 
 describe("PropertyCard", () => {
-  it("renders property details correctly in English", () => {
-    render(<PropertyCard property={mockProperty} lang="en" dict={mockDict} />);
+  beforeEach(() => {
+    localStorage.clear();
+    vi.clearAllMocks();
+    vi.stubGlobal('requestAnimationFrame', (cb: FrameRequestCallback) => {
+      cb(0);
+      return 0;
+    });
+  });
+
+  it("renders property details correctly in English", async () => {
+    await act(async () => {
+      render(<PropertyCard property={mockProperty} lang="en" dict={mockDict} />);
+    });
     
     expect(screen.getByText(/Costa del Sol/)).toBeInTheDocument();
-    // Use a regex to match the price with potentially different formatting characters
-    expect(screen.getByText(/500.000|500,000/)).toBeInTheDocument();
+    expect(screen.getByText(/500,000/)).toBeInTheDocument();
     expect(screen.getByText(/3/)).toBeInTheDocument();
     expect(screen.getByText(/beds/)).toBeInTheDocument();
     expect(screen.getByText(/View Property/)).toBeInTheDocument();
   });
 
-  it("renders property details correctly in Spanish", () => {
-    const esDict = { 
-      ...mockDict, 
-      beds: "Hab", 
-      baths: "Baños", 
-      view_property: "Ver Propiedad",
-      for_sale: "En Venta"
-    };
-    render(<PropertyCard property={mockProperty} lang="es" dict={esDict} />);
+  it("handles like/unlike correctly and persists to localStorage", async () => {
+    await act(async () => {
+      render(<PropertyCard property={mockProperty} lang="en" dict={mockDict} />);
+    });
     
-    expect(screen.getByText(/Ver Propiedad/)).toBeInTheDocument();
-    expect(screen.getByText(/Hab/)).toBeInTheDocument();
-    expect(screen.getByText(/En Venta/)).toBeInTheDocument();
+    const likeBtn = screen.getByLabelText(/Save property/i);
+    fireEvent.click(likeBtn);
+    
+    expect(localStorage.getItem(`property-liked-${mockProperty.id}`)).toBe("true");
+    expect(likeBtn).toHaveClass('text-red-500');
+    
+    fireEvent.click(likeBtn);
+    expect(localStorage.getItem(`property-liked-${mockProperty.id}`)).toBe("false");
+  });
+
+  it("loads like state from localStorage on mount", async () => {
+    localStorage.setItem(`property-liked-${mockProperty.id}`, "true");
+    
+    await act(async () => {
+      render(<PropertyCard property={mockProperty} lang="en" dict={mockDict} />);
+    });
+    
+    const likeBtn = screen.getByLabelText(/Save property/i);
+    expect(likeBtn).toHaveClass('text-red-500');
+  });
+
+  it("renders 'For Rent' and 'For Sale' badges based on property type", async () => {
+    const { rerender } = render(<PropertyCard property={mockProperty} lang="en" dict={mockDict} />);
+    expect(screen.getByText(/For Sale/)).toBeInTheDocument();
+    
+    const rentProperty = { ...mockProperty, contractType: "rent" as const };
+    await act(async () => {
+      rerender(<PropertyCard property={rentProperty} lang="en" dict={mockDict} />);
+    });
+    expect(screen.getByText(/For Rent/)).toBeInTheDocument();
+  });
+
+  it("formats price correctly for Spanish locale", async () => {
+    await act(async () => {
+      render(<PropertyCard property={mockProperty} lang="es" dict={mockDict} />);
+    });
+    
+    // In Spanish locale for EUR, it often uses dot for thousands
+    expect(screen.getByText(/500.000/)).toBeInTheDocument();
   });
 });
