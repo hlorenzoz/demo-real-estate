@@ -4,7 +4,7 @@
   --background: #F9FAFB;
   --foreground: #111827;
   --primary: #111827;
-  --primary-accent: #ffdf75; /* Vibrant gold for a premium look */
+  --primary-accent: #ffdf75; /* Vibrant gold for a premium look */n  --primary-accent-dark: #B45309; /* Darker gold for accessibility contrast on light backgrounds */
   --secondary-accent: #0f172a;
   --surface: #FFFFFF;
   --surface-muted: #F3F4F6;
@@ -17,6 +17,7 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-accent: var(--primary-accent);
+  --color-primary-accent-dark: var(--primary-accent-dark);
   --color-secondary-accent: var(--secondary-accent);
   --color-surface: var(--surface);
   --color-surface-muted: var(--surface-muted);
@@ -54,7 +55,7 @@
   }
 
   .gold-gradient {
-    @apply bg-gradient-to-r from-[#9e7e16] to-[#b79633] bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#EAB308] to-[#FACC15] bg-clip-text text-transparent;
   }
 
   .scrollbar-hide::-webkit-scrollbar {

@@ -12,13 +12,15 @@
 - **TDD**: Pre-commit hooks are mandatory.
 
 ## Task Overview
-This project is a standardized boilerplate for high-converting real estate websites.
+This project is a high-end luxury real estate boilerplate with advanced search, localized routing, and premium aesthetics.
 
 ## Decisions
 - **Properties Catalog**: Implemented a dynamic hub with filterable property listings and detail pages. Uses `base-content.json` as the local property database.
 - **Asset Management**: High-resolution property images are generated in PNG and served locally from `public/images/` for immediate availability. Existing heritage assets are hosted on Cloudflare R2.
 - **Localized Routing**: Implemented `getLocalizedPath(lang, slug)` pattern to translate internal Spanish slugs to English (e.g., `/properties`) in a type-safe way.
 - **SEO Strategy**: Implemented JSON-LD structured data for every property detail page to improve indexability.
+- **Infrastructure**: Configured Lighthouse CI and Cloudflare Analytics via a custom Cookie Banner.
+- **Design System**: Built a Navy/Gold/Glassmorphism design system using Tailwind 4.
 
 ## Maintainers
 - Antigravity AI (Primary Developer)

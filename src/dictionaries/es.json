@@ -60,14 +60,21 @@
     "whatsapp_prompt": "¿En qué podemos ayudarte?"
   },
   "services": {
-    "title": "Servicios exclusivos",
-    "description": "Acompañandote en cada paso del proceso inmobiliario con el máximo rigor.",
-    "tasacion": "Tasación Gratuita",
-    "tasacion_desc": "Estudio de mercado detallado para vender al mejor precio.",
-    "gestion": "Gestión Integral",
-    "gestion_desc": "Nos encargamos de toda la burocracia y trámites legales.",
-    "inversion": "Asesoría Inversión",
-    "inversion_desc": "Rentabilidad garantizada en activos seleccionados."
+    "title": "Portafolio de Servicios Inmobiliarios",
+    "description": "Soluciones estratégicas adaptadas a tus objetivos patrimoniales con rigor y exclusividad.",
+    "tasacion": "Tasación Gratuita de tu Vivienda",
+    "tasacion_desc": "Ofrecemos una valoración precisa y sin compromiso utilizando algoritmos avanzados de mercado y nuestro profundo conocimiento local de la región de Ourense. El primer paso hacia una transacción exitosa.",
+    "tasacion_detail": "Coste €0 por valoración profesional.",
+    "venta": "Venta de Inmuebles",
+    "venta_desc": "Maximizamos la exposición de tu propiedad mediante estrategias de marketing digital de vanguardia y una red exclusiva de compradores internacionales.",
+    "alquiler": "Alquiler Garantizado",
+    "alquiler_desc": "Seguridad jurídica total y selección rigurosa de inquilinos. Gestionamos todo para que tu inversión genere rentabilidad sin preocupaciones.",
+    "alquiler_pillars": ["Cobro asegurado", "Gestión de contratos", "Mantenimiento técnico"],
+    "asesoria": "Asesoría Personalizada",
+    "asesoria_desc": "Planes estratégicos a medida adaptados a tus objetivos específicos, ya sea para inversión, reubicación o expansión de patrimonio.",
+    "legal": "Asesoramiento Legal y Fiscal",
+    "legal_desc": "Navegamos las complejas normativas de la región de Ourense. Especialistas en derecho inmobiliario gallego, herencias y optimización fiscal para grandes patrimonios.",
+    "legal_expertise": "Especialistas en la zona de Xinzo de Limia."
   },
   "reviews": {
     "title": "Confianza verificada",

@@ -28,4 +28,28 @@ describe("FAQSection", () => {
     
     expect(screen.getByText(/A lot/)).toBeInTheDocument();
   });
+
+  it("closes an open answer when clicked again", () => {
+    render(<FAQSection lang="en" dict={mockDict} />);
+    
+    // First item is open by default: const [openIndex, setOpenIndex] = useState<number | null>(0);
+    expect(screen.getByText(/A lot/)).toBeInTheDocument();
+    
+    const firstQuestion = screen.getByText(/How much\?/);
+    fireEvent.click(firstQuestion); // Should set it to null
+    
+    // The text might still be in document but hidden (max-h-0), 
+    // let's check for the class that hides it or just queries that it's no longer visible
+    // Actually FAQSection.tsx has opacity-0 and max-h-0.
+    const answerContainer = screen.getByText(/A lot/).parentElement?.parentElement;
+    expect(answerContainer).toHaveClass('opacity-0');
+  });
+
+  it("limits the number of items and shows 'View All' link when limit is passed", () => {
+    render(<FAQSection lang="en" dict={mockDict} limit={1} />);
+    
+    expect(screen.getByText(/How much\?/)).toBeInTheDocument();
+    expect(screen.queryByText(/When\?/)).not.toBeInTheDocument();
+    expect(screen.getByText(/View All/)).toBeInTheDocument();
+  });
 });

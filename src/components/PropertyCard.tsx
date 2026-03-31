@@ -88,7 +88,7 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
       <div className="p-10 flex flex-col flex-grow">
         <div className="mb-6">
           <h3 className="text-3xl font-serif text-primary leading-tight mb-2 tracking-tight truncate">{property.location}</h3>
-          <div className="text-2xl font-black text-primary-accent italic">{formattedPrice}</div>
+          <div className="text-2xl font-black text-primary-accent-dark italic">{formattedPrice}</div>
         </div>
 
         <div className="flex items-center justify-between py-6 border-y border-slate-50 mb-8">

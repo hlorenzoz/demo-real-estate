@@ -134,7 +134,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
         <div className="glass p-2 lg:p-3 rounded-[32px] flex flex-col lg:flex-row lg:items-center shadow-2xl border border-white/20 backdrop-blur-3xl relative z-[100] gap-2 lg:gap-0">
           
           {/* General Search Input */}
-          <div className="flex-1 relative" ref={searchRef}>
+          <div className="flex-1 relative" ref={searchRef} data-testid="search-container">
             <div className="flex items-center gap-5 px-6">
               <Search className="text-primary/20 w-6 h-6" />
               <input 
@@ -159,6 +159,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
             <AnimatePresence>
               {showSearchDropdown && filteredSearch.length > 0 && (
                 <motion.div 
+                  data-testid="search-dropdown"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
@@ -176,9 +177,9 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-black text-primary truncate tracking-tight">{property.location}</div>
-                          <div className="text-[10px] uppercase font-black text-primary-accent tracking-widest">{property.type} • {property.city}</div>
+                          <div className="text-[10px] uppercase font-black text-primary-accent-dark tracking-widest">{property.type} • {property.city}</div>
                         </div>
-                        <ArrowRight size={14} className="text-primary-accent opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
+                        <ArrowRight size={14} className="text-primary-accent-dark opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0" />
                       </Link>
                     ))}
                   </div>
@@ -190,12 +191,12 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
           <div className="hidden lg:block w-px h-12 bg-black/5" />
 
           {/* Location Search Input */}
-          <div className="flex-[0.6] relative" ref={locationRef}>
+          <div className="flex-[0.6] relative" ref={locationRef} data-testid="location-container">
             <div 
               className="px-6 flex items-center gap-3 cursor-pointer hover:bg-black/5 rounded-2xl py-4 transition-all text-primary"
               onClick={() => setShowLocationDropdown(true)}
             >
-              <MapPin className="text-primary-accent w-6 h-6" />
+              <MapPin className="text-primary-accent-dark w-6 h-6" />
               <input 
                 type="text"
                 value={locationQuery}
@@ -213,6 +214,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
             <AnimatePresence>
               {showLocationDropdown && filteredLocations.length > 0 && (
                 <motion.div 
+                  data-testid="location-dropdown"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}

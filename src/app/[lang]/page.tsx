@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-import { Sparkles, ArrowRight, ShieldCheck, TrendingUp, MessageCircle } from "lucide-react";
+import { ArrowRight, ShieldCheck, MessageCircle, Calculator, Megaphone, Users, Scale, Check } from "lucide-react";
 import { getLocalizedPath } from "../../lib/routes";
 import { getDictionary } from "../../get-dictionary";
 import Navbar from "../../components/Navbar";
@@ -37,6 +37,24 @@ const baseContent = baseContentRaw as {
   };
 };
 
+interface ServiceDictionary {
+  title: string;
+  description: string;
+  tasacion: string;
+  tasacion_desc: string;
+  tasacion_detail: string;
+  venta: string;
+  venta_desc: string;
+  alquiler: string;
+  alquiler_desc: string;
+  alquiler_pillars: string[];
+  asesoria: string;
+  asesoria_desc: string;
+  legal: string;
+  legal_desc: string;
+  legal_expertise: string;
+}
+
 export default async function Home({
   params,
 }: {
@@ -44,7 +62,9 @@ export default async function Home({
 }) {
   const resolvedParams = await params;
   const locale = resolvedParams.lang;
-  const dict = await getDictionary(locale);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const dict = await getDictionary(locale) as Record<string, any>;
+  const services = dict.services as ServiceDictionary;
   const { reviews, stats } = baseContent;
 
   const featuredProperties = baseContent.properties.filter(p => p.featured && p.contractType === 'sale');
@@ -93,7 +113,7 @@ export default async function Home({
                 {dict.home.property_subtitle}
               </p>
             </div>
-            <Link href={getLocalizedPath(locale, 'listings')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent border-b-2 border-primary-accent pb-2 hover:opacity-70 transition-all">
+            <Link href={getLocalizedPath(locale, 'listings')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 hover:opacity-70 transition-all font-serif italic">
               {dict.home.cta_catalog} <ArrowRight size={18} />
             </Link>
           </MotionWrapper>
@@ -114,7 +134,7 @@ export default async function Home({
                 {dict.home.property_subtitle}
               </p>
             </div>
-            <Link href={getLocalizedPath(locale, 'alquiler')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-secondary-accent border-b-2 border-secondary-accent pb-2 hover:opacity-70 transition-all">
+            <Link href={getLocalizedPath(locale, 'alquiler')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 hover:opacity-70 transition-all font-serif italic">
               {dict.home.cta_rentals} <ArrowRight size={18} />
             </Link>
           </MotionWrapper>
@@ -124,45 +144,119 @@ export default async function Home({
       </section>
 
       {/* 2. Services Section */}
-      <section id="vender" className="py-32 px-6">
+      <section id="vender" className="py-32 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-serif mb-6 text-primary tracking-tight">
-              {dict.services.title}
+            <h2 className="text-5xl md:text-7xl font-serif mb-6 text-primary tracking-tight italic">
+              {services.title}
             </h2>
-            <p className="text-xl text-text-muted font-light max-w-2xl mx-auto italic">
-              {dict.services.description}
+            <p className="text-xl text-text-muted font-light max-w-3xl mx-auto italic">
+              {services.description}
             </p>
           </MotionWrapper>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { 
-                icon: <Sparkles className="w-8 h-8" />, 
-                title: dict.services.tasacion, 
-                desc: dict.services.tasacion_desc 
-              },
-              { 
-                icon: <ShieldCheck className="w-8 h-8" />, 
-                title: dict.services.gestion, 
-                desc: dict.services.gestion_desc 
-              },
-              { 
-                icon: <TrendingUp className="w-8 h-8" />, 
-                title: dict.services.inversion, 
-                desc: dict.services.inversion_desc 
-              }
-            ].map((service, i) => (
-              <MotionWrapper key={i} delay={i * 0.1}>
-                <div className="bg-white p-12 rounded-[48px] border border-slate-50 transition-all hover:shadow-[0_32px_80px_rgba(0,0,0,0.06)] hover:translate-y-[-8px] group h-full flex flex-col items-center text-center">
-                  <div className="w-20 h-20 rounded-3xl bg-slate-50 flex items-center justify-center text-primary-accent mb-8 shadow-sm group-hover:bg-primary group-hover:text-white transition-all transform group-hover:rotate-6">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-2xl font-serif mb-4 text-primary">{service.title}</h3>
-                  <p className="text-text-muted leading-relaxed font-bold text-base">{service.desc}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Service 1: Tasación */}
+            <MotionWrapper delay={0.1} className="lg:col-span-1">
+              <div className="bg-slate-50 p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-transparent hover:border-white/10 shadow-sm hover:shadow-2xl">
+                <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:rotate-12">
+                  <Calculator size={36} />
                 </div>
-              </MotionWrapper>
-            ))}
+                <div className="mt-auto">
+                  <span className="text-xs font-black uppercase tracking-[0.3em] text-primary-accent-dark mb-4 block group-hover:text-primary-accent">
+                    {services.tasacion_detail}
+                  </span>
+                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
+                    {services.tasacion}
+                  </h3>
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
+                    {services.tasacion_desc}
+                  </p>
+                </div>
+              </div>
+            </MotionWrapper>
+
+            {/* Service 2: Venta */}
+            <MotionWrapper delay={0.2} className="lg:col-span-1">
+              <div className="bg-white p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-slate-100 hover:border-white/10 shadow-sm hover:shadow-2xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-accent/5 rounded-bl-full translate-x-8 -translate-y-8 group-hover:bg-primary-accent/10 transition-all" />
+                <div className="w-20 h-20 rounded-3xl bg-slate-50 shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:scale-110">
+                  <Megaphone size={36} />
+                </div>
+                <div className="mt-auto">
+                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
+                    {services.venta}
+                  </h3>
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
+                    {services.venta_desc}
+                  </p>
+                </div>
+              </div>
+            </MotionWrapper>
+
+            {/* Service 3: Alquiler */}
+            <MotionWrapper delay={0.3} className="lg:col-span-1">
+              <div className="bg-slate-50 p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-transparent hover:border-white/10 shadow-sm hover:shadow-2xl">
+                <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:-rotate-12">
+                  <ShieldCheck size={36} />
+                </div>
+                <div className="mt-auto">
+                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
+                    {services.alquiler}
+                  </h3>
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-8">
+                    {services.alquiler_desc}
+                  </p>
+                  <ul className="space-y-3">
+                    {services.alquiler_pillars.map((p: string) => (
+                      <li key={p} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent-dark group-hover:text-primary-accent">
+                        <Check size={16} /> {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </MotionWrapper>
+
+            {/* Service 4: Asesoría (Wide) */}
+            <MotionWrapper delay={0.4} className="md:col-span-2 lg:col-span-2">
+              <div className="bg-primary p-12 lg:p-16 rounded-[56px] h-full flex flex-col lg:flex-row gap-12 group hover:shadow-2xl transition-all duration-700 border border-white/5 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="lg:w-1/3 flex flex-col">
+                  <div className="w-24 h-24 rounded-[32px] bg-primary-accent flex items-center justify-center text-primary mb-10 transform -rotate-3 group-hover:rotate-0 transition-transform">
+                    <Users size={40} />
+                  </div>
+                  <h3 className="text-4xl lg:text-5xl font-serif text-white leading-tight italic">
+                    {services.asesoria}
+                  </h3>
+                </div>
+                <div className="lg:w-2/3 lg:flex lg:items-center">
+                  <p className="text-2xl text-gray-300 font-light italic leading-relaxed">
+                    {services.asesoria_desc}
+                  </p>
+                </div>
+              </div>
+            </MotionWrapper>
+
+            {/* Service 5: Legal */}
+            <MotionWrapper delay={0.5} className="md:col-span-1 lg:col-span-1">
+              <div className="bg-white p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-slate-100 hover:border-white/10 shadow-sm hover:shadow-2xl">
+                <div className="w-20 h-20 rounded-3xl bg-slate-50 shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500">
+                  <Scale size={36} />
+                </div>
+                <div className="mt-auto">
+                  <span className="text-xs font-black uppercase tracking-[0.3em] text-primary-accent-dark mb-4 block group-hover:text-primary-accent">
+                    {services.legal_expertise}
+                  </span>
+                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
+                    {services.legal}
+                  </h3>
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
+                    {services.legal_desc}
+                  </p>
+                </div>
+              </div>
+            </MotionWrapper>
           </div>
         </div>
       </section>
@@ -213,7 +307,7 @@ export default async function Home({
               <h3 className="text-4xl font-serif mb-6 text-primary tracking-tight italic">{dict.home.about_title}</h3>
               <p className="text-xl text-text-muted mb-8 leading-relaxed font-bold">
                 {dict.home.about_desc.split(dict.home.about_transparency)[0]}
-                <span className="text-primary-accent">{dict.home.about_transparency}</span>
+                <span className="text-primary-accent-dark">{dict.home.about_transparency}</span>
                 {dict.home.about_desc.split(dict.home.about_transparency)[1]}
               </p>
               <div className="flex flex-wrap gap-8">
