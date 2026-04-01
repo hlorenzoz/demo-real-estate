@@ -257,4 +257,15 @@ describe("PWAInstaller", () => {
     
     expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
   });
+
+  it("has correct accessible text colors for contrast", async () => {
+    render(<PWAInstaller {...mockPropsEn} />);
+    await act(async () => {
+      vi.advanceTimersByTime(7000);
+    });
+    
+    const description = screen.getByText(/Access Luxury Living instantly/);
+    expect(description).toHaveClass('text-[#374151]');
+    expect(description).not.toHaveClass('opacity-80');
+  });
 });
