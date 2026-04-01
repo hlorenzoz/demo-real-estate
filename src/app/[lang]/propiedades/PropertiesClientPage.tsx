@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useMemo } from "react";
@@ -142,7 +143,7 @@ export default function PropertiesClientPage({
             </span>
             <select
               value={activeSort}
-              onChange={(e) => setActiveSort(e.target.value)}
+              onChange={(e) => setActiveSort((e.target as any).value)}
               className="bg-white border-2 border-slate-100 rounded-2xl px-4 py-3 text-xs font-black text-primary uppercase tracking-widest focus:outline-none focus:border-primary transition-all appearance-none cursor-pointer"
             >
               <option value="default">— Sort —</option>

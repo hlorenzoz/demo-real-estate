@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
+import { PWAProvider } from "../../components/PWAProvider";
 import { getDictionary, Locale } from "../../get-dictionary";
 import { PWAInstaller } from "../../components/PWAInstaller";
 import { CookieBanner } from "../../components/CookieBanner";
@@ -92,29 +93,13 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+        <PWAProvider swUrl="/sw.js" />
         {children}
         <PWAInstaller lang={locale} />
         <CookieBanner dict={dict} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js').then(
-                    function(registration) {
-                      console.log('Service Worker registration successful with scope: ', registration.scope);
-                    },
-                    function(err) {
-                      console.log('Service Worker registration failed: ', err);
-                    }
-                  );
-                });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   );
 }
+
 

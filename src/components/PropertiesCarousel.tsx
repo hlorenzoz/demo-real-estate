@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -19,18 +20,27 @@ export default function PropertiesCarousel({ properties, lang, dict }: Propertie
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setItemsToDisplay(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsToDisplay(2);
-      } else {
-        setItemsToDisplay(3);
+      if (typeof (globalThis as any).window !== "undefined") {
+        const width = (globalThis as any).window.innerWidth;
+        if (width < 768) {
+          setItemsToDisplay(1);
+        } else if (width < 1024) {
+          setItemsToDisplay(2);
+        } else {
+          setItemsToDisplay(3);
+        }
       }
     };
 
     handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    if (typeof (globalThis as any).window !== "undefined") {
+      (globalThis as any).window.addEventListener("resize", handleResize);
+    }
+    return () => {
+      if (typeof (globalThis as any).window !== "undefined") {
+        (globalThis as any).window.removeEventListener("resize", handleResize);
+      }
+    };
   }, []);
 
   const totalItems = properties.length;

@@ -10,6 +10,7 @@
 - **Styling**: Tailwind 4+
 - **Prerequisites**: All images must be WebP.
 - **TDD**: Pre-commit hooks are mandatory.
+- **Maintenance**: All new features and bug fixes must include 100% test coverage (unit/component, functional, and e2e).
 
 ## Task Overview
 This project is a high-end luxury real estate boilerplate with advanced search, localized routing, and premium aesthetics.
@@ -21,6 +22,7 @@ This project is a high-end luxury real estate boilerplate with advanced search, 
 - **SEO Strategy**: Implemented JSON-LD structured data for every property detail page to improve indexability.
 - **Infrastructure**: Configured Lighthouse CI and Cloudflare Analytics via a custom Cookie Banner.
 - **Design System**: Built a Navy/Gold/Glassmorphism design system using Tailwind 4.
+- **PWA Integration**: Migrated to `@serwist/next` for Next.js 16/Turbopack compatibility and robust offline support.
 
 ## Maintainers
 - Antigravity AI (Primary Developer)

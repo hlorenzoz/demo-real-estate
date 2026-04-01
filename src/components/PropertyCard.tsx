@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -23,8 +24,10 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      const liked = localStorage.getItem(`property-liked-${property.id}`);
-      if (liked === "true") setIsLiked(true);
+      if (typeof (globalThis as any).window !== "undefined") {
+        const liked = (globalThis as any).localStorage.getItem(`property-liked-${property.id}`);
+        if (liked === "true") setIsLiked(true);
+      }
     });
     return () => cancelAnimationFrame(frame);
   }, [property.id]);
@@ -34,7 +37,9 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
     e.stopPropagation();
     const newState = !isLiked;
     setIsLiked(newState);
-    localStorage.setItem(`property-liked-${property.id}`, String(newState));
+    if (typeof (globalThis as any).window !== "undefined") {
+      (globalThis as any).localStorage.setItem(`property-liked-${property.id}`, String(newState));
+    }
   };
 
   const formattedPrice = new Intl.NumberFormat(lang === "es" ? "es-ES" : "en-US", {
