@@ -5,9 +5,11 @@ import { useState, useEffect } from "react";
 import { Cookie, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dictionary } from "../get-dictionary";
+import { useUIOverlay } from "../context/UIOverlayContext";
 
 export function CookieBanner({ dict }: { dict: Dictionary }) {
   const [show, setShow] = useState(false);
+  const { setCookieBannerVisible } = useUIOverlay();
 
   const injectCloudflareAnalytics = () => {
     // Only inject if token is available
@@ -25,6 +27,10 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
       }
     }
   };
+
+  useEffect(() => {
+    setCookieBannerVisible(show);
+  }, [show, setCookieBannerVisible]);
 
   useEffect(() => {
     // Avoid synchronous setState in effect for React 19 by deferring it
@@ -57,7 +63,7 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 100 }}
-          className="fixed bottom-0 left-0 right-0 z-[9999] bg-white border-t border-slate-100 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] p-4 sm:p-6"
+          className="fixed bottom-0 left-0 right-0 z-[130] bg-white border-t border-slate-100 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] p-4 sm:p-6"
         >
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-start sm:items-center gap-4 flex-1">

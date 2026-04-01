@@ -82,6 +82,9 @@ export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "es" }];
 }
 
+import { UIOverlayProvider } from "../../context/UIOverlayContext";
+import { WhatsAppButton } from "../../components/WhatsAppButton";
+
 export default async function RootLayout({
   children,
   params,
@@ -123,9 +126,12 @@ export default async function RootLayout({
             }}
           />
         )}
-        {children}
-        <PWAInstaller lang={locale} />
-        <CookieBanner dict={dict} />
+        <UIOverlayProvider>
+          {children}
+          <PWAInstaller lang={locale} />
+          <CookieBanner dict={dict} />
+          <WhatsAppButton prompt={dict.home.whatsapp_prompt} />
+        </UIOverlayProvider>
       </body>
     </html>
   );

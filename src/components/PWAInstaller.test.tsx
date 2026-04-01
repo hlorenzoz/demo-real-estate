@@ -2,10 +2,19 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { PWAInstaller, BeforeInstallPromptEvent } from "./PWAInstaller";
+import { UIOverlayProvider } from "../context/UIOverlayContext";
 
 declare const window: Window & typeof globalThis & { alert: any };
 
 describe("PWAInstaller", () => {
+  const renderWithProvider = (ui: React.ReactElement) => {
+    return render(
+      <UIOverlayProvider>
+        {ui}
+      </UIOverlayProvider>
+    );
+  };
+
   beforeEach(() => {
     vi.clearAllMocks();
     vi.useFakeTimers();
@@ -41,12 +50,12 @@ describe("PWAInstaller", () => {
   const mockPropsEs = { lang: "es" };
 
   it("is not visible by default", () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
   });
 
   it("shows installer automatically after 7 seconds delay", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
     
@@ -60,7 +69,7 @@ describe("PWAInstaller", () => {
   });
 
   it("shows Spanish installer correctly", async () => {
-    render(<PWAInstaller {...mockPropsEs} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEs} />);
     
     await act(async () => {
       vi.advanceTimersByTime(7000);
@@ -70,7 +79,7 @@ describe("PWAInstaller", () => {
   });
 
   it("shows installer when beforeinstallprompt is triggered", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     const promptEvent = new Event("beforeinstallprompt") as unknown as BeforeInstallPromptEvent;
     vi.spyOn(promptEvent, 'preventDefault');
@@ -100,7 +109,7 @@ describe("PWAInstaller", () => {
       })),
     });
 
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     await act(async () => {
       vi.advanceTimersByTime(7000);
@@ -110,7 +119,7 @@ describe("PWAInstaller", () => {
   });
 
   it("does not reappear after dismissal", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     await act(async () => {
       vi.advanceTimersByTime(7000);
@@ -130,7 +139,7 @@ describe("PWAInstaller", () => {
   });
 
   it("handles install button click (accepted)", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     const promptEvent = new Event("beforeinstallprompt") as unknown as BeforeInstallPromptEvent;
     const userChoicePromise = Promise.resolve({ outcome: "accepted" as const, platform: "" });
@@ -153,7 +162,7 @@ describe("PWAInstaller", () => {
   });
 
   it("handles install button click (dismissed)", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     const promptEvent = new Event("beforeinstallprompt") as unknown as BeforeInstallPromptEvent;
     const userChoicePromise = Promise.resolve({ outcome: "dismissed" as const, platform: "" });
@@ -178,7 +187,7 @@ describe("PWAInstaller", () => {
   });
 
   it("handles install button click error", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     const promptEvent = new Event("beforeinstallprompt") as unknown as BeforeInstallPromptEvent;
     Object.defineProperty(promptEvent, 'prompt', { value: vi.fn().mockRejectedValue(new Error("Prompt failed")) });
@@ -199,12 +208,12 @@ describe("PWAInstaller", () => {
   it("handles manual install alert when prompt is missing (En and Es)", async () => {
     vi.spyOn(window, 'alert').mockImplementation(() => {});
     
-    const { rerender } = render(<PWAInstaller {...mockPropsEn} />);
+    const { rerender } = renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     await act(async () => { vi.advanceTimersByTime(7000); });
     fireEvent.click(screen.getByText("Install"));
     expect(window.alert).toHaveBeenCalledWith(expect.stringContaining("To install:"));
 
-    rerender(<PWAInstaller {...mockPropsEs} />);
+    rerender(<UIOverlayProvider><PWAInstaller {...mockPropsEs} /></UIOverlayProvider>);
     fireEvent.click(screen.getByText("Instalar"));
     expect(window.alert).toHaveBeenCalledWith(expect.stringContaining("Para instalar:"));
   });
@@ -222,7 +231,7 @@ describe("PWAInstaller", () => {
     }));
     Object.defineProperty(window, 'matchMedia', { writable: true, value: matchMediaMock });
 
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     // Change mock to true before timer fires
     matchMediaMock.mockImplementation(query => ({
@@ -244,7 +253,7 @@ describe("PWAInstaller", () => {
   });
 
   it("does not show after delay if dismissed during delay", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
     // Partially wait
     await act(async () => {
@@ -267,7 +276,7 @@ describe("PWAInstaller", () => {
   });
 
   it("has correct accessible text colors for contrast", async () => {
-    render(<PWAInstaller {...mockPropsEn} />);
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     await act(async () => {
       vi.advanceTimersByTime(7000);
     });

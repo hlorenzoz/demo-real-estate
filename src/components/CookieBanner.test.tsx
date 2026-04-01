@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { CookieBanner } from "./CookieBanner";
@@ -8,10 +9,12 @@ const mockDict = {
     description: "We use cookies.",
     decline: "Decline",
     accept: "Accept All"
+  },
+  navbar: {
+    close_menu: "Close"
   }
 };
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 vi.mock('framer-motion', () => ({
   motion: {
     div: ({ children, ...props }: any) => <div {...props}>{children}</div>,
@@ -23,7 +26,8 @@ vi.mock('framer-motion', () => ({
   AnimatePresence: ({ children }: any) => <>{children}</>,
   useReducedMotion: () => true,
 }));
-/* eslint-enable @typescript-eslint/no-explicit-any */
+
+import { UIOverlayProvider } from "../context/UIOverlayContext";
 
 describe("CookieBanner", () => {
   beforeEach(() => {
@@ -35,27 +39,33 @@ describe("CookieBanner", () => {
     vi.unstubAllEnvs();
   });
 
-  it.skip("renders correctly", async () => {
-    render(<CookieBanner dict={mockDict} />);
+  const renderWithProvider = (ui: React.ReactElement) => {
+    return render(
+      <UIOverlayProvider>
+        {ui}
+      </UIOverlayProvider>
+    );
+  };
+
+  it("renders correctly", async () => {
+    renderWithProvider(<CookieBanner dict={mockDict as any} />);
     await waitFor(() => {
       expect(screen.getByText(/We respect your privacy/i)).toBeInTheDocument();
     });
   });
 
-  it.skip("saves preference when Accept All is clicked", async () => {
-    render(<CookieBanner dict={mockDict} />);
+  it("saves preference when Accept All is clicked", async () => {
+    renderWithProvider(<CookieBanner dict={mockDict as any} />);
     const acceptBtn = await screen.findByText(/Accept All/);
     fireEvent.click(acceptBtn);
     expect(localStorage.getItem('cookie_consent')).toBe('accepted');
   });
 
-  it.skip("injects script when accepted", async () => {
-    vi.stubEnv('NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN', 'some-token');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const spy = vi.spyOn(document.head, 'appendChild').mockImplementation(() => ({} as any));
+  it("injects script when accepted", async () => {
+    vi.stubEnv('NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN', 'some-token');
+    const spy = vi.spyOn(document.body, 'appendChild');
     
-    render(<CookieBanner dict={mockDict} />);
+    renderWithProvider(<CookieBanner dict={mockDict as any} />);
     const acceptBtn = await screen.findByText(/Accept All/);
     fireEvent.click(acceptBtn);
     
@@ -63,14 +73,12 @@ describe("CookieBanner", () => {
     spy.mockRestore();
   });
 
-  it.skip("injects script on mount if already accepted", async () => {
+  it("injects script on mount if already accepted", async () => {
     localStorage.setItem('cookie_consent', 'accepted');
-    vi.stubEnv('NEXT_PUBLIC_CLOUDFLARE_ANALYTICS_TOKEN', 'some-token');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const spy = vi.spyOn(document.head, 'appendChild').mockImplementation(() => ({} as any));
+    vi.stubEnv('NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN', 'some-token');
+    const spy = vi.spyOn(document.body, 'appendChild');
     
-    render(<CookieBanner dict={mockDict} />);
+    renderWithProvider(<CookieBanner dict={mockDict as any} />);
     
     await waitFor(() => {
       expect(spy).toHaveBeenCalled();
@@ -78,8 +86,8 @@ describe("CookieBanner", () => {
     spy.mockRestore();
   });
 
-  it.skip("closes on X click", async () => {
-    render(<CookieBanner dict={mockDict} />);
+  it("closes on X click", async () => {
+    renderWithProvider(<CookieBanner dict={mockDict as any} />);
     const allButtons = await screen.findAllByRole('button');
     const xButton = allButtons.find(b => !b.textContent);
     if (xButton) {

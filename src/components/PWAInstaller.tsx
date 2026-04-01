@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Download, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useUIOverlay, getPWAOffset } from "../context/UIOverlayContext";
 
 export interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -26,6 +27,13 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
   const [showInstaller, setShowInstaller] = useState(false);
   const [hasDismissed, setHasDismissed] = useState(false);
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const { cookieBannerVisible, setPwaInstallerVisible } = useUIOverlay();
+
+  const isVisible = showInstaller && isScrolledPastHero;
+
+  useEffect(() => {
+    setPwaInstallerVisible(isVisible);
+  }, [isVisible, setPwaInstallerVisible]);
 
   useEffect(() => {
     // Check if already installed
@@ -111,13 +119,16 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
 
   return (
     <AnimatePresence>
-      {showInstaller && isScrolledPastHero && (
+      {isVisible && (
         <motion.div
-          initial={{ opacity: 0, y: 100, scale: 0.9 }}
+          initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 100, scale: 0.9 }}
+          exit={{ opacity: 0, y: 30, scale: 0.9 }}
           transition={{ type: "spring", damping: 25, stiffness: 350 }}
-          className="fixed bottom-10 left-6 right-6 lg:left-auto lg:right-10 lg:w-[480px] z-[9999] bg-[#EEF1F0] rounded-[2.5rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] p-6 lg:p-7 border border-white/20 select-none"
+          style={{ 
+            bottom: getPWAOffset(cookieBannerVisible) 
+          }}
+          className="fixed left-6 right-6 lg:left-auto lg:right-10 lg:w-[480px] z-[140] bg-[#EEF1F0] rounded-[2.5rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] p-6 lg:p-7 border border-white/20 select-none transition-all duration-300"
         >
           <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6 w-full relative">
             <div className="flex items-center gap-4 sm:gap-6 flex-1 w-full min-w-0 pr-8 sm:pr-0">
