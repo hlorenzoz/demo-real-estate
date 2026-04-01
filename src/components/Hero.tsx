@@ -28,6 +28,7 @@ export default function Hero({ dict, lang, properties }: HeroProps) {
           className="object-cover"
           priority={true}
           fetchPriority="high"
+          quality={70}
         />
       </div>
       

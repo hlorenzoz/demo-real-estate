@@ -276,6 +276,7 @@ export default async function Home({
             sizes="100vw"
             className="object-cover group-hover:scale-110 transition-transform duration-1000" 
             priority
+            quality={70}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-12 md:p-24">
             <MotionWrapper className="max-w-xl text-white">
@@ -306,7 +307,7 @@ export default async function Home({
 
           <div className="mt-8 flex flex-col lg:flex-row items-center gap-12 p-12 glass rounded-[56px] border border-white/40 shadow-2xl">
             <div className="lg:w-1/3 relative h-[450px] w-full rounded-[40px] overflow-hidden shadow-xl">
-              <Image src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/team.webp" alt="Our Team" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" />
+              <Image src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/team.webp" alt="Our Team" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" quality={65} />
             </div>
             <div className="lg:w-2/3">
               <h3 className="text-4xl font-serif mb-6 text-primary tracking-tight italic">{dict.home.about_title}</h3>

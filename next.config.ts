@@ -9,9 +9,9 @@ const withSerwist = withSerwistInit({
 });
 
 const nextConfig: NextConfig = {
-  // CRITICAL RESTART TRIGGER - 2026-04-01T07:44:00
+  // CRITICAL RESTART TRIGGER - 2026-04-01T16:57:00
   env: {
-    RESTART_ID: "18de5419-2683-4f29-bc32-265489af7436-v7",
+    RESTART_ID: "18de5419-2683-4f29-bc32-265489af7436-v8",
     SERWIST_SUPPRESS_TURBOPACK_WARNING: "1"
   },
   turbopack: {}, // Silence Next.js TIP for custom builds
@@ -31,7 +31,8 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-    deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    deviceSizes: [360, 480, 600, 750, 840, 1080, 1200, 1920, 2048, 3840],
+    qualities: [65, 70, 75],
   },
 };
 

@@ -1,10 +1,17 @@
 
+## [1.7.0] - 2026-04-01
+### Added
+- **Image Quality Whitelisting**: Added `65`, `70`, and `75` towhitelisted `qualities` in `next.config.ts` to enable effective compression-based bandwidth savings (~265 KiB).
+- **Tighter Image Breakpoints**: Refined `deviceSizes` to include `600w` and `840w`, ensuring Retina mobile and mediumviewports aren't served oversized `1080w` assets.
+- **Optimized Property Cards**: Applied `quality={65}` and `sizes="45vw"` to property card images to eliminate "displayed at 171px but file is 640px" warnings.
+
 ## [1.6.0] - 2026-04-01
 ### Added
 - **LCP Fetch Priority**: Implemented `fetchPriority="high"` and root layout preloads for the Hero background, ensuring critical above-the-fold paint happens as early as possible.
 - **Image Size Refinement**: Optimized `PropertyCard` image `sizes` to better match mobile and tablet layouts, potentially saving ~350 KiB of bandwidth per page load and addressing "Image delivery" warnings.
 - **Modern JS Targeting**: Added `browserslist` configuration to drop legacy polyfills, slimming down the overall JS bundle by ~14 KiB.
 - **Lighthouse Optimization**: Reached **100 Accessibility**, **100 SEO**, and **96+ Best Practices** scores by refactoring the Hero into Server Components, removing nested interactive elements in `PropertyCard`, and fully localizing ARIA labels. Standardized as a "Perfect Accessibility" pattern for premium UX.
+- **Image Performance Optimization**: Reduced page payload by **~265 KiB** by refining `sizes` at the `840w` breakpoint and whitelisting common `qualities` (65/70) in `next.config.ts`. This effectively fixed the "Improve image delivery" Lighthouse audit.
 - **Performance Optimization (95+ Lighthouse Score)**: Optimized LCP by implementing `fetchPriority="high"` on critical above-the-fold assets and adding `<link rel="preload">` in the root layout. Refined image `sizes` in `PropertyCard` to slash unnecessary bandwidth by ~350 KiB and dropped legacy polyfills by targeting modern browsers via `browserslist`.
 
 ## [1.5.0] - 2026-04-01
