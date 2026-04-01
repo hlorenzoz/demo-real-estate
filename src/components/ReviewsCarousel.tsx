@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -59,7 +60,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
 
   const checkScroll = () => {
     if (scrollRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current as any;
       setCanScrollLeft(scrollLeft > 20);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
     }
@@ -71,18 +72,22 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
       checkScroll();
     });
     const timer = setTimeout(checkScroll, 500);
-    window.addEventListener("resize", checkScroll);
+    if (typeof (globalThis as any).window !== "undefined") {
+      (globalThis as any).window.addEventListener("resize", checkScroll);
+    }
     return () => {
       cancelAnimationFrame(frame);
       clearTimeout(timer);
-      window.removeEventListener("resize", checkScroll);
+      if (typeof (globalThis as any).window !== "undefined") {
+        (globalThis as any).window.removeEventListener("resize", checkScroll);
+      }
     };
   }, [reviews]);
 
   const scroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
       const scrollAmount = 400;
-      scrollRef.current.scrollBy({
+      (scrollRef.current as any).scrollBy({
         left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });

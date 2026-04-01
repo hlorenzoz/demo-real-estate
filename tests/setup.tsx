@@ -1,21 +1,24 @@
 import '@testing-library/jest-dom';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { vi } from 'vitest';
 import React from 'react';
 
 // Mock matchMedia
-Object.defineProperty(window, 'matchMedia', {
-  writable: true,
-  value: vi.fn().mockImplementation(query => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
+if (typeof (globalThis as any).window !== "undefined") {
+  Object.defineProperty((globalThis as any).window, 'matchMedia', {
+    writable: true,
+    value: vi.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: vi.fn(), // deprecated
+      removeListener: vi.fn(), // deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })),
+  });
+}
 
 // Mock ResizeObserver
 class ResizeObserver {
@@ -23,7 +26,9 @@ class ResizeObserver {
   unobserve() {}
   disconnect() {}
 }
-window.ResizeObserver = ResizeObserver;
+if (typeof (globalThis as any).window !== "undefined") {
+  (globalThis as any).window.ResizeObserver = ResizeObserver;
+}
 
 // Mock localStorage
 const localStorageMock = (() => {
@@ -41,7 +46,9 @@ const localStorageMock = (() => {
     },
   };
 })();
-Object.defineProperty(window, 'localStorage', { value: localStorageMock, writable: true });
+if (typeof (globalThis as any).window !== "undefined") {
+  Object.defineProperty((globalThis as any).window, 'localStorage', { value: localStorageMock, writable: true });
+}
 
 // Mock next/navigation
 vi.mock('next/navigation', () => ({

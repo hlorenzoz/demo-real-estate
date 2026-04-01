@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useMemo, useEffect, useRef } from "react";
@@ -30,15 +31,21 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
   // Close dropdowns on click outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+      if (searchRef.current && !(searchRef.current as any).contains(event.target as any)) {
         setShowSearchDropdown(false);
       }
-      if (locationRef.current && !locationRef.current.contains(event.target as Node)) {
+      if (locationRef.current && !(locationRef.current as any).contains(event.target as any)) {
         setShowLocationDropdown(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    if (typeof (globalThis as any).window !== "undefined") {
+      (globalThis as any).document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      if (typeof (globalThis as any).window !== "undefined") {
+        (globalThis as any).document.removeEventListener("mousedown", handleClickOutside);
+      }
+    };
   }, []);
 
   // Filter properties for general search
@@ -141,7 +148,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                 type="text" 
                 value={searchQuery}
                 onChange={(e) => {
-                  setSearchQuery(e.target.value);
+                  setSearchQuery((e.target as any).value);
                   setShowSearchDropdown(true);
                 }}
                 onFocus={() => setShowSearchDropdown(true)}
@@ -201,7 +208,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                 type="text"
                 value={locationQuery}
                 onChange={(e) => {
-                  setLocationQuery(e.target.value);
+                  setLocationQuery((e.target as any).value);
                   setShowLocationDropdown(true);
                 }}
                 onFocus={() => setShowLocationDropdown(true)}

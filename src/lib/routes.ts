@@ -2,7 +2,7 @@ export const routeMappings: Record<string, Record<string, string>> = {
   en: {
     'properties': 'propiedades',
     'contact': 'contact',
-    'sell': 'vender',
+    'services': 'vender',
     'about-us': 'about-us',
     'faq': 'faq',
     'rentals': 'alquiler',
@@ -12,7 +12,7 @@ export const routeMappings: Record<string, Record<string, string>> = {
   es: {
     'propiedades': 'propiedades',
     'contactar': 'contact',
-    'vender': 'vender',
+    'servicios': 'vender',
     'nosotros': 'about-us',
     'faq': 'faq',
     'alquiler': 'alquiler',

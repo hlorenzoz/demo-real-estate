@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useState } from "react";
@@ -47,7 +48,8 @@ export default function ContactForm({ dict, lang }: ContactFormProps) {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target as any;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   return (

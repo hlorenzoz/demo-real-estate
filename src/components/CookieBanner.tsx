@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useEffect } from "react";
@@ -11,15 +12,16 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
   const injectCloudflareAnalytics = () => {
     // Only inject if token is available
     const token = process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
-    if (token && typeof window !== "undefined") {
+    if (token && typeof (globalThis as any).window !== "undefined") {
+      const doc = (globalThis as any).document;
       // Avoid injecting multiple times
-      if (!document.getElementById("cf-analytics-script")) {
-        const script = document.createElement("script");
+      if (!doc.getElementById("cf-analytics-script")) {
+        const script = doc.createElement("script");
         script.id = "cf-analytics-script";
         script.src = "https://static.cloudflareinsights.com/beacon.min.js";
         script.setAttribute("data-cf-beacon", JSON.stringify({ token }));
         script.defer = true;
-        document.body.appendChild(script);
+        doc.body.appendChild(script);
       }
     }
   };
@@ -27,7 +29,7 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
   useEffect(() => {
     // Avoid synchronous setState in effect for React 19 by deferring it
     const timer = setTimeout(() => {
-      const consent = localStorage.getItem("cookie_consent");
+      const consent = (globalThis as any).localStorage.getItem("cookie_consent");
       if (!consent) {
         setShow(true);
       } else if (consent === "accepted") {
@@ -38,13 +40,13 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
   }, []);
 
   const handleAccept = () => {
-    localStorage.setItem("cookie_consent", "accepted");
+    (globalThis as any).localStorage.setItem("cookie_consent", "accepted");
     setShow(false);
     injectCloudflareAnalytics();
   };
 
   const handleDecline = () => {
-    localStorage.setItem("cookie_consent", "declined");
+    (globalThis as any).localStorage.setItem("cookie_consent", "declined");
     setShow(false);
   };
 
