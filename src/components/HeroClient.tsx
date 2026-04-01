@@ -105,12 +105,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
       </div>
       
       <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-[-10vh]">
-        <motion.div 
-          initial={{ opacity: 1, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-2xl text-white"
-        >
+        <div className="max-w-2xl text-white">
           <span className="bg-primary-accent text-primary text-[10px] font-black uppercase tracking-[0.3em] px-4 py-2 rounded-xl mb-8 inline-block shadow-2xl">
             {dict.badge}
           </span>
@@ -128,7 +123,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
               {dict.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Hero Search (Floating Glass) */}

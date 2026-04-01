@@ -6,7 +6,7 @@ import { ArrowRight, ShieldCheck, MessageCircle, Calculator, Megaphone, Users, S
 import { getLocalizedPath, reverseMappings } from "../../lib/routes";
 import { getDictionary } from "../../get-dictionary";
 import Navbar from "../../components/Navbar";
-import HeroClient from "../../components/HeroClient";
+import Hero from "../../components/Hero";
 import Footer from "../../components/Footer";
 
 // Lazy load off-screen components
@@ -100,7 +100,7 @@ export default async function Home({
         }}
       />
       <Navbar lang={locale} dict={dict.navbar} />
-      <HeroClient 
+      <Hero 
         dict={dict.hero} 
         lang={locale} 
         properties={baseContent.properties} 

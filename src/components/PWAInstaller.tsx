@@ -119,9 +119,9 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
 
             {/* Content Area */}
             <div className="flex-1 min-w-0">
-              <h4 className="text-[#001D19] text-lg font-bold leading-tight mb-1 truncate tracking-tight">
+              <p className="text-[#001D19] text-lg font-bold leading-tight mb-1 truncate tracking-tight">
                 {lang === 'es' ? 'Añadir a Inicio' : 'Add to Home Screen'}
-              </h4>
+              </p>
               <p className="text-[#4B5563] text-sm font-medium leading-tight opacity-80 decoration-0">
                 {lang === 'es' 
                   ? 'Accede a Luxury Living al instante, incluso offline' 
