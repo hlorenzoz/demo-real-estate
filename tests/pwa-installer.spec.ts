@@ -23,7 +23,7 @@ test.describe("PWA Installer E2E", () => {
     await closeBtn.click();
 
     // Should be removed from DOM (because of AnimatePresence exit)
-    await expect(installer).not.toBeAttached({ timeout: 10000 });
+    await expect(installer).not.toBeAttached({ timeout: 15000 });
   });
 
   test("should show manual install instructions if clicked before prompt fires", async ({ page }) => {

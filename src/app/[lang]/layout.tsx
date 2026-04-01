@@ -102,12 +102,8 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <head>
-        <link 
-          rel="preload" 
-          as="image" 
-          href="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero-1.webp" 
-          fetchPriority="high" 
-        />
+        {/* Preconnect to the CDN for faster initial connection */}
+        <link rel="preconnect" href="https://cdn.hlorenzoz.com" crossOrigin="anonymous" />
       </head>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         {process.env.NODE_ENV === "production" ? (
