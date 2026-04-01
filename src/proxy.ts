@@ -71,7 +71,7 @@ export default function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
+    // Skip all internal paths (_next) and static assets with dots (.*\\..*)
     '/((?!_next|api|.*\\..*).*)',
   ],
 };

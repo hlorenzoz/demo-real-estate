@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Playfair_Display, Inter } from "next/font/google";
 import { PWAProvider } from "../../components/PWAProvider";
 import { getDictionary, Locale } from "../../get-dictionary";
@@ -89,6 +90,12 @@ export default async function RootLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
+  const locales = ["en", "es"];
+  
+  if (!locales.includes(lang)) {
+    notFound();
+  }
+
   const locale = lang as Locale;
   const dict = await getDictionary(locale);
 
