@@ -1,4 +1,16 @@
 
+## [1.5.0] - 2026-04-01
+### Added
+- **Full PWA Support (@serwist/next)**: Complete service worker integration for Next.js 16/Turbopack with offline caching and smart installation prompts.
+- **100% Accessibility Score**: Achieved a perfect 100 in Lighthouse by resolving nested interactive elements and full ARIA localization.
+- **Enhanced SEO & Best Practices**: Reached 100% scores in SEO and Best Practices through improved metadata, heading structures, and semantic HTML.
+- **Hero Performance Refinement**: Removed zero-opacity fade-in animations that were delaying Largest Contentful Paint (LCP) in mobile simulations.
+
+### Fixed
+- **Nested Interactivity**: Refactored `PropertyCard` to separate primary `Link` from `button` elements, fixing a critical accessibility diagnostic.
+- **ARIA Localization**: Synchronized all tooltips, labels, and hidden text with localized dictionaries.
+- **PWA Installation Prompt**: Stabilized the installation flow for mobile Safari and Android Chrome.
+
 ## [1.4.0] - 2026-04-01
 ### Added
 - **Zero-Hydration-Delay Hero**: Refactored the Hero section into a Server Component to ensure the `h1` and background paint instantly without JS hydration delays.

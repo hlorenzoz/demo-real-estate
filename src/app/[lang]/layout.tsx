@@ -95,7 +95,23 @@ export default async function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
-        <PWAProvider swUrl="/sw.js" />
+        {process.env.NODE_ENV === "production" ? (
+          <PWAProvider swUrl="/sw.js" />
+        ) : (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                  navigator.serviceWorker.getRegistrations().then(registrations => {
+                    for (let registration of registrations) {
+                      registration.unregister();
+                    }
+                  });
+                }
+              `,
+            }}
+          />
+        )}
         {children}
         <PWAInstaller lang={locale} />
         <CookieBanner dict={dict} />

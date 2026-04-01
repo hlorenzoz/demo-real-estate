@@ -90,7 +90,7 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
             <button
               onClick={() => setShow(false)}
               className="absolute top-4 right-4 sm:hidden text-slate-400 p-2"
-              aria-label="Dismiss"
+              aria-label={dict.navbar.close_menu || "Dismiss"}
             >
               <X size={24} />
             </button>

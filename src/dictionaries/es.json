@@ -7,7 +7,12 @@
     "blog": "Blog",
     "faq": "FAQ",
     "contactar": "Contactar",
-    "rentals": "Alquiler"
+    "rentals": "Alquiler",
+    "open_menu": "Abrir menú de navegación",
+    "close_menu": "Cerrar menú de navegación",
+    "search_aria": "Buscar propiedades por tipo o nombre",
+    "location_aria": "Filtrar por ubicación o ciudad",
+    "save_property": "Guardar propiedad en favoritos"
   },
   "paths": {
     "propiedades": "propiedades",
@@ -27,7 +32,9 @@
     "cta": "Explorar Propiedades",
     "search_placeholder": "¿Qué buscas hoy? (Piso, Casa, Terreno...)",
     "location_label": "Ubicación",
-    "search_button": "Buscar"
+    "search_button": "Buscar",
+    "search_aria": "Campo de búsqueda",
+    "location_aria": "Campo de ubicación"
   },
   "home": {
     "property_title": "Listados",
@@ -57,7 +64,10 @@
     "about_transparency": "transparencia total",
     "years_exp": "Años experiencia",
     "success_rate": "Éxito gestión",
-    "whatsapp_prompt": "¿En qué podemos ayudarte?"
+    "whatsapp_prompt": "¿En qué podemos ayudarte?",
+    "property_slide": "Ver grupo de propiedades número",
+    "prev_properties": "Ver propiedades anteriores",
+    "next_properties": "Ver propiedades siguientes"
   },
   "services": {
     "title": "Portafolio de Servicios Inmobiliarios",

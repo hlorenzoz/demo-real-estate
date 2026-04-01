@@ -13,7 +13,9 @@ const mockDict = {
   blog: "Blog",
   faq: "FAQ",
   contactar: "Contact",
-  about_us: "About Us"
+  about_us: "About Us",
+  open_menu: "Open menu",
+  close_menu: "Close menu"
 };
 
 describe("Navbar", () => {

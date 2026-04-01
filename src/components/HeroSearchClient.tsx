@@ -105,6 +105,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
               }}
               onFocus={() => setShowSearchDropdown(true)}
               placeholder={dict.search_placeholder} 
+              aria-label={dict.search_aria}
               data-testid="hero-search-input"
               className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-lg placeholder:text-primary/30 py-4" 
             />
@@ -162,6 +163,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
               }}
               onFocus={() => setShowLocationDropdown(true)}
               placeholder={dict.location_label}
+              aria-label={dict.location_aria}
               className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-base placeholder:text-primary/40 p-0"
             />
           </div>

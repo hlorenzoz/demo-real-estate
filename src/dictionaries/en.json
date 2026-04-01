@@ -7,7 +7,12 @@
     "blog": "Blog",
     "faq": "FAQ",
     "contactar": "Contact",
-    "rentals": "Rentals"
+    "rentals": "Rentals",
+    "open_menu": "Open navigation menu",
+    "close_menu": "Close navigation menu",
+    "search_aria": "Search properties by type or name",
+    "location_aria": "Filter by location or city",
+    "save_property": "Save property to favorites"
   },
   "paths": {
     "propiedades": "properties",
@@ -27,7 +32,9 @@
     "cta": "Explore Properties",
     "search_placeholder": "What are you looking for? (Flat, House, Land...)",
     "location_label": "Location",
-    "search_button": "Search"
+    "search_button": "Search",
+    "search_aria": "Search query field",
+    "location_aria": "Location query field"
   },
   "home": {
     "property_title": "Listings",
@@ -57,7 +64,10 @@
     "about_transparency": "total transparency",
     "years_exp": "Years experience",
     "success_rate": "Management Success",
-    "whatsapp_prompt": "How can we help you?"
+    "whatsapp_prompt": "How can we help you?",
+    "property_slide": "View property group number",
+    "prev_properties": "Previous properties",
+    "next_properties": "Next properties"
   },
   "services": {
     "title": "Real Estate Services Portfolio",

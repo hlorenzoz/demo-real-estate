@@ -64,14 +64,14 @@ export default function PropertiesCarousel({ properties, lang, dict }: Propertie
           <button
             onClick={prev}
             className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95"
-            aria-label="Previous properties"
+            aria-label={dict.prev_properties || "Previous properties"}
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={next}
             className="w-14 h-14 rounded-2xl bg-white border border-slate-100 flex items-center justify-center text-primary shadow-sm hover:bg-primary hover:text-white transition-all active:scale-95"
-            aria-label="Next properties"
+            aria-label={dict.next_properties || "Next properties"}
           >
             <ChevronRight size={24} />
           </button>
@@ -108,7 +108,7 @@ export default function PropertiesCarousel({ properties, lang, dict }: Propertie
             key={i}
             onClick={() => setCurrentIndex(i)}
             className="group relative w-12 h-12 flex items-center justify-center"
-            aria-label={`Property slide ${i + 1}`}
+            aria-label={`${dict.property_slide || "Property group"} ${i + 1}`}
           >
             <div className={`transition-all rounded-full ${
               currentIndex === i ? "bg-primary w-8 h-2.5" : "bg-slate-300 w-2.5 h-2.5"

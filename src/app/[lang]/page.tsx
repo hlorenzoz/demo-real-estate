@@ -271,7 +271,7 @@ export default async function Home({
         <div className="max-w-7xl mx-auto h-[600px] relative rounded-[64px] overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)]">
           <Image 
             src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero.webp" 
-            alt="Villas exclusivas" 
+            alt={dict.home.cta_banner} 
             fill 
             sizes="100vw"
             className="object-cover group-hover:scale-110 transition-transform duration-1000" 
