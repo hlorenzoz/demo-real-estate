@@ -58,7 +58,7 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
             src={property.image} 
             alt={property.location} 
             fill 
-            sizes="(max-width: 640px) 95vw, (max-width: 1024px) 45vw, 30vw" 
+            sizes="(max-width: 639px) 85vw, (max-width: 1023px) 45vw, 30vw" 
             className="object-cover group-hover:scale-110 transition-transform duration-700" 
             priority={priority} 
           />

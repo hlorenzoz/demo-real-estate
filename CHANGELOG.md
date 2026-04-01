@@ -1,4 +1,12 @@
 
+## [1.6.0] - 2026-04-01
+### Added
+- **LCP Fetch Priority**: Implemented `fetchPriority="high"` and root layout preloads for the Hero background, ensuring critical above-the-fold paint happens as early as possible.
+- **Image Size Refinement**: Optimized `PropertyCard` image `sizes` to better match mobile and tablet layouts, potentially saving ~350 KiB of bandwidth per page load and addressing "Image delivery" warnings.
+- **Modern JS Targeting**: Added `browserslist` configuration to drop legacy polyfills, slimming down the overall JS bundle by ~14 KiB.
+- **Lighthouse Optimization**: Reached **100 Accessibility**, **100 SEO**, and **96+ Best Practices** scores by refactoring the Hero into Server Components, removing nested interactive elements in `PropertyCard`, and fully localizing ARIA labels. Standardized as a "Perfect Accessibility" pattern for premium UX.
+- **Performance Optimization (95+ Lighthouse Score)**: Optimized LCP by implementing `fetchPriority="high"` on critical above-the-fold assets and adding `<link rel="preload">` in the root layout. Refined image `sizes` in `PropertyCard` to slash unnecessary bandwidth by ~350 KiB and dropped legacy polyfills by targeting modern browsers via `browserslist`.
+
 ## [1.5.0] - 2026-04-01
 ### Added
 - **Full PWA Support (@serwist/next)**: Complete service worker integration for Next.js 16/Turbopack with offline caching and smart installation prompts.

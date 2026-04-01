@@ -27,6 +27,7 @@ export default function Hero({ dict, lang, properties }: HeroProps) {
           sizes="100vw"
           className="object-cover"
           priority={true}
+          fetchPriority="high"
         />
       </div>
       
