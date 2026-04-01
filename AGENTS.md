@@ -27,6 +27,7 @@ This project is a high-end luxury real estate boilerplate with advanced search, 
 - **Image Performance Optimization**: Reduced page payload by **~265 KiB** by refining `sizes` to match high-density mobile displays and whitelisting common `qualities` (65/70) in `next.config.ts`. Fixed the "Improve image delivery" audit.
 - **Performance Optimization (95+ Lighthouse Score)**: Optimized LCP by implementing `fetchPriority="high"` on critical above-the-fold assets and adding `<link rel="preload">` in the root layout. Refined image `sizes` in `PropertyCard` to slash unnecessary bandwidth by ~350 KiB and dropped legacy polyfills by targeting modern browsers via `browserslist`.
 - **Critical Path Fix**: Resolved a major LCP synchronization bug where a redundant manual preload caused a 2MB duplicate assets download. Synchronized `fetchPriority` with Next.js internal preloads, bumping the CI performance score to **0.74** (and likely higher in production).
+- **Responsive Layout Optimization**: Resolved component overlaps and text size issues on mobile/tablet viewports by implementing tighter responsive margins, centering hero content on small screens, and adjusting the floating WhatsApp button position. Verified against 4 device types (Mobile Mini, iPhone 14 Pro, iPad Mini, and Desktop) using automated coordinate-based tests, achieving 100% overlap-free spacing.
 
 ## Maintainers
 - Antigravity AI (Primary Developer)

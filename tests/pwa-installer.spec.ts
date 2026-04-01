@@ -4,6 +4,11 @@ test.describe("PWA Installer E2E", () => {
   test.beforeEach(async ({ page }) => {
     // Basic navigation
     await page.goto("/en");
+    // We need to wait for the scroll trigger too
+    await page.evaluate(() => {
+      // @ts-expect-error - window is available in browser context
+      window.scrollTo(0, 500);
+    });
   });
 
   test("should appear after the 7 second delay and allow dismissal", async ({ page }) => {

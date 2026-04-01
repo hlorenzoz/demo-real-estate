@@ -90,7 +90,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
 
   return (
     <div className="absolute bottom-6 lg:bottom-10 left-1/2 -translate-x-1/2 w-full max-w-5xl px-4 lg:px-6 z-[100]">
-      <div className="glass p-2 lg:p-3 rounded-[32px] flex flex-col lg:flex-row lg:items-center shadow-2xl border border-white/20 backdrop-blur-md relative z-[100] gap-2 lg:gap-0">
+      <div data-testid="hero-search-card" className="glass p-1.5 lg:p-3 rounded-2xl lg:rounded-[32px] flex flex-col lg:flex-row lg:items-center shadow-2xl border border-white/20 backdrop-blur-md relative z-[100] gap-2 lg:gap-0">
         
         {/* General Search Input */}
         <div className="flex-1 relative" ref={searchRef}>
@@ -107,7 +107,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
               placeholder={dict.search_placeholder} 
               aria-label={dict.search_aria}
               data-testid="hero-search-input"
-              className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-lg placeholder:text-primary/30 py-4" 
+              className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-base lg:text-lg placeholder:text-primary/30 py-3 lg:py-4" 
             />
             {searchQuery && (
               <button onClick={() => setSearchQuery("")} className="text-primary/20 hover:text-primary">
@@ -164,7 +164,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
               onFocus={() => setShowLocationDropdown(true)}
               placeholder={dict.location_label}
               aria-label={dict.location_aria}
-              className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-base placeholder:text-primary/40 p-0"
+            className="bg-transparent border-none focus:ring-0 w-full text-primary outline-none font-bold text-sm lg:text-base placeholder:text-primary/40 p-0"
             />
           </div>
 
@@ -199,7 +199,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
 
         <button 
           onClick={handleSearch}
-          className="bg-primary text-white px-8 lg:px-12 py-4 lg:py-5 rounded-[24px] lg:rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-xs lg:text-sm tracking-widest shadow-xl lg:ml-2"
+          className="bg-primary text-white px-8 lg:px-12 py-3 lg:py-5 rounded-xl lg:rounded-2xl hover:bg-primary-accent hover:text-primary transition-all font-black uppercase text-[10px] lg:text-sm tracking-widest shadow-xl lg:ml-2"
         >
           {dict.search_button}
         </button>

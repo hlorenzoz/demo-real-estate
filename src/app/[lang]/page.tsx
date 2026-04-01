@@ -341,7 +341,7 @@ export default async function Home({
       {/* Floating Action Button (WhatsApp) */}
       <Link 
         href="https://wa.me/34988461585" 
-        className="fixed bottom-12 right-12 z-[100] bg-[#25D366] text-white p-5 rounded-3xl shadow-[0_20px_50px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all group"
+        className="fixed bottom-32 sm:bottom-12 right-6 sm:right-12 z-[100] bg-[#25D366] text-white p-5 rounded-3xl shadow-[0_20px_50px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all group"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact us on WhatsApp"

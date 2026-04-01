@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, act } from "@testing-library/react";
 import { PWAInstaller, BeforeInstallPromptEvent } from "./PWAInstaller";
+
+declare const window: Window & typeof globalThis & { alert: any };
 
 describe("PWAInstaller", () => {
   beforeEach(() => {
@@ -9,7 +12,12 @@ describe("PWAInstaller", () => {
     vi.spyOn(console, 'log').mockImplementation(() => {});
     vi.spyOn(console, 'error').mockImplementation(() => {});
     
-    // Default matchMedia mock
+    // Default window mocks
+    Object.defineProperty(window, 'scrollY', {
+      writable: true,
+      value: 500,
+    });
+
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
@@ -108,7 +116,7 @@ describe("PWAInstaller", () => {
       vi.advanceTimersByTime(7000);
     });
     
-    const xBtn = screen.getByLabelText("Close installer");
+    const xBtn = screen.getAllByLabelText("Close installer")[0];
     fireEvent.click(xBtn);
     expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
 
@@ -246,7 +254,7 @@ describe("PWAInstaller", () => {
     });
 
     // It showed because event fired, now dismiss
-    const xBtn = screen.getByLabelText("Close installer");
+    const xBtn = screen.getAllByLabelText("Close installer")[0];
     fireEvent.click(xBtn);
     expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
 
