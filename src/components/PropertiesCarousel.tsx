@@ -107,11 +107,11 @@ export default function PropertiesCarousel({ properties, lang, dict }: Propertie
           <button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            className="group relative p-2"
-            aria-label={`Go to slide ${i + 1}`}
+            className="group relative w-12 h-12 flex items-center justify-center"
+            aria-label={`Property slide ${i + 1}`}
           >
-            <div className={`w-2.5 h-2.5 rounded-full transition-all group-hover:scale-125 ${
-              currentIndex === i ? "bg-primary w-8" : "bg-slate-300"
+            <div className={`transition-all rounded-full ${
+              currentIndex === i ? "bg-primary w-8 h-2.5" : "bg-slate-300 w-2.5 h-2.5"
             }`} />
           </button>
         ))}

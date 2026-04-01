@@ -11,7 +11,7 @@ test.describe("PWA Installer E2E", () => {
     await page.waitForTimeout(10000);
 
     // Assert by presence in DOM 
-    const installer = page.locator("h4:has-text('Add to Home Screen')");
+    const installer = page.getByText('Add to Home Screen');
     await expect(installer).toBeAttached({ timeout: 15000 });
 
     // Verify brand assets
@@ -49,7 +49,7 @@ test.describe("PWA Installer E2E", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.waitForTimeout(10000);
     
-    const installer = page.locator("h4:has-text('Add to Home Screen')");
+    const installer = page.getByText('Add to Home Screen');
     await expect(installer).toBeAttached({ timeout: 15000 });
     
     const box = await installer.boundingBox();

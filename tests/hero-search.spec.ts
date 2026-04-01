@@ -9,14 +9,18 @@ test.describe('Hero Search Autocomplete', () => {
     await expect(page.getByRole('heading', { level: 1 }).first()).toBeVisible();
     
     // Wait for Hero search input to be visible
-    const searchInput = page.getByPlaceholder(/looking for/i).first();
+    const searchInput = page.locator('input').first();
     await expect(searchInput).toBeVisible();
     
     // Type something that matches properties in base-content.json
     await searchInput.fill('Villa');
     
+    // Check debug count has items
+    const debugCount = page.getByTestId('debug-count');
+    await expect(debugCount).not.toHaveText('0', { timeout: 5000 });
+    
     // Wait for dropdown
-    const resultLink = page.locator('a[href*="/properties/"]').first();
+    const resultLink = page.getByTestId('hero-search-result').first();
     await resultLink.waitFor({ state: 'visible', timeout: 5000 });
     
     // Check if it contains text related to the search

@@ -9,11 +9,13 @@ import "../globals.css";
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair-display",
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
 });
 
 type Props = {

@@ -53,12 +53,12 @@ export default function PropertyCard({ property, lang, dict, priority }: Propert
       href={`${propertyPath}/${property.id}`}
       className="bg-white rounded-[40px] overflow-hidden border border-slate-50 group shadow-sm hover:shadow-[0_48px_100px_-20px_rgba(0,0,0,0.1)] transition-all flex flex-col h-full"
     >
-      <div className="relative h-72 overflow-hidden">
+      <div className="relative aspect-square overflow-hidden">
         <Image 
           src={property.image} 
           alt={property.location} 
           fill 
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" 
+          sizes="(max-width: 640px) 95vw, (max-width: 1024px) 45vw, 30vw" 
           className="object-cover group-hover:scale-110 transition-transform duration-700" 
           priority={priority} 
         />

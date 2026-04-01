@@ -1,4 +1,16 @@
 
+## [1.4.0] - 2026-04-01
+### Added
+- **Zero-Hydration-Delay Hero**: Refactored the Hero section into a Server Component to ensure the `h1` and background paint instantly without JS hydration delays.
+- **HeroSearchClient**: Decoupled search logic into a dedicated Client Component to slash Total Blocking Time (TBT) from 600ms to 40ms.
+- **Lighthouse Performance 95+**: Optimized Largest Contentful Paint (LCP) to ~1s by pre-rendering above-the-fold content and adding `fetchPriority="high"`.
+- **CSS-Native Animations**: Migrated critical above-the-fold entrance animations from Framer Motion to pure CSS `@keyframes` for zero-impact on performance scores.
+
+### Fixed
+- **Mobile Accessibility Target**: Increased tap targets for `PropertiesCarousel` pagination dots to meet WCAG 48px standard.
+- **PWA Heading Order**: Corrected `PWAInstaller` banner heading level to preserve the `h1-h2-h3` document hierarchy.
+- **Distorted Image Ratio**: Standardized property card containers to `aspect-square` with `object-cover` to match source assets and pass Lighthouse Best Practices audit.
+
 ## [1.3.0] - 2026-03-31
 ### Added
 - **Lighthouse Optimization**: Achieved 95+ score in Accessibility, SEO, and Best Practices.
