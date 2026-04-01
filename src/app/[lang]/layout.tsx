@@ -37,6 +37,7 @@ export async function generateMetadata(
     title: "Demo Website | Real Estate",
     description: dict.metadata.description,
     keywords: dict.metadata.keywords.split(",").map((k: string) => k.trim()),
+    manifest: "/manifest.json",
     openGraph: {
       title: "Demo Website | Real Estate",
       description: dict.metadata.description,
@@ -92,8 +93,26 @@ export default async function RootLayout({
     <html lang={locale} suppressHydrationWarning>
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         {children}
-        <PWAInstaller />
+        <PWAInstaller lang={locale} />
         <CookieBanner dict={dict} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js').then(
+                    function(registration) {
+                      console.log('Service Worker registration successful with scope: ', registration.scope);
+                    },
+                    function(err) {
+                      console.log('Service Worker registration failed: ', err);
+                    }
+                  );
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   );

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Download, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export interface BeforeInstallPromptEvent extends Event {
   readonly platforms: string[];
@@ -13,32 +14,57 @@ export interface BeforeInstallPromptEvent extends Event {
   prompt(): Promise<void>;
 }
 
-export function PWAInstaller() {
+interface PWAInstallerProps {
+  lang: string;
+}
+
+export function PWAInstaller({ lang }: PWAInstallerProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(
     null
   );
   const [showInstaller, setShowInstaller] = useState(false);
+  const [hasDismissed, setHasDismissed] = useState(false);
 
   useEffect(() => {
+    // Check if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      return;
+    }
+
     const handler = (e: Event) => {
       const pwaEvent = e as BeforeInstallPromptEvent;
-      // Prevent the mini-infobar from appearing on mobile
       pwaEvent.preventDefault();
-      // Stash the event so it can be triggered later.
       setDeferredPrompt(pwaEvent);
-      // Update UI notify the user they can install the PWA
-      setShowInstaller(true);
+      // If we haven't dismissed it, show it when the prompt is ready
+      if (!hasDismissed) {
+        setShowInstaller(true);
+      }
     };
 
     window.addEventListener("beforeinstallprompt", handler);
 
+    // Force show after a delay (7 seconds) to fulfill user request
+    const timer = setTimeout(() => {
+      if (!hasDismissed && !window.matchMedia('(display-mode: standalone)').matches) {
+        setShowInstaller(true);
+      }
+    }, 7000);
+
     return () => {
       window.removeEventListener("beforeinstallprompt", handler);
+      clearTimeout(timer);
     };
-  }, []);
+  }, [hasDismissed]);
 
   const handleInstall = async () => {
-    if (!deferredPrompt) return;
+    if (!deferredPrompt) {
+      // Fallback or instructions if prompted manually before event
+      alert(lang === 'es' 
+        ? "Para instalar: abre el menú del navegador y selecciona 'Instalar aplicación' o 'Añadir a pantalla de inicio'." 
+        : "To install: open your browser menu and select 'Install app' or 'Add to home screen'.");
+      return;
+    }
+    
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
     
@@ -48,41 +74,64 @@ export function PWAInstaller() {
     setDeferredPrompt(null);
   };
 
+  const handleDismiss = () => {
+    setShowInstaller(false);
+    setHasDismissed(true);
+  };
+
   return (
     <AnimatePresence>
       {showInstaller && (
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-6 right-6 z-[60] bg-white rounded-2xl shadow-2xl border border-slate-100 p-4 max-w-sm"
+          initial={{ opacity: 0, y: 100, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: 100, scale: 0.9 }}
+          transition={{ type: "spring", damping: 25, stiffness: 350 }}
+          className="fixed bottom-10 left-6 right-6 lg:left-auto lg:right-10 lg:w-[480px] z-[9999] bg-[#EEF1F0] rounded-[2.5rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.3)] p-6 lg:p-7 border border-white/20 select-none"
         >
-          <div className="flex items-start gap-4">
-            <div className="flex-1">
-              <h4 className="text-sm font-bold text-primary mb-1">Install App</h4>
-              <p className="text-xs text-text-muted font-medium mb-3">Install our app for a faster and better experience.</p>
-              <div className="flex gap-2">
-                <button
-                  onClick={handleInstall}
-                  className="bg-primary hover:bg-primary-accent transition-colors text-white text-xs font-bold px-4 py-2 rounded-lg"
-                >
-                  <Download size={14} className="inline mr-1" />
-                  Install
-                </button>
-                <button
-                  onClick={() => setShowInstaller(false)}
-                  className="bg-slate-100 hover:bg-slate-200 text-slate-500 transition-colors text-xs font-bold px-4 py-2 rounded-lg"
-                >
-                  Later
-                </button>
-              </div>
+          <div className="flex items-center gap-6">
+            {/* App Icon */}
+            <div className="shrink-0 w-16 h-16 bg-white rounded-2xl flex items-center justify-center relative overflow-hidden shadow-lg group border border-[#001D19]/10">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#00473E]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Image 
+                src="/favicon.svg" 
+                alt="Luxury Living logo" 
+                width={48}
+                height={48}
+                className="w-12 h-12 object-contain relative z-10"
+              />
             </div>
-            <button
-              onClick={() => setShowInstaller(false)}
-              className="text-slate-400 hover:text-slate-600 transition-colors"
-            >
-              <X size={16} />
-            </button>
+
+            {/* Content Area */}
+            <div className="flex-1 min-w-0">
+              <h4 className="text-[#001D19] text-lg font-bold leading-tight mb-1 truncate tracking-tight">
+                {lang === 'es' ? 'Añadir a Inicio' : 'Add to Home Screen'}
+              </h4>
+              <p className="text-[#4B5563] text-sm font-medium leading-tight opacity-80 decoration-0">
+                {lang === 'es' 
+                  ? 'Accede a Luxury Living al instante, incluso offline' 
+                  : 'Access Luxury Living instantly, even offline'}
+              </p>
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-4">
+              <button
+                onClick={handleInstall}
+                className="bg-[#FACC15] hover:bg-[#EAB308] text-[#001D19] px-6 py-2.5 rounded-full flex items-center gap-2 text-sm font-extrabold shadow-[0_10px_20px_-5px_rgba(250,204,21,0.3)] hover:shadow-[0_15px_30px_-10px_rgba(250,204,21,0.5)] active:scale-95 transition-all outline-none border-none whitespace-nowrap"
+              >
+                <Download size={14} strokeWidth={3} />
+                {lang === 'es' ? 'Instalar' : 'Install'}
+              </button>
+              
+              <button
+                onClick={handleDismiss}
+                className="text-[#4B5563] hover:text-[#001D19] hover:bg-[#001D19]/5 p-2 rounded-full transition-colors outline-none cursor-pointer"
+                aria-label={lang === 'es' ? 'Cerrar instalador' : 'Close installer'}
+              >
+                <X size={20} strokeWidth={2.5} />
+              </button>
+            </div>
           </div>
         </motion.div>
       )}
