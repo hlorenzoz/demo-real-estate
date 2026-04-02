@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { getDictionary, Locale } from "@/get-dictionary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,11 +21,13 @@ export default async function rentalsPage({
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">
       <Navbar lang={lang as Locale} dict={dict.navbar} />
       
-      <PropertiesClientPage 
-        properties={properties} 
-        lang={lang as Locale} 
-        dict={dict} 
-      />
+      <Suspense fallback={<div className="min-h-screen bg-[#FAFAFA]" />}>
+        <PropertiesClientPage 
+          properties={properties} 
+          lang={lang as Locale} 
+          dict={dict} 
+        />
+      </Suspense>
 
       <Footer lang={lang as Locale} dict={dict.footer} />
     </main>
