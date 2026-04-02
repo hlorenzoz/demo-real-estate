@@ -49,7 +49,7 @@ export default function Hero({ dict, lang, properties }: HeroProps) {
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center lg:items-start gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>
             <Link 
-              href={getLocalizedPath(lang, 'listings')} 
+              href={getLocalizedPath(lang, 'properties')} 
               className="bg-primary-accent text-primary px-10 py-5 rounded-2xl flex items-center justify-center gap-3 font-black uppercase text-xs tracking-widest hover:scale-105 transition-all group shadow-2xl"
             >
               {dict.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

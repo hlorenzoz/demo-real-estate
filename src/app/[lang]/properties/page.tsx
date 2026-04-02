@@ -6,11 +6,11 @@ import PropertiesClientPage from "../listings/PropertiesClientPage";
 import { getBaseContent } from "@/lib/content";
 
 /**
- * Rentals Page — shows only FOR RENT properties.
- * Contract-type filters are hidden (showContractFilters={false}) because
- * this page is dedicated to rentals; the filter would be redundant.
+ * Unified Properties Page — shows ALL properties (for sale + for rent).
+ * The contract-type filter pills (All / For Sale / For Rent) are visible so
+ * visitors can narrow down by transaction type.
  */
-export default async function rentalsPage({
+export default async function PropertiesPage({
   params,
 }: {
   params: Promise<{ lang: string }>;
@@ -19,8 +19,8 @@ export default async function rentalsPage({
   const dict = await getDictionary(lang as Locale);
   const baseContent = getBaseContent();
 
-  // Pre-filter: for-rent only
-  const properties = baseContent.properties.filter(p => p.contractType === 'rent');
+  // Show every property — no pre-filtering
+  const properties = baseContent.properties;
 
   return (
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">
@@ -31,7 +31,7 @@ export default async function rentalsPage({
           properties={properties}
           lang={lang as Locale}
           dict={dict}
-          showContractFilters={false}
+          showContractFilters={true}
         />
       </Suspense>
 

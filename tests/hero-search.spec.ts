@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Hero Search Autocomplete', () => {
-  test('should show autocomplete results when typing in search bar', async ({ page }) => {
+test.describe('Home Page Interactions', () => {
+
+  test('Hero Search Autocomplete should navigate to detail page', async ({ page }) => {
     // Go to home page
     await page.goto('/en', { waitUntil: 'networkidle' });
     
@@ -28,7 +29,37 @@ test.describe('Hero Search Autocomplete', () => {
     
     // Clicking should navigate
     await resultLink.click();
-    await page.waitForURL(/\/properties\//);
+    
+    // REASON FOR FIX: Individual property detail pages are still under the /en/listings/ path.
+    // The previous test expected /en/properties/ which is the new unified hub path, not the detail page path.
+    await page.waitForURL(/\/(listings|listados)\//);
+    expect(page.url()).toMatch(/\/(listings|listados)\/.+/);
+  });
+
+  test('Check Listings CTA in home section should point to /en/listings', async ({ page }) => {
+    await page.goto('/en', { waitUntil: 'networkidle' });
+    
+    // Identify the "Featured Properties" section link
+    const listingsCta = page
+      .locator('section#featured-properties')
+      .getByRole('link', { name: /check listings/i });
+      
+    const href = await listingsCta.getAttribute('href');
+    
+    // Following user request: "Change it to /listings" and "Fixed E2E to verify" 
+    expect(href).toBe('/en/listings');
+  });
+
+  test('Check Rentals CTA in home section should point to /en/rentals', async ({ page }) => {
+    await page.goto('/en', { waitUntil: 'networkidle' });
+    
+    const rentalsCta = page
+      .locator('section#rentals')
+      .getByRole('link', { name: /check rentals/i });
+      
+    const href = await rentalsCta.getAttribute('href');
+    
+    expect(href).toBe('/en/rentals');
   });
 
 });

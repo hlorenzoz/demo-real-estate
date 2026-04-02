@@ -29,6 +29,9 @@ This project is a high-end luxury real estate boilerplate with advanced search, 
 - **Critical Path Fix**: Resolved a major LCP synchronization bug where a redundant manual preload caused a 2MB duplicate assets download. Synchronized `fetchPriority` with Next.js internal preloads, bumping the CI performance score to **0.74** (and likely higher in production).
 - **Responsive Layout Optimization**: Resolved component overlaps and text size issues on mobile/tablet viewports by implementing tighter responsive margins, centering hero content on small screens, and adjusting the floating WhatsApp button position. Verified against 4 device types (Mobile Mini, iPhone 14 Pro, iPad Mini, and Desktop) using automated coordinate-based tests, achieving 100% overlap-free spacing.
 - **Framework Conflict Resolution**: Renamed the generic `CatchAll` component to `NotFoundHandler` to prevent collisions with Next.js internal performance measurement marks, fixing the "negative time stamp" measurement error.
+- **Unified Property Catalog**: Implemented a new `/properties` (`/propiedades`) route to serve as a comprehensive property hub with transaction-type filters (All, For Sale, For Rent) enabled. Updated the `/listings` and `/rentals` routes to be pre-filtered views (Sales and Rentals respectively) which hide the redundant contract-type filters for a cleaner, category-specific experience.
+- **Home CTA Update**: Pointed the "Check Listings" section link on the home page specifically to `/listings` to match its title, while keeping the Hero link on the unified properties hub.
+- **E2E Stability Pattern**: Standardized on using UI-displayed result counts for property listing verification in Playwright tests (e.g., `"{count} properties found"`) rather than fragile URL-based selectors, ensuring internationalized routes work correctly across translations.
 
 ## Maintainers
 - Antigravity AI (Primary Developer)

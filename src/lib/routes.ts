@@ -1,11 +1,15 @@
-export type InternalRoute = 'listings' | 'rentals' | 'services' | 'blog' | 'contact' | 'faq' | 'about-us' | 'meet-the-team' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy' | 'gdpr' | 'sitemap';
+export type InternalRoute = 'properties' | 'listings' | 'rentals' | 'services' | 'blog' | 'contact' | 'faq' | 'about-us' | 'meet-the-team' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy' | 'gdpr' | 'sitemap';
 
 /**
- * Maps user-facing SLUGS to internal route names
+ * Maps user-facing SLUGS to internal route names.
+ * - 'properties' / 'propiedades' -> unified page (sale + rent)
+ * - 'listings'   / 'listados'    -> sales-only page
+ * - 'rentals'    / 'alquiler'    -> rentals-only page
  */
 export const routeMappings: Record<string, Record<string, InternalRoute>> = {
   en: {
-    'properties': 'listings',
+    'properties': 'properties',
+    'listings': 'listings',
     'rentals': 'rentals',
     'services': 'services',
     'blog': 'blog',
@@ -20,7 +24,8 @@ export const routeMappings: Record<string, Record<string, InternalRoute>> = {
     'sitemap': 'sitemap'
   },
   es: {
-    'propiedades': 'listings',
+    'propiedades': 'properties',
+    'listados': 'listings',
     'alquiler': 'rentals',
     'servicios': 'services',
     'blog': 'blog',
@@ -41,7 +46,8 @@ export const routeMappings: Record<string, Record<string, InternalRoute>> = {
  */
 export const reverseMappings: Record<string, Record<string, string>> = {
   en: {
-    'listings': 'properties',
+    'properties': 'properties',
+    'listings': 'listings',
     'rentals': 'rentals',
     'services': 'services',
     'blog': 'blog',
@@ -56,7 +62,8 @@ export const reverseMappings: Record<string, Record<string, string>> = {
     'sitemap': 'sitemap'
   },
   es: {
-    'listings': 'propiedades',
+    'properties': 'propiedades',
+    'listings': 'listados',
     'rentals': 'alquiler',
     'services': 'servicios',
     'blog': 'blog',

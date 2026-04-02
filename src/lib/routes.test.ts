@@ -7,11 +7,23 @@ describe('getLocalizedPath', () => {
     expect(getLocalizedPath('es', '')).toBe('/es');
   });
 
-  it('should localize properties correctly', () => {
-    // en properties -> en properties (mapped to listings)
+  it('should localize properties (unified) correctly', () => {
+    // /en/properties -> unified page (sale + rent)
     expect(getLocalizedPath('en', 'properties')).toBe('/en/properties');
-    // es propiedades -> es propiedades (mapped to listings)
-    expect(getLocalizedPath('es', 'propiedades')).toBe('/es/propiedades');
+    // /es/propiedades -> unified page (sale + rent)
+    expect(getLocalizedPath('es', 'properties')).toBe('/es/propiedades');
+  });
+
+  it('should localize listings (sales-only) correctly', () => {
+    // /en/listings -> sales-only page
+    expect(getLocalizedPath('en', 'listings')).toBe('/en/listings');
+    // /es/listados -> sales-only page
+    expect(getLocalizedPath('es', 'listings')).toBe('/es/listados');
+  });
+
+  it('should localize rentals correctly', () => {
+    expect(getLocalizedPath('en', 'rentals')).toBe('/en/rentals');
+    expect(getLocalizedPath('es', 'rentals')).toBe('/es/alquiler');
   });
 
   it('should localize contact correctly', () => {
@@ -34,11 +46,23 @@ describe('routeMappings', () => {
     expect(routeMappings).toHaveProperty('es');
   });
 
-  it('should have correct mapping for en properties', () => {
-    expect(routeMappings.en.properties).toBe('listings');
+  it('should map en/properties to internal properties (unified page)', () => {
+    expect(routeMappings.en.properties).toBe('properties');
   });
 
-  it('should have correct mapping for en services', () => {
+  it('should map en/listings to internal listings (sales-only page)', () => {
+    expect(routeMappings.en.listings).toBe('listings');
+  });
+
+  it('should map es/propiedades to internal properties (unified page)', () => {
+    expect(routeMappings.es.propiedades).toBe('properties');
+  });
+
+  it('should map es/listados to internal listings (sales-only page)', () => {
+    expect(routeMappings.es.listados).toBe('listings');
+  });
+
+  it('should have correct mapping for services', () => {
     expect(routeMappings.en.services).toBe('services');
   });
 });
