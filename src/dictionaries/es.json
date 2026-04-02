@@ -233,5 +233,12 @@
     "description": "Utilizamos cookies para analizar el tráfico del sitio y mejorar su experiencia. Al hacer clic en \"Aceptar todas\", consiente nuestro uso de cookies.",
     "decline": "Rechazar",
     "accept": "Aceptar todas"
+  },
+  "not_found": {
+    "title": "¿Un Desvío Inesperado?",
+    "subtitle": "La propiedad o página seleccionada no se encuentra disponible actualmente en nuestra colección exclusiva.",
+    "cta": "Volver a la Colección",
+    "meta_title": "404 - Página No Encontrada | Excelencia Inmobiliaria",
+    "meta_description": "La página que busca no existe."
   }
 }
