@@ -8,9 +8,11 @@ vi.mock('next/link', () => ({
   default: ({ children, href }: any) => <a href={href}>{children}</a>,
 }));
 
+/* eslint-disable @next/next/no-img-element, jsx-a11y/alt-text */
 vi.mock('next/image', () => ({
   default: (props: any) => <img {...props} />,
 }));
+/* eslint-enable @next/next/no-img-element, jsx-a11y/alt-text */
 
 vi.mock('./HeroSearchClient', () => ({
   default: () => <div data-testid="search-client-stub" />
@@ -48,7 +50,8 @@ describe("Hero Component", () => {
     expect(badge).toHaveClass("text-black");
     
     // 3. Check Section Context (Hero should be the bg-primary section)
-    const section = container.querySelector("section");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const section = (container as any).querySelector("section");
     expect(section).toHaveClass("bg-primary");
   });
 
