@@ -160,6 +160,7 @@ export default async function Home({
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="w-full h-full object-cover"
+                  priority={true}
                 />
             </div>
             {/* Floating Stats */}
