@@ -20,7 +20,9 @@ const mockDict = {
   gdpr: "GDPR",
   rentals: "Rentals",
   citations_title: "Market Intelligence",
-  citations: []
+  citations: [
+    { text: "Source 1", url: "https://source1.com" }
+  ]
 };
 
 describe("Footer", () => {
@@ -30,5 +32,6 @@ describe("Footer", () => {
     expect(screen.getByText(/Luxury property search/)).toBeInTheDocument();
     expect(screen.getAllByText(/Contact/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/About Us/)[0]).toBeInTheDocument();
+    expect(screen.getByText(/Source 1/)).toBeInTheDocument();
   });
 });
