@@ -6,7 +6,7 @@ import { useEffect } from "react";
 export default function RootNotFound() {
   useEffect(() => {
     // Redirect absolute root 404s to English as the primary hub
-    redirect("/en/not-found");
+    redirect("/en/404");
   }, []);
 
   return (

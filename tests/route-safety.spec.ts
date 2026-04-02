@@ -91,17 +91,21 @@ test.describe("Route & Asset Safety Checks", () => {
     });
   }
 
-  // 5. 404 Page Behavior
-  test("Unknown route /en/not-a-page should return 404", async ({ page }) => {
+  // 5. 404 Page Behavior (Unified Redirect)
+  test("Unknown route /en/not-a-page should redirect to /en/404", async ({ page }) => {
     const response = await page.goto("/en/not-a-page");
-    expect(response?.status()).toBe(404);
-    // Verify custom 404 content if applicable (e.g. "Page Not Found" or a link back home)
-    await expect(page.locator("h1")).toContainText(/404|not found|luxurious mistake/i);
+    // Should follow redirect and end at /404 with status 200
+    expect(page.url()).toContain("/en/404");
+    expect(response?.status()).toBe(200);
+    
+    // Verify custom 404 content
+    await expect(page.locator("h1")).toContainText(/luxurious mistake/i);
   });
 
-  test("Unknown route /es/pagina-inexistente should return 404", async ({ page }) => {
+  test("Unknown route /es/pagina-inexistente should redirect to /es/404", async ({ page }) => {
     const response = await page.goto("/es/pagina-inexistente");
-    expect(response?.status()).toBe(404);
-    await expect(page.locator("h1")).toContainText(/404|no encontrada|desvío inesperado/i);
+    expect(page.url()).toContain("/es/404");
+    expect(response?.status()).toBe(200);
+    await expect(page.locator("h1")).toContainText(/desvío inesperado/i);
   });
 });
