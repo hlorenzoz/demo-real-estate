@@ -37,7 +37,7 @@ export default function Hero({ dict, lang, properties }: HeroProps) {
       <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-0 lg:mt-[-10vh] pb-24 sm:pb-32 lg:pb-0 text-center lg:text-left">
         <div className="flex flex-col items-center lg:items-start max-w-4xl mx-auto lg:mx-0">
           {/* LCP Optimization: Removed backdrop-blur for faster paint on mobile */}
-          <span className="bg-white/10 border border-white/20 text-white px-6 py-2 rounded-xl mb-4 lg:mb-8 inline-block shadow-2xl animate-fade-in text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] leading-none">
+          <span className="bg-primary-accent text-black border border-primary-accent/20 px-6 py-2 rounded-xl mb-4 lg:mb-8 inline-block shadow-2xl animate-fade-in text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] leading-none">
             {dict.badge}
           </span>
           <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif mb-4 lg:mb-8 leading-[1.1] tracking-tighter text-white [text-rendering:optimizeLegibility] [transform:translateZ(0)]">
