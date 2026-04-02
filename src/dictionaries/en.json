@@ -87,7 +87,9 @@
     "legal_expertise": "Specialists in the Xinzo de Limia zone.",
     "tasacion_stat": "500+ properties valued annually",
     "venta_stat": "Properties sold 20% faster",
-    "alquiler_stat": "98% satisfaction rate"
+    "venta_volume": "€50M+ in asset volume",
+    "alquiler_stat": "98% satisfaction rate",
+    "service_speed": "Avg. 15 days to close"
   },
   "reviews": {
     "title": "Verified Trust",

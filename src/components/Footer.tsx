@@ -80,10 +80,10 @@ export default function Footer({ dict, lang }: FooterProps) {
         )}
       </div>
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">© 2026 {dict.excellence}. All rights reserved.</p>
+        <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">© 2026 {dict.excellence}. All rights reserved.</p>
         <div className="flex gap-8">
-            <Link href={`/${lang}/sitemap`} className="text-gray-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-tighter">Sitemap</Link>
-            <Link href={`/${lang}/privacy-policy`} className="text-gray-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-tighter">Privacy</Link>
+            <Link href={`/${lang}/sitemap`} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Sitemap</Link>
+            <Link href={`/${lang}/privacy-policy`} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Privacy</Link>
         </div>
       </div>
     </footer>

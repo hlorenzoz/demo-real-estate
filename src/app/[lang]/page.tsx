@@ -55,7 +55,9 @@ interface ServiceDictionary {
   legal_expertise: string;
   tasacion_stat?: string;
   venta_stat?: string;
+  venta_volume?: string;
   alquiler_stat?: string;
+  service_speed?: string;
 }
 
 export default async function Home({
@@ -204,8 +206,15 @@ export default async function Home({
                     {services.venta_desc}
                   </p>
                   {services.venta_stat && (
-                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
-                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.venta_stat}</span>
+                    <div className="flex flex-wrap gap-2">
+                      <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
+                        <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.venta_stat}</span>
+                      </div>
+                      {services.venta_volume && (
+                        <div className="inline-flex items-center gap-2 bg-slate-100 group-hover:bg-white/5 px-4 py-2 rounded-full transition-colors border border-transparent group-hover:border-white/10">
+                          <span className="text-[10px] font-black text-text-muted group-hover:text-gray-400 uppercase tracking-widest leading-none">{services.venta_volume}</span>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -226,8 +235,15 @@ export default async function Home({
                     {services.alquiler_desc}
                   </p>
                   {services.alquiler_stat && (
-                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors mb-6">
-                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.alquiler_stat}</span>
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
+                        <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.alquiler_stat}</span>
+                      </div>
+                      {services.service_speed && (
+                         <div className="inline-flex items-center gap-2 bg-slate-200 group-hover:bg-white/5 px-4 py-2 rounded-full transition-colors border border-transparent group-hover:border-white/10">
+                           <span className="text-[10px] font-black text-text-muted group-hover:text-gray-400 uppercase tracking-widest leading-none">{services.service_speed}</span>
+                         </div>
+                      )}
                     </div>
                   )}
                   <ul className="space-y-3">

@@ -16,7 +16,7 @@ test.describe('Floating Overlays Stacking', () => {
     await expect(cookieBanner).toBeVisible();
     
     // 2. Scroll and trigger PWA Installer manually
-    await page.mouse.wheel(0, 1000);
+    await page.mouse.wheel(0, 1200);
     await page.evaluate(() => {
       const event = new Event('beforeinstallprompt');
       (event as any).userChoice = Promise.resolve({ outcome: 'dismissed' });

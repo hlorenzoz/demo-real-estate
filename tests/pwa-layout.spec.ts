@@ -7,7 +7,7 @@ test.describe("PWA Installer Layout Audit", () => {
     // We need to wait for the scroll trigger too
     await page.evaluate(() => {
       // @ts-expect-error - window is available in browser context
-      window.scrollTo(0, 750);
+      window.scrollTo(0, 1000);
     });
     await page.waitForTimeout(8000); // 7s component delay + buffer
   });

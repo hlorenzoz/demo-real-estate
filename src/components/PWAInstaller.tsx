@@ -74,8 +74,9 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
     if (typeof (globalThis as any).window === "undefined") return;
 
     const handleScroll = () => {
-      // Show after scrolling 600px which is generally past the hero/search area
-      setIsScrolledPastHero((globalThis as any).window.scrollY > 600);
+      // Show after scrolling 900px which is generally past the hero/search area
+      // This prevents the PWA banner from blocking the primary search intent
+      setIsScrolledPastHero((globalThis as any).window.scrollY > 900);
     };
 
     (globalThis as any).window.addEventListener("scroll", handleScroll, { passive: true });

@@ -7,7 +7,7 @@ test.describe("PWA Installer E2E", () => {
     // We need to wait for the scroll trigger too
     await page.evaluate(() => {
       // @ts-expect-error - window is available in browser context
-      window.scrollTo(0, 700);
+      window.scrollTo(0, 1000);
     });
   });
 

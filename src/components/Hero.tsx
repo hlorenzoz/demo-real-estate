@@ -34,14 +34,15 @@ export default function Hero({ dict, lang, properties }: HeroProps) {
       
       {/* Hero Content - Server Rendered for LCP */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 w-full mt-0 lg:mt-[-10vh] pb-24 sm:pb-32 lg:pb-0 text-center lg:text-left">
-        <div className="max-w-2xl text-white mx-auto lg:mx-0">
-          <span className="bg-primary-accent text-primary text-[10px] font-black uppercase tracking-[0.3em] px-4 py-2 rounded-xl mb-2 lg:mb-8 inline-block shadow-2xl animate-fade-in">
+        <div className="flex flex-col items-center lg:items-start max-w-4xl mx-auto lg:mx-0">
+          <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-2 rounded-xl mb-4 lg:mb-8 inline-block shadow-2xl animate-fade-in text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] leading-none">
             {dict.badge}
           </span>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif mb-2 lg:mb-8 leading-[1.1] tracking-tighter">
-            {dict.title} <span className="gold-gradient italic">{dict.title_accent}</span>
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif mb-4 lg:mb-8 leading-[1.1] tracking-tighter text-white">
+            {dict.title} <br/> 
+            <span className="gold-gradient italic">{dict.title_accent}</span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-4 lg:mb-12 leading-relaxed font-light max-w-xl mx-auto lg:mx-0">
+          <p className="text-sm sm:text-lg lg:text-xl text-white/90 font-medium max-w-2xl mx-auto lg:mx-0 mb-10 lg:mb-12 animate-fade-in [animation-delay:200ms] leading-relaxed italic">
             {dict.subtitle}
           </p>
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center lg:items-start gap-6 animate-fade-in" style={{ animationDelay: '0.3s' }}>

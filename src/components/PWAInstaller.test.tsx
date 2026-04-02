@@ -24,7 +24,7 @@ describe("PWAInstaller", () => {
     // Default window mocks
     Object.defineProperty(window, 'scrollY', {
       writable: true,
-      value: 700,
+      value: 1000,
     });
 
     Object.defineProperty(window, 'matchMedia', {
