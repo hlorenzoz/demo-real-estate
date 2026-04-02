@@ -214,10 +214,10 @@ export default async function PropertyDetailPage({ params }: Props) {
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {[
-                    { key: "pool", icon: <Waves size={18} />, label: d.pool, value: property.pool },
-                    { key: "garden", icon: <TreePine size={18} />, label: d.garden, value: property.garden },
-                    { key: "elevator", icon: <Building2 size={18} />, label: d.elevator, value: property.elevator },
-                    { key: "garage", icon: <Car size={18} />, label: d.garage && property.garage > 0 ? true : false },
+                    { key: "pool", icon: <Waves size={18} />, label: d.pool, value: !!property.pool },
+                    { key: "garden", icon: <TreePine size={18} />, label: d.garden, value: !!property.garden },
+                    { key: "elevator", icon: <Building2 size={18} />, label: d.elevator, value: !!property.elevator },
+                    { key: "garage", icon: <Car size={18} />, label: d.garage, value: (property.garage ?? 0) > 0 },
                   ].map(({ key, icon, label, value }) => (
                     <div
                       key={key}
