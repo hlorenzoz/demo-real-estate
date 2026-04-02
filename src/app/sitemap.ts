@@ -8,13 +8,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const languages = ['en', 'es'] as const;
   
   const staticPaths: InternalRoute[] = [
-    'propiedades',
+    'listings',
     'contact',
-    'vender',
+    'services',
     'about-us',
     'faq',
-    'alquiler',
-    'listings',
+    'rentals',
     'blog'
   ];
 
@@ -61,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // 3. Dynamic Property Routes
   languages.forEach((lang) => {
     (baseContent.properties as Property[]).forEach((prop: Property) => {
-      const propsPath: InternalRoute = 'propiedades';
+      const propsPath: InternalRoute = 'listings';
       const url = `${baseUrl}${getLocalizedPath(lang, propsPath)}/${prop.id}`;
       
       const alternatesMapping: Record<string, string> = {

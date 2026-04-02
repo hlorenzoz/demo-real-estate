@@ -54,11 +54,11 @@ export default function Navbar({ lang, dict }: NavbarProps) {
     const currentSlug = segments[2];
 
     if (currentLocale && currentSlug && routeMappings[currentLocale]) {
-      // Find internal ID for current slug (e.g. 'properties' -> 'propiedades')
+      // Find internal ID for current slug (e.g. 'properties' -> 'listings')
       const internalSlug = routeMappings[currentLocale][currentSlug];
       
       if (internalSlug) {
-        // Get user-facing slug for target language (e.g. 'propiedades' -> 'properties' or stays 'propiedades')
+        // Get user-facing slug for target language (e.g. 'listings' -> 'properties' or stays 'propiedades')
         const targetSlug = reverseMappings[targetLocale]?.[internalSlug] || internalSlug;
         const newSegments = [...segments];
         newSegments[1] = targetLocale;
@@ -81,8 +81,8 @@ export default function Navbar({ lang, dict }: NavbarProps) {
         </Link>
         <div className="hidden min-[1100px]:flex items-center gap-8 xl:gap-10">
           <Link href={getLocalizedPath(lang, 'listings')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.listings}</Link>
-          <Link href={getLocalizedPath(lang, 'alquiler')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.rentals}</Link>
-          <Link href={`/${lang}/#${reverseMappings[lang]?.['vender'] || 'vender'}`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.vender}</Link>
+          <Link href={getLocalizedPath(lang, 'rentals')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.rentals}</Link>
+          <Link href={`/${lang}/#${reverseMappings[lang]?.['services'] || 'services'}`} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.services}</Link>
           <Link href={getLocalizedPath(lang, 'blog')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.blog}</Link>
           <Link href={getLocalizedPath(lang, 'faq')} className="text-sm font-bold text-text-muted hover:text-primary transition-all uppercase tracking-widest">{dict.faq}</Link>
           
@@ -133,8 +133,8 @@ export default function Navbar({ lang, dict }: NavbarProps) {
             >
               <div className="flex flex-col gap-4">
                 <Link href={getLocalizedPath(lang, 'listings')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.listings}</Link>
-                <Link href={getLocalizedPath(lang, 'alquiler')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.rentals}</Link>
-                <Link href={`/${lang}/#${reverseMappings[lang]?.['vender'] || 'vender'}`} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.vender}</Link>
+                <Link href={getLocalizedPath(lang, 'rentals')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.rentals}</Link>
+                <Link href={`/${lang}/#${reverseMappings[lang]?.['services'] || 'services'}`} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.services}</Link>
                 <Link href={getLocalizedPath(lang, 'blog')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest border-b border-black/5">{dict.blog}</Link>
                 <Link href={getLocalizedPath(lang, 'faq')} className="p-4 text-sm font-bold text-primary hover:bg-primary/5 rounded-2xl transition-all uppercase tracking-widest">{dict.faq}</Link>
                 

@@ -1,32 +1,76 @@
-export const routeMappings: Record<string, Record<string, string>> = {
+export type InternalRoute = 'listings' | 'rentals' | 'services' | 'blog' | 'contact' | 'faq' | 'about-us' | 'meet-the-team' | 'privacy-policy' | 'terms-of-service' | 'cookie-policy' | 'gdpr' | 'sitemap';
+
+/**
+ * Maps user-facing SLUGS to internal route names
+ */
+export const routeMappings: Record<string, Record<string, InternalRoute>> = {
   en: {
-    'properties': 'propiedades',
+    'properties': 'listings',
+    'rentals': 'rentals',
+    'services': 'services',
+    'blog': 'blog',
     'contact': 'contact',
-    'services': 'vender',
-    'about-us': 'about-us',
     'faq': 'faq',
-    'rentals': 'alquiler',
-    'listings': 'listings',
-    'blog': 'blog'
+    'about-us': 'about-us',
+    'meet-the-team': 'meet-the-team',
+    'privacy-policy': 'privacy-policy',
+    'terms-of-service': 'terms-of-service',
+    'cookie-policy': 'cookie-policy',
+    'gdpr': 'gdpr',
+    'sitemap': 'sitemap'
   },
   es: {
-    'propiedades': 'propiedades',
-    'contactar': 'contact',
-    'servicios': 'vender',
-    'nosotros': 'about-us',
+    'propiedades': 'listings',
+    'alquiler': 'rentals',
+    'servicios': 'services',
+    'blog': 'blog',
+    'contacto': 'contact',
     'faq': 'faq',
-    'alquiler': 'alquiler',
-    'listados': 'listings',
-    'blog': 'blog'
+    'sobre-nosotros': 'about-us',
+    'equipo': 'meet-the-team',
+    'politica-privacidad': 'privacy-policy',
+    'terminos-servicio': 'terms-of-service',
+    'politica-cookies': 'cookie-policy',
+    'rgpd': 'gdpr',
+    'mapa-sitio': 'sitemap'
   }
 };
 
+/**
+ * Maps internal route names to user-facing SLUGS
+ */
 export const reverseMappings: Record<string, Record<string, string>> = {
-  en: Object.fromEntries(Object.entries(routeMappings.en).map(([k, v]) => [v, k])),
-  es: Object.fromEntries(Object.entries(routeMappings.es).map(([k, v]) => [v, k]))
+  en: {
+    'listings': 'properties',
+    'rentals': 'rentals',
+    'services': 'services',
+    'blog': 'blog',
+    'contact': 'contact',
+    'faq': 'faq',
+    'about-us': 'about-us',
+    'meet-the-team': 'meet-the-team',
+    'privacy-policy': 'privacy-policy',
+    'terms-of-service': 'terms-of-service',
+    'cookie-policy': 'cookie-policy',
+    'gdpr': 'gdpr',
+    'sitemap': 'sitemap'
+  },
+  es: {
+    'listings': 'propiedades',
+    'rentals': 'alquiler',
+    'services': 'servicios',
+    'blog': 'blog',
+    'contact': 'contacto',
+    'faq': 'faq',
+    'about-us': 'sobre-nosotros',
+    'meet-the-team': 'equipo',
+    'privacy-policy': 'politica-privacidad',
+    'terms-of-service': 'terminos-servicio',
+    'cookie-policy': 'politica-cookies',
+    'gdpr': 'rgpd',
+    'sitemap': 'mapa-sitio'
+  }
 };
-
-export type InternalRoute = 'propiedades' | 'contact' | 'vender' | 'about-us' | 'blog' | 'faq' | 'page' | 'alquiler' | 'listings';
 
 /**
  * Returns the localized path prefix and slug for a given internal route.

@@ -1,375 +1,304 @@
 import React from "react";
-import Image from "next/image";
+import { ArrowRight, Star, Mail, Phone, MapPin, Building, ShieldCheck, TrendingUp, Handshake, Users } from "lucide-react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-import { ArrowRight, ShieldCheck, Calculator, Megaphone, Users, Scale, Check } from "lucide-react";
-import { getLocalizedPath, reverseMappings } from "../../lib/routes";
-import { getDictionary } from "../../get-dictionary";
-import Navbar from "../../components/Navbar";
-import Hero from "../../components/Hero";
-import Footer from "../../components/Footer";
-
-// Lazy load off-screen components
-const PropertiesCarousel = dynamic(() => import("../../components/PropertiesCarousel"), { 
-  loading: () => <div className="h-[400px] bg-slate-50 animate-pulse rounded-[48px]" />
-});
-const ReviewsCarousel = dynamic(() => import("../../components/ReviewsCarousel"));
-const FAQSection = dynamic(() => import("../../components/FAQSection"));
-const MotionWrapper = dynamic(() => import("../../components/MotionWrapper"));
-
-// Data from JSON in root dir
-import { Property } from "../../types/property";
-import baseContentRaw from "../../../base-content.json";
-
-const baseContent = baseContentRaw as {
-  properties: Property[];
-  reviews: {
-    author: string;
-    date: string;
-    rating: number;
-    content: string;
-  }[];
-  stats: {
-    average: number;
-    count: number;
-    label: string;
-    platform: string;
-  };
-};
-
-interface ServiceDictionary {
-  title: string;
-  description: string;
-  tasacion: string;
-  tasacion_desc: string;
-  tasacion_detail: string;
-  venta: string;
-  venta_desc: string;
-  alquiler: string;
-  alquiler_desc: string;
-  alquiler_pillars: string[];
-  asesoria: string;
-  asesoria_desc: string;
-  legal: string;
-  legal_desc: string;
-  legal_expertise: string;
-  tasacion_stat?: string;
-  venta_stat?: string;
-  venta_volume?: string;
-  alquiler_stat?: string;
-  service_speed?: string;
-}
+import Image from "next/image";
+import { getDictionary, Locale } from "@/get-dictionary";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MotionWrapper from "@/components/MotionWrapper";
+import ReviewsCarousel from "@/components/ReviewsCarousel";
+import Hero from "@/components/Hero";
+import ContactForm from "@/components/ContactForm";
+import PropertiesCarousel from "@/components/PropertiesCarousel";
+import FAQSection from "@/components/FAQSection";
+import { Property } from "@/types/property";
+import { getLocalizedPath } from "@/lib/routes";
+import { getBaseContent } from "@/lib/content";
 
 export default async function Home({
   params,
 }: {
-  params: Promise<{ lang: "en" | "es" }>;
+  params: Promise<{ lang: string }>;
 }) {
-  const resolvedParams = await params;
-  const locale = resolvedParams.lang;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const dict = await getDictionary(locale) as Record<string, any>;
-  const services = dict.services as ServiceDictionary;
-  const { reviews, stats } = baseContent;
+  const { lang } = await params;
+  const dict = await getDictionary(lang as Locale);
+  const baseContent = getBaseContent();
 
-  const featuredProperties = baseContent.properties.filter(p => p.featured && p.contractType === 'sale');
-  const rentalProperties = baseContent.properties.filter(p => p.contractType === 'rent');
+  const featuredProperties = (baseContent.properties as Property[]).filter(p => p.featured).slice(0, 6);
+  const rentalProperties = (baseContent.properties as Property[]).filter(p => p.contractType === 'rent').slice(0, 6);
+  const reviews = baseContent.reviews.slice(0, 8);
 
-  const propiedadesId = reverseMappings[locale]?.['propiedades'] || 'propiedades';
-  const alquilerId = reverseMappings[locale]?.['alquiler'] || 'alquiler';
-  const venderId = reverseMappings[locale]?.['vender'] || 'vender';
-  const nosotrosId = reverseMappings[locale]?.['about-us'] || 'about-us';
+  const servicesList = [
+    {
+      title: dict.services.tasacion,
+      desc: dict.services.tasacion_desc,
+      detail: dict.services.tasacion_detail,
+      icon: <Building className="w-6 h-6 text-primary-accent" />
+    },
+    {
+      title: dict.services.venta,
+      desc: dict.services.venta_desc,
+      icon: <TrendingUp className="w-6 h-6 text-primary-accent" />
+    },
+    {
+      title: dict.services.alquiler,
+      desc: dict.services.alquiler_desc,
+      detail: dict.services.alquiler_pillars ? dict.services.alquiler_pillars.join(" • ") : undefined,
+      icon: <ShieldCheck className="w-6 h-6 text-primary-accent" />
+    },
+    {
+      title: dict.services.asesoria,
+      desc: dict.services.asesoria_desc,
+      icon: <Handshake className="w-6 h-6 text-primary-accent" />
+    },
+    {
+      title: dict.services.legal,
+      desc: dict.services.legal_desc,
+      detail: dict.services.legal_expertise,
+      icon: <Users className="w-6 h-6 text-primary-accent" />
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
-            "name": "Demo Real Estate",
-            "image": "https://demo-realestate.com/images/meta.png",
-            "url": "https://demo-realestate.com",
-            "telephone": "+34 900 000 000",
-            "priceRange": "$$$",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Main Street, 123",
-              "addressLocality": "City",
-              "addressRegion": "Region",
-              "postalCode": "28001",
-              "addressCountry": "ES"
-            }
-          }),
-        }}
-      />
-      <Navbar lang={locale} dict={dict.navbar} />
-      <Hero 
-        dict={dict.hero} 
-        lang={locale} 
-        properties={baseContent.properties} 
-      />
+      <Navbar lang={lang as Locale} dict={dict.navbar} />
+      
+      <section id="hero">
+        <Hero lang={lang as Locale} dict={dict.hero} properties={baseContent.properties} />
+      </section>
 
-      {/* Featured Properties (Sale) */}
-      <section id={propiedadesId} className="py-32 px-6 bg-white overflow-hidden">
+      {/* Featured Properties Section */}
+      <section id="featured-properties" className="py-32 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-5xl md:text-7xl font-serif text-primary italic mb-6 tracking-tight">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary-accent-dark mb-4 block">
                 {dict.home.property_title}
-              </h2>
-              <p className="text-xl text-text-muted font-light italic">
+              </span>
+              <h2 className="text-4xl md:text-7xl font-serif text-primary italic leading-[0.9] tracking-tighter">
                 {dict.home.property_subtitle}
-              </p>
+              </h2>
             </div>
-            <Link href={getLocalizedPath(locale, 'listings')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 hover:opacity-70 transition-all font-serif italic">
-              {dict.home.cta_catalog} <ArrowRight size={18} />
+            <Link 
+              href={getLocalizedPath(lang, 'listings')}
+              className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-primary hover:text-primary-accent transition-all group border-b-2 border-primary/10 pb-2"
+            >
+              {dict.home.cta_catalog}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </MotionWrapper>
 
-          <PropertiesCarousel properties={featuredProperties} lang={locale} dict={dict.home} />
+          <PropertiesCarousel properties={featuredProperties} lang={lang as Locale} dict={dict.home} />
         </div>
       </section>
 
-      {/* Featured Rentals */}
-      <section id={alquilerId} className="py-32 px-6 bg-[#F8F9FB] overflow-hidden">
+      {/* Rentals Section */}
+      <section id="rentals" className="py-32 px-6 bg-[#FAFAFA] overflow-hidden">
         <div className="max-w-7xl mx-auto">
           <MotionWrapper className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
             <div className="max-w-2xl">
-              <h2 className="text-5xl md:text-7xl font-serif text-primary italic mb-6 tracking-tight">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary-accent-dark mb-4 block">
                 {dict.navbar.rentals}
+              </span>
+              <h2 className="text-4xl md:text-7xl font-serif text-primary italic leading-[0.9] tracking-tighter">
+                {dict.home.for_rent}
               </h2>
-              <p className="text-xl text-text-muted font-light italic">
-                {dict.home.property_subtitle}
-              </p>
             </div>
-            <Link href={getLocalizedPath(locale, 'alquiler')} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 hover:opacity-70 transition-all font-serif italic">
-              {dict.home.cta_rentals} <ArrowRight size={18} />
+            <Link 
+              href={getLocalizedPath(lang, 'rentals')}
+              className="flex items-center gap-3 text-xs font-black uppercase tracking-[0.2em] text-primary hover:text-primary-accent transition-all group border-b-2 border-primary/10 pb-2"
+            >
+              {dict.home.cta_rentals || 'Check Rentals'}
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </MotionWrapper>
 
-          <PropertiesCarousel properties={rentalProperties} lang={locale} dict={dict.home} />
+          <PropertiesCarousel properties={rentalProperties} lang={lang as Locale} dict={dict.home} />
         </div>
       </section>
 
-      {/* 2. Services Section */}
-      <section id={venderId} className="py-32 px-6 bg-white overflow-hidden">
+      {/* Services Section */}
+      <section id="services" className="py-32 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          <MotionWrapper className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-serif mb-6 text-primary tracking-tight italic">
-              {services.title}
+          <MotionWrapper className="mb-20 text-center">
+            <h2 className="text-4xl md:text-6xl font-serif text-primary italic leading-[1.1] tracking-tighter mb-8">
+               {dict.services.title}
             </h2>
-            <p className="text-xl text-text-muted font-light max-w-3xl mx-auto italic">
-              {services.description}
+            <p className="text-xl text-text-muted font-light max-w-2xl mx-auto italic">
+               {dict.services.description}
             </p>
           </MotionWrapper>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Service 1: Tasación */}
-            <MotionWrapper delay={0.1} className="lg:col-span-1">
-              <div className="bg-slate-50 p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-transparent hover:border-white/10 shadow-sm hover:shadow-2xl">
-                <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:rotate-12">
-                  <Calculator size={36} />
+            {servicesList.map((service, i) => (
+              <MotionWrapper key={i} delay={i * 0.1} className="bg-[#FAFAFA] border border-slate-100 p-10 rounded-[40px] flex flex-col items-start gap-4 hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-shadow group">
+                <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                  {service.icon}
                 </div>
-                <div className="mt-auto">
-                  <span className="text-xs font-black uppercase tracking-[0.3em] text-primary-accent-dark mb-4 block group-hover:text-primary-accent">
-                    {services.tasacion_detail}
-                  </span>
-                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
-                    {services.tasacion}
-                  </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
-                    {services.tasacion_desc}
-                  </p>
-                  {services.tasacion_stat && (
-                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
-                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.tasacion_stat}</span>
+                <div>
+                  <h3 className="text-2xl font-serif text-primary mb-3 leading-tight tracking-tight">{service.title}</h3>
+                  <p className="text-text-muted font-light text-sm leading-relaxed mb-4">{service.desc}</p>
+                  {service.detail && (
+                    <div className="text-[10px] uppercase font-black tracking-widest text-primary-accent-dark border-t border-slate-200 pt-4 mt-auto">
+                      {service.detail}
                     </div>
                   )}
                 </div>
-              </div>
-            </MotionWrapper>
-
-            {/* Service 2: Venta */}
-            <MotionWrapper delay={0.2} className="lg:col-span-1">
-              <div className="bg-white p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-slate-100 hover:border-white/10 shadow-sm hover:shadow-2xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary-accent/5 rounded-bl-full translate-x-8 -translate-y-8 group-hover:bg-primary-accent/10 transition-all" />
-                <div className="w-20 h-20 rounded-3xl bg-slate-50 shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:scale-110">
-                  <Megaphone size={36} />
-                </div>
-                <div className="mt-auto">
-                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
-                    {services.venta}
-                  </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
-                    {services.venta_desc}
-                  </p>
-                  {services.venta_stat && (
-                    <div className="flex flex-wrap gap-2">
-                      <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
-                        <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.venta_stat}</span>
-                      </div>
-                      {services.venta_volume && (
-                        <div className="inline-flex items-center gap-2 bg-slate-100 group-hover:bg-white/5 px-4 py-2 rounded-full transition-colors border border-transparent group-hover:border-white/10">
-                          <span className="text-[10px] font-black text-text-muted group-hover:text-gray-400 uppercase tracking-widest leading-none">{services.venta_volume}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </MotionWrapper>
-
-            {/* Service 3: Alquiler */}
-            <MotionWrapper delay={0.3} className="lg:col-span-1">
-              <div className="bg-slate-50 p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-transparent hover:border-white/10 shadow-sm hover:shadow-2xl">
-                <div className="w-20 h-20 rounded-3xl bg-white shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500 transform group-hover:-rotate-12">
-                  <ShieldCheck size={36} />
-                </div>
-                <div className="mt-auto">
-                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
-                    {services.alquiler}
-                  </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
-                    {services.alquiler_desc}
-                  </p>
-                  {services.alquiler_stat && (
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
-                        <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.alquiler_stat}</span>
-                      </div>
-                      {services.service_speed && (
-                         <div className="inline-flex items-center gap-2 bg-slate-200 group-hover:bg-white/5 px-4 py-2 rounded-full transition-colors border border-transparent group-hover:border-white/10">
-                           <span className="text-[10px] font-black text-text-muted group-hover:text-gray-400 uppercase tracking-widest leading-none">{services.service_speed}</span>
-                         </div>
-                      )}
-                    </div>
-                  )}
-                  <ul className="space-y-3">
-                    {services.alquiler_pillars.map((p: string) => (
-                      <li key={p} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent-dark group-hover:text-primary-accent">
-                        <Check size={16} /> {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </MotionWrapper>
-
-            {/* Service 4: Asesoría (Wide) */}
-            <MotionWrapper delay={0.4} className="md:col-span-2 lg:col-span-2">
-              <div className="bg-primary p-12 lg:p-16 rounded-[56px] h-full flex flex-col lg:flex-row gap-12 group hover:shadow-2xl transition-all duration-700 border border-white/5 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                <div className="lg:w-1/3 flex flex-col">
-                  <div className="w-24 h-24 rounded-[32px] bg-primary-accent flex items-center justify-center text-primary mb-10 transform -rotate-3 group-hover:rotate-0 transition-transform">
-                    <Users size={40} />
-                  </div>
-                  <h3 className="text-4xl lg:text-5xl font-serif text-white leading-tight italic">
-                    {services.asesoria}
-                  </h3>
-                </div>
-                <div className="lg:w-2/3 lg:flex lg:items-center">
-                  <p className="text-2xl text-gray-300 font-light italic leading-relaxed">
-                    {services.asesoria_desc}
-                  </p>
-                </div>
-              </div>
-            </MotionWrapper>
-
-            {/* Service 5: Legal */}
-            <MotionWrapper delay={0.5} className="md:col-span-1 lg:col-span-1">
-              <div className="bg-white p-12 rounded-[56px] h-full flex flex-col group hover:bg-primary transition-all duration-700 border border-slate-100 hover:border-white/10 shadow-sm hover:shadow-2xl">
-                <div className="w-20 h-20 rounded-3xl bg-slate-50 shadow-sm flex items-center justify-center text-primary-accent mb-10 group-hover:bg-primary-accent group-hover:text-primary transition-all duration-500">
-                  <Scale size={36} />
-                </div>
-                <div className="mt-auto">
-                  <span className="text-xs font-black uppercase tracking-[0.3em] text-primary-accent-dark mb-4 block group-hover:text-primary-accent">
-                    {services.legal_expertise}
-                  </span>
-                  <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
-                    {services.legal}
-                  </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
-                    {services.legal_desc}
-                  </p>
-                </div>
-              </div>
-            </MotionWrapper>
+              </MotionWrapper>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 3. Featured CTA */}
-      <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto h-[600px] relative rounded-[64px] overflow-hidden group shadow-[0_50px_100px_-20px_rgba(0,0,0,0.2)]">
-          <Image 
-            src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/hero.webp" 
-            alt={dict.home.cta_banner} 
-            fill 
-            sizes="100vw"
-            className="object-cover group-hover:scale-110 transition-transform duration-1000" 
-            priority
-            quality={70}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex flex-col justify-end p-12 md:p-24">
-            <MotionWrapper className="max-w-xl text-white">
-              <h2 className="text-4xl md:text-6xl font-serif mb-6 leading-tight">{dict.home.cta_banner} <br/> <span className="gold-gradient italic">{dict.home.cta_banner_accent}</span></h2>
-              <p className="text-xl text-gray-200 mb-10 font-bold">{dict.home.cta_banner_desc}</p>
-              <Link href={getLocalizedPath(locale, 'listings')} className="bg-primary-accent text-primary px-10 py-5 rounded-2xl font-black uppercase text-xs tracking-widest hover:scale-105 transition-all shadow-xl inline-block">
-                {dict.home.cta_catalog}
-              </Link>
-            </MotionWrapper>
-
-          </div>
-        </div>
-      </section>
-
-      {/* 4. Social Proof */}
-      <section id={nosotrosId} className="py-32 bg-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-6">
-          <MotionWrapper className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-serif mb-6 text-primary tracking-tight">
-              {dict.reviews.title}
+      {/* About Section - Minimalist & Geometric */}
+      <section id="about-us" className="py-32 px-6 bg-[#FAFAFA]">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <MotionWrapper className="relative">
+            <div className="aspect-[4/5] relative rounded-[64px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)]">
+                <Image 
+                  src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/luxury-facade.webp" 
+                  alt="Luxury Modern Architecture" 
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="w-full h-full object-cover"
+                />
+            </div>
+            {/* Floating Stats */}
+            <div className="absolute -bottom-10 -right-10 bg-primary p-10 rounded-[40px] text-white shadow-2xl hidden md:block border border-white/10 backdrop-blur-xl">
+               <div className="text-5xl font-serif italic gold-gradient mb-1">15+</div>
+               <div className="text-[10px] uppercase font-black tracking-widest text-primary-accent opacity-80">{dict.home.years_exp}</div>
+            </div>
+          </MotionWrapper>
+          
+          <MotionWrapper delay={0.2}>
+            <h2 className="text-4xl md:text-6xl font-serif text-primary mb-8 leading-[1.1] italic">
+               {dict.home.about_title}
+               <span className="block h-1 w-24 bg-primary-accent mt-6 opacity-50" />
             </h2>
-            <p className="text-xl text-text-muted font-light max-w-xl mx-auto mb-2 tracking-tight italic">
-              {dict.reviews.description}
+            <p className="text-xl text-text-muted leading-relaxed font-bold mb-12 italic">
+               {dict.home.about_desc}
+            </p>
+            <div className="grid grid-cols-2 gap-8">
+                <div className="p-8 bg-white rounded-[32px] border border-slate-50">
+                    <div className="text-3xl font-serif gold-gradient mb-2">98%</div>
+                    <div className="text-[10px] uppercase font-black tracking-widest text-text-muted">{dict.home.success_rate}</div>
+                </div>
+                <div className="p-8 bg-white rounded-[32px] border border-slate-50">
+                    <div className="text-3xl font-serif gold-gradient mb-2">100%</div>
+                    <div className="text-[10px] uppercase font-black tracking-widest text-text-muted">{dict.home.about_transparency}</div>
+                </div>
+            </div>
+          </MotionWrapper>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section id="reviews" className="py-32 px-6 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <MotionWrapper className="text-center mb-24">
+            <span className="inline-flex items-center gap-2 px-4 py-2 bg-primary-accent/10 rounded-full text-[10px] font-black uppercase tracking-widest text-primary-accent-dark mb-6">
+                <Star size={12} fill="currentColor" /> {dict.reviews.stats_label}
+            </span>
+            <h2 className="text-5xl md:text-8xl font-serif text-primary italic leading-none tracking-tight mb-8">
+               {dict.reviews.title}
+            </h2>
+            <p className="text-xl text-text-muted font-light max-w-xl mx-auto italic">
+               {dict.reviews.description}
             </p>
           </MotionWrapper>
 
-          <ReviewsCarousel reviews={reviews} stats={stats} dict={dict.reviews} />
+          <ReviewsCarousel reviews={reviews} stats={baseContent.stats} dict={dict.reviews} />
 
-          <div className="mt-8 flex flex-col lg:flex-row items-center gap-12 p-12 glass rounded-[56px] border border-white/40 shadow-2xl">
-            <div className="lg:w-1/3 relative h-[450px] w-full rounded-[40px] overflow-hidden shadow-xl">
-              <Image src="https://cdn.hlorenzoz.com/demo-real-estate/real-estate/team.webp" alt="Our Team" fill sizes="(max-width: 1024px) 100vw, 33vw" className="object-cover" quality={65} />
-            </div>
-            <div className="lg:w-2/3">
-              <h3 className="text-4xl font-serif mb-6 text-primary tracking-tight italic">{dict.home.about_title}</h3>
-              <p className="text-xl text-text-muted mb-8 leading-relaxed font-bold">
-                {dict.home.about_desc.split(dict.home.about_transparency)[0]}
-                <span className="text-primary-accent-dark">{dict.home.about_transparency}</span>
-                {dict.home.about_desc.split(dict.home.about_transparency)[1]}
-              </p>
-              <div className="flex flex-wrap gap-8">
-                <div className="flex flex-col">
-                  <span className="text-4xl font-serif text-primary tracking-tighter italic">+15</span>
-                  <span className="text-xs uppercase font-black text-text-muted tracking-widest mt-1">{dict.home.years_exp}</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="text-4xl font-serif text-primary tracking-tighter italic">100%</span>
-                  <span className="text-xs uppercase font-black text-text-muted tracking-widest mt-1">{dict.home.success_rate}</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
+          <MotionWrapper delay={0.4} className="mt-20 text-center">
+            <a 
+              href={baseContent.agency.gmb_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-4 px-12 py-6 bg-primary text-white rounded-full font-black uppercase text-xs tracking-[0.2em] hover:scale-105 hover:bg-primary-accent hover:text-primary transition-all shadow-xl"
+            >
+               {dict.reviews.view_all}
+               <ArrowRight size={16} />
+            </a>
+          </MotionWrapper>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <FAQSection dict={dict.faq} lang={locale} limit={5} />
+      <div id="faq">
+        <FAQSection dict={dict.faq} lang={lang} limit={4} />
+      </div>
 
-      <Footer dict={dict.footer} lang={locale} />
+      {/* Contact Section */}
+      <section id="contact" className="py-32 px-6 bg-[#FAFAFA]">
+        <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-24">
+                <MotionWrapper>
+                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-primary-accent-dark mb-4 block">
+                        {dict.contact_page.badge}
+                    </span>
+                    <h2 className="text-4xl md:text-7xl font-serif text-primary mb-8 leading-[0.9] tracking-tighter italic">
+                        {dict.contact_page.title}
+                    </h2>
+                    <p className="text-xl text-text-muted font-bold mb-12 italic">
+                        {dict.contact_page.subtitle}
+                    </p>
+
+                    <div className="space-y-8">
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-16 h-16 rounded-[24px] bg-white shadow-lg flex items-center justify-center text-primary-accent transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                                <Phone size={24} />
+                            </div>
+                            <div>
+                                <div className="text-[10px] uppercase font-black tracking-widest text-text-muted mb-1">{dict.contact_page.phone_label}</div>
+                                <div className="text-xl font-serif italic text-primary">+34 912 345 678</div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-16 h-16 rounded-[24px] bg-white shadow-lg flex items-center justify-center text-primary-accent transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                                <Mail size={24} />
+                            </div>
+                            <div>
+                                <div className="text-[10px] uppercase font-black tracking-widest text-text-muted mb-1">{dict.contact_page.email_label}</div>
+                                <div className="text-xl font-serif italic text-primary">info@luxuryrealestate.com</div>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-6 group">
+                            <div className="w-16 h-16 rounded-[24px] bg-white shadow-lg flex items-center justify-center text-primary-accent transition-all group-hover:scale-110 group-hover:bg-primary group-hover:text-white">
+                                <MapPin size={24} />
+                            </div>
+                            <div>
+                                <div className="text-[10px] uppercase font-black tracking-widest text-text-muted mb-1">{dict.contact_page.address_label}</div>
+                                <div className="text-xl font-serif italic text-primary">{baseContent.agency.location}</div>
+                            </div>
+                        </div>
+
+                        {/* Working Hours */}
+                        <div className="mt-12 p-8 bg-white rounded-[32px] border border-slate-50 shadow-sm">
+                            <h3 className="text-xs font-black uppercase tracking-widest text-primary-accent-dark mb-6 tracking-[0.2em]">{dict.contact_page.working_hours}</h3>
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center border-b border-slate-50 pb-4">
+                                    <span className="text-sm font-bold text-slate-500">{dict.contact_page.mon_fri_label}</span>
+                                    <span className="text-sm font-black text-primary">{dict.contact_page.mon_fri}</span>
+                                </div>
+                                <div className="flex justify-between items-center border-b border-slate-50 pb-4">
+                                    <span className="text-sm font-bold text-slate-500">{dict.contact_page.sat_label}</span>
+                                    <span className="text-sm font-black text-primary">{dict.contact_page.sat}</span>
+                                </div>
+                                <div className="flex justify-between items-center pb-2">
+                                    <span className="text-sm font-bold text-slate-500">{dict.contact_page.sun_label}</span>
+                                    <span className="text-[10px] uppercase font-black text-slate-400 tracking-widest bg-slate-50 px-3 py-1 rounded-full">{dict.contact_page.closed}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </MotionWrapper>
+
+                <MotionWrapper delay={0.2} className="bg-white p-12 md:p-16 rounded-[64px] border border-slate-50 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.08)]">
+                    <ContactForm dict={dict.contact_page} lang={lang} />
+                </MotionWrapper>
+            </div>
+        </div>
+      </section>
+
+      <Footer lang={lang as Locale} dict={dict.footer} />
     </main>
   );
 }

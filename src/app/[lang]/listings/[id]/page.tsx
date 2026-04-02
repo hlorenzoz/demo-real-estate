@@ -7,30 +7,35 @@ import {
   BedDouble, Bath, Square, MapPin, ArrowLeft, ArrowRight,
   Calendar, Car, Waves, TreePine, Building2, Check, Share2, Phone
 } from "lucide-react";
-import { getDictionary } from "../../../../get-dictionary";
-import { Property } from "../../../../types/property";
-import Navbar from "../../../../components/Navbar";
-import Footer from "../../../../components/Footer";
-import MotionWrapper from "../../../../components/MotionWrapper";
-import PropertyCard from "../../../../components/PropertyCard";
-import { getLocalizedPath } from "../../../../lib/routes";
-
-import baseContentRaw from "../../../../../base-content.json";
-const baseContent = baseContentRaw as { properties: Property[] };
+import { getDictionary } from "@/get-dictionary";
+import { Property } from "@/types/property";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MotionWrapper from "@/components/MotionWrapper";
+import PropertyCard from "@/components/PropertyCard";
+import { getLocalizedPath } from "@/lib/routes";
+import { getBaseContent } from "@/lib/content";
 
 interface Props {
   params: Promise<{ lang: "en" | "es"; id: string }>;
 }
 
 export async function generateStaticParams() {
-  return (baseContent.properties as Property[]).map((p: Property) => ({
-    id: p.id,
-  }));
+  const baseContent = getBaseContent();
+  const paths: { lang: "en" | "es"; id: string }[] = [];
+  
+  (baseContent.properties as Property[]).forEach((p: Property) => {
+    paths.push({ lang: "en", id: p.id });
+    paths.push({ lang: "es", id: p.id });
+  });
+
+  return paths;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, id } = await params;
   const dict = await getDictionary(lang);
+  const baseContent = getBaseContent();
   const property = (baseContent.properties as Property[]).find((p: Property) => p.id === id);
 
   if (!property) return { title: "Property Not Found" };
@@ -57,6 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PropertyDetailPage({ params }: Props) {
   const { lang, id } = await params;
   const dict = await getDictionary(lang);
+  const baseContent = getBaseContent();
   const property = (baseContent.properties as Property[]).find((p: Property) => p.id === id);
 
   if (!property) notFound();
@@ -90,7 +96,7 @@ export default async function PropertyDetailPage({ params }: Props) {
     "@type": "RealEstateListing",
     name: property.location,
     description: lang === "es" ? (property.description_es || property.description_en) : (property.description_en || property.description_es),
-    url: `https://demo-realestate.com${getLocalizedPath(lang, 'propiedades')}/${property.id}`,
+    url: `https://demo-realestate.com${getLocalizedPath(lang, 'listings')}/${property.id}`,
     image: property.image,
     price: property.price,
     priceCurrency: "EUR",
@@ -133,7 +139,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           {/* Back nav */}
           <div className="absolute top-32 left-6 md:left-12 z-10">
             <Link
-              href={getLocalizedPath(lang, 'propiedades')}
+              href={getLocalizedPath(lang, 'listings')}
               className="flex items-center gap-2 bg-white/90 backdrop-blur text-primary px-5 py-3 rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg border border-white/20"
             >
               <ArrowLeft size={14} />
@@ -211,7 +217,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                     { key: "pool", icon: <Waves size={18} />, label: d.pool, value: property.pool },
                     { key: "garden", icon: <TreePine size={18} />, label: d.garden, value: property.garden },
                     { key: "elevator", icon: <Building2 size={18} />, label: d.elevator, value: property.elevator },
-                    { key: "garage", icon: <Car size={18} />, label: d.garage, value: property.garage && property.garage > 0 ? true : false },
+                    { key: "garage", icon: <Car size={18} />, label: d.garage && property.garage > 0 ? true : false },
                   ].map(({ key, icon, label, value }) => (
                     <div
                       key={key}
@@ -247,7 +253,7 @@ export default async function PropertyDetailPage({ params }: Props) {
             {/* Right: Price Card + CTA */}
             <div className="lg:col-span-1">
               <MotionWrapper delay={0.15} className="sticky top-32">
-                <div className="bg-white rounded-[40px] p-10 border border-slate-50 shadow-[0_32px_80px_rgba(0,0,0,0.06)]">
+                <div className="bg-white rounded-[40px] p-10 border border-slate-50 shadow-[0_32px_80_rgba(0,0,0,0.06)]">
                   <div className="mb-8">
                     <div className="text-xs font-black uppercase tracking-widest text-text-muted mb-2">
                       {typeLabel}
@@ -306,7 +312,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                   {d.similar_properties}
                 </h2>
                 <Link
-                  href={getLocalizedPath(lang, 'propiedades')}
+                  href={getLocalizedPath(lang, 'listings')}
                   className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-primary-accent-dark border-b-2 border-primary-accent-dark pb-1 hover:opacity-70 transition-all"
                 >
                   {d.filter_all} <ArrowRight size={14} />

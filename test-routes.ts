@@ -3,13 +3,12 @@ import { getLocalizedPath } from './src/lib/routes';
 const baseUrl = 'https://demo-realestate.com';
 const langs = ['en', 'es'];
 const staticPaths = [
-  'propiedades',
+  'listings',
   'contact',
-  'vender',
+  'services',
   'about-us',
   'faq',
-  'alquiler',
-  'listings',
+  'rentals',
   'blog'
 ];
 
@@ -21,7 +20,7 @@ langs.forEach((lang) => {
 });
 
 console.log('--- Property Pages ---');
-const propsPath = 'propiedades';
+const propsPath = 'listings';
 langs.forEach((lang) => {
   console.log(`${lang} - ${propsPath} base: ${baseUrl}${getLocalizedPath(lang, propsPath)}`);
 });

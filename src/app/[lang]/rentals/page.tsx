@@ -2,10 +2,10 @@ import React from "react";
 import { getDictionary, Locale } from "@/get-dictionary";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PropertiesClientPage from "./PropertiesClientPage";
+import PropertiesClientPage from "../listings/PropertiesClientPage";
 import { getBaseContent } from "@/lib/content";
 
-export default async function listingsPage({
+export default async function rentalsPage({
   params,
 }: {
   params: Promise<{ lang: string }>;
@@ -14,8 +14,8 @@ export default async function listingsPage({
   const dict = await getDictionary(lang as Locale);
   const baseContent = getBaseContent();
   
-  // Filter for sale
-  const properties = baseContent.properties.filter(p => p.contractType === 'sale');
+  // Filter for rent
+  const properties = baseContent.properties.filter(p => p.contractType === 'rent');
 
   return (
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">

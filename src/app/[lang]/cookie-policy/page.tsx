@@ -1,7 +1,7 @@
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
-import MotionWrapper from "../../../components/MotionWrapper";
-import { getDictionary, Locale } from "../../../get-dictionary";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MotionWrapper from "@/components/MotionWrapper";
+import { getDictionary, Locale } from "@/get-dictionary";
 
 export default async function cookiepolicyPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params;
@@ -46,7 +46,7 @@ export default async function cookiepolicyPage({ params }: { params: Promise<{ l
     }
   };
 
-  const currentContent = content[lang as 'en' | 'es'];
+  const currentContent = content[lang as 'en' | 'es'] || content.en;
 
   return (
     <main className="min-h-screen bg-[#FAFAFA] text-primary selection:bg-primary-accent selection:text-primary overflow-x-hidden">

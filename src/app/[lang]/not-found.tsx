@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { ArrowLeft, Home, Search } from "lucide-react";
+import { getLocalizedPath } from "@/lib/routes";
 
 export default function NotFound() {
   const params = useParams();
@@ -42,13 +43,9 @@ export default function NotFound() {
 
       {/* 2. Top Navigation (Logo only) */}
       <header className="relative z-50 px-8 py-10 flex justify-between items-center max-w-7xl mx-auto w-full">
-         <Link href={`/${lang}`} className="group flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary-accent-dark rounded-xl flex items-center justify-center text-white font-black text-xl shadow-[0_4px_20px_rgba(30,58,138,0.2)] transition-transform group-hover:scale-110">
-            A
-          </div>
-          <span className="font-serif text-2xl font-black text-slate-800 tracking-tighter uppercase whitespace-nowrap">
-            Luxury<span className="text-primary-accent-dark">Living</span>
-          </span>
+         <Link href={`/${lang}`} className="flex flex-col shrink-0">
+          <span className="text-2xl lg:text-3xl font-serif text-primary tracking-tighter leading-none">Real Estate</span>
+          <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-text-muted mt-1 opacity-60">Real Estate</span>
         </Link>
       </header>
 
@@ -69,6 +66,7 @@ export default function NotFound() {
                 src="/images/luxury_404_illustration.webp"
                 alt="Empty luxury villa hallway"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-transform duration-[3s] group-hover:scale-110"
                 priority
               />
@@ -104,7 +102,7 @@ export default function NotFound() {
 
               <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
                 <Link
-                  href={`/${lang}/listings`}
+                  href={getLocalizedPath(lang, 'listings')}
                   className="group relative inline-flex items-center justify-center gap-3 bg-primary-accent-dark text-white px-10 py-5 rounded-full font-black text-lg transition-all hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(30,58,138,0.3)] hover:shadow-[0_25px_60px_rgba(30,58,138,0.4)] overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />

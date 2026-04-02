@@ -9,7 +9,7 @@ vi.mock("next/navigation", () => ({
 const mockDict = {
   listings: "Listings",
   rentals: "Rentals",
-  vender: "Sell",
+  services: "Services",
   blog: "Blog",
   faq: "FAQ",
   contactar: "Contact",
@@ -35,7 +35,7 @@ describe("Navbar", () => {
     
     expect(screen.getByText(/Listings/)).toBeInTheDocument();
     expect(screen.getByText(/Rentals/)).toBeInTheDocument();
-    expect(screen.getByText(/Sell/)).toBeInTheDocument();
+    expect(screen.getByText(/Services/)).toBeInTheDocument();
     expect(screen.getByText(/Contact/)).toBeInTheDocument();
   });
 
@@ -75,8 +75,8 @@ describe("Navbar", () => {
     });
     
     const esLinks = screen.getAllByText(/ES/);
-    // 'properties' is the English slug for the internal 'propiedades'
-    // in Spanish it should stay 'propiedades' (or whatever is in reverseMappings)
+    // 'properties' is the English slug for the internal 'listings'
+    // in Spanish it should stay 'propiedades' (as defined in reverseMappings)
     expect(esLinks[0]).toHaveAttribute('href', '/es/propiedades');
   });
 

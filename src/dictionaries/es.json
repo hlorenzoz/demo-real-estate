@@ -2,7 +2,7 @@
   "navbar": {
     "home": "Inicio",
     "listings": "Listados",
-    "vender": "Servicios",
+    "services": "Servicios",
     "nosotros": "Nosotros",
     "blog": "Blog",
     "faq": "FAQ",
@@ -17,7 +17,7 @@
   "paths": {
     "propiedades": "propiedades",
     "listings": "listados",
-    "vender": "servicios",
+    "services": "servicios",
     "nosotros": "nosotros",
     "blog": "blog",
     "faq": "faq",
@@ -121,6 +121,14 @@
     "address": "Calle Principal, 123, 28001 Ciudad, Provincia",
     "phone": "+34 900 000 000",
     "email": "contacto@tuinmobiliaria.com",
+    "about_us": "Sobre Nosotros",
+    "team": "Conoce al Equipo",
+    "contact_nav": "Contacto",
+    "tos": "Términos de Servicio",
+    "privacy": "Política de Privacidad",
+    "cookie_policy": "Política de Cookies",
+    "gdpr": "RGPD",
+    "sitemap": "Mapa del Sitio",
     "citations_title": "Inteligencia de Mercado",
     "citations": [
       { "text": "Datos del Mercado Inmobiliario Local 2024", "url": "https://www.ine.es/dyngs/INEbase/es/categoria.htm?c=Estadistica_P&cid=1254735576757" },

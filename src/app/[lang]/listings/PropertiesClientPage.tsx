@@ -83,7 +83,7 @@ export default function PropertiesClientPage({
     (dict.home.property_types as Record<string, string>)[type] || type;
 
   return (
-    <section className="py-16 px-6">
+    <section className="py-16 px-6 pt-32 lg:pt-40">
       <div className="max-w-7xl mx-auto">
 
         {/* Filters & Sort Bar */}

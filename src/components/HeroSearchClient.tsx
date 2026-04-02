@@ -126,7 +126,7 @@ export default function HeroSearchClient({ dict, lang, properties }: HeroSearchC
                 {filteredSearch.map((property) => (
                   <Link 
                     key={property.id}
-                    href={`${getLocalizedPath(lang, 'propiedades')}/${property.id}`}
+                    href={`${getLocalizedPath(lang, 'listings')}/${property.id}`}
                     data-testid="hero-search-result"
                     className="w-full flex items-center gap-4 p-3 hover:bg-primary/5 rounded-2xl transition-all group"
                   >

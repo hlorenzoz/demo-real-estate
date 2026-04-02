@@ -66,6 +66,7 @@ export async function generateMetadata(
     },
     icons: {
       icon: [
+        { url: "/favicon.ico" },
         { url: "/favicon.png", sizes: "192x192", type: "image/png" },
         { url: "/favicon.svg", type: "image/svg+xml" },
       ],

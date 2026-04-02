@@ -18,7 +18,7 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property, lang, dict, priority }: PropertyCardProps) {
-  const propertyPath = getLocalizedPath(lang, 'propiedades');
+  const propertyPath = getLocalizedPath(lang, 'listings');
   
   const [isLiked, setIsLiked] = useState(false);
 

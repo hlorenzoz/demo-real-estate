@@ -22,7 +22,7 @@ function getLocale(request: NextRequest) {
   return defaultLocale;
 }
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const segments = pathname.split("/"); 
   const localeFromPath = segments[1]; 
@@ -49,7 +49,7 @@ export default function middleware(request: NextRequest) {
   }
 
   // 2. Path localized rewriting (Virtual Slugs)
-  // Example: /en/properties -> /en/propiedades
+  // Example: /en/properties -> /en/listings
   // We handle requests like /[locale]/[slug]
   if (localeFromPath && slugFromPath && routeMappings[localeFromPath]) {
     const internalSlug = routeMappings[localeFromPath][slugFromPath];

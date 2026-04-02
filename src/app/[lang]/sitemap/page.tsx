@@ -1,11 +1,11 @@
-import Navbar from "../../../components/Navbar";
-import Footer from "../../../components/Footer";
-import MotionWrapper from "../../../components/MotionWrapper";
-import { getDictionary, Locale } from "../../../get-dictionary";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import MotionWrapper from "@/components/MotionWrapper";
+import { getDictionary, Locale } from "@/get-dictionary";
 import baseContentRaw from "../../../../base-content.json";
-import { Property } from "../../../types/property";
+import { Property } from "@/types/property";
 import Link from "next/link";
-import { getLocalizedPath } from "../../../lib/routes";
+import { getLocalizedPath, InternalRoute } from "@/lib/routes";
 
 const baseContent = baseContentRaw as { properties: Property[] };
 
@@ -14,19 +14,19 @@ export default async function sitemapPage({ params }: { params: Promise<{ lang: 
   const dict = await getDictionary(lang as Locale);
 
   const mainPages = [
-    { name: lang === 'es' ? 'Inicio' : 'Home', path: '/' },
-    { name: lang === 'es' ? 'Propiedades' : 'Properties', path: '/propiedades' },
-    { name: lang === 'es' ? 'Alquileres' : 'Rentals', path: '/alquiler' },
-    { name: lang === 'es' ? 'Sobre Nosotros' : 'About Us', path: '/about-us' },
-    { name: lang === 'es' ? 'Blog' : 'Blog', path: '/blog' },
-    { name: lang === 'es' ? 'Contacto' : 'Contact', path: '/contact' },
+    { name: lang === 'es' ? 'Inicio' : 'Home', path: 'home' },
+    { name: lang === 'es' ? 'Propiedades' : 'Properties', path: 'listings' },
+    { name: lang === 'es' ? 'Alquileres' : 'Rentals', path: 'rentals' },
+    { name: lang === 'es' ? 'Sobre Nosotros' : 'About Us', path: 'about-us' },
+    { name: lang === 'es' ? 'Blog' : 'Blog', path: 'blog' },
+    { name: lang === 'es' ? 'Contacto' : 'Contact', path: 'contact' },
   ];
 
   const legalPages = [
-    { name: lang === 'es' ? 'Aviso Legal' : 'Terms of Service', path: '/terms-of-service' },
-    { name: lang === 'es' ? 'Privacidad' : 'Privacy Policy', path: '/privacy-policy' },
-    { name: lang === 'es' ? 'Cookies' : 'Cookie Policy', path: '/cookie-policy' },
-    { name: lang === 'es' ? 'GDPR' : 'GDPR', path: '/gdpr' },
+    { name: lang === 'es' ? 'Aviso Legal' : 'Terms of Service', path: 'terms-of-service' },
+    { name: lang === 'es' ? 'Privacidad' : 'Privacy Policy', path: 'privacy-policy' },
+    { name: lang === 'es' ? 'Cookies' : 'Cookie Policy', path: 'cookie-policy' },
+    { name: lang === 'es' ? 'GDPR' : 'GDPR', path: 'gdpr' },
   ];
 
   return (
@@ -51,7 +51,7 @@ export default async function sitemapPage({ params }: { params: Promise<{ lang: 
                  {mainPages.map((page) => (
                    <li key={page.path}>
                      <Link 
-                        href={getLocalizedPath(lang, page.path)} 
+                        href={getLocalizedPath(lang, page.path as InternalRoute)} 
                         className="text-text-muted hover:text-primary-accent transition-colors font-bold"
                      >
                        {page.name}
@@ -70,7 +70,7 @@ export default async function sitemapPage({ params }: { params: Promise<{ lang: 
                  {baseContent.properties.map((prop) => (
                    <li key={prop.id}>
                      <Link 
-                        href={getLocalizedPath(lang, `/propiedades/${prop.id}`)} 
+                        href={`${getLocalizedPath(lang, 'listings')}/${prop.id}`} 
                         className="text-text-muted hover:text-primary-accent transition-colors text-sm font-bold"
                      >
                        {prop.location} - {prop.city}
@@ -89,7 +89,7 @@ export default async function sitemapPage({ params }: { params: Promise<{ lang: 
                  {legalPages.map((page) => (
                    <li key={page.path}>
                      <Link 
-                        href={getLocalizedPath(lang, page.path)} 
+                        href={getLocalizedPath(lang, page.path as InternalRoute)} 
                         className="text-text-muted hover:text-primary-accent transition-colors font-bold"
                      >
                        {page.name}

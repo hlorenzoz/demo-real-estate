@@ -8,19 +8,19 @@ describe('getLocalizedPath', () => {
   });
 
   it('should localize properties correctly', () => {
-    // en properties -> en properties (mapped from propiedades)
-    expect(getLocalizedPath('en', 'propiedades')).toBe('/en/properties');
-    // es propiedades -> es propiedades
+    // en properties -> en properties (mapped to listings)
+    expect(getLocalizedPath('en', 'properties')).toBe('/en/properties');
+    // es propiedades -> es propiedades (mapped to listings)
     expect(getLocalizedPath('es', 'propiedades')).toBe('/es/propiedades');
   });
 
   it('should localize contact correctly', () => {
     expect(getLocalizedPath('en', 'contact')).toBe('/en/contact');
-    expect(getLocalizedPath('es', 'contact')).toBe('/es/contactar');
+    expect(getLocalizedPath('es', 'contact')).toBe('/es/contacto');
   });
 
   it('should handle leading slashes', () => {
-    expect(getLocalizedPath('en', '/propiedades')).toBe('/en/properties');
+    expect(getLocalizedPath('en', '/properties')).toBe('/en/properties');
   });
 
   it('should return original if no mapping exists', () => {
@@ -35,6 +35,10 @@ describe('routeMappings', () => {
   });
 
   it('should have correct mapping for en properties', () => {
-    expect(routeMappings.en.properties).toBe('propiedades');
+    expect(routeMappings.en.properties).toBe('listings');
+  });
+
+  it('should have correct mapping for en services', () => {
+    expect(routeMappings.en.services).toBe('services');
   });
 });

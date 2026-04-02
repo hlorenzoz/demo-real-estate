@@ -11,15 +11,16 @@ const mockDict = {
   email: "test@example.com",
   follow: "Follow Us",
   rights: "All rights reserved",
-  links: {
-    listings: "Listings",
-    vender: "Sell",
-    nosotros: "About Us",
-    privacy: "Privacy",
-    legal: "Legal",
-    faq: "FAQ",
-    gdpr: "GDPR"
-  }
+  about_us: "About Us",
+  team: "Meet The Team",
+  contact_nav: "Contact",
+  tos: "Terms of Service",
+  privacy: "Privacy Policy",
+  cookie_policy: "Cookie Policy",
+  gdpr: "GDPR",
+  rentals: "Rentals",
+  citations_title: "Market Intelligence",
+  citations: []
 };
 
 describe("Footer", () => {
@@ -28,6 +29,6 @@ describe("Footer", () => {
     
     expect(screen.getByText(/Luxury property search/)).toBeInTheDocument();
     expect(screen.getAllByText(/Contact/)[0]).toBeInTheDocument();
-    expect(screen.getByText(/About Us/)).toBeInTheDocument();
+    expect(screen.getAllByText(/About Us/)[0]).toBeInTheDocument();
   });
 });

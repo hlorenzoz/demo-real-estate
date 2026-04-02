@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { MapPin, Mail, Phone, Instagram, Facebook } from "lucide-react";
-import { Dictionary } from "../get-dictionary";
+import { Dictionary } from "@/get-dictionary";
+import { getLocalizedPath } from "@/lib/routes";
 
 interface FooterProps {
   dict: Dictionary["footer"];
@@ -11,7 +12,7 @@ interface FooterProps {
 export default function Footer({ dict, lang }: FooterProps) {
   return (
     <footer className="bg-[#111111] text-white py-24 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-12 gap-y-16 lg:gap-x-16">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-x-12 gap-y-16 lg:gap-x-16">
         <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
           <Link href={`/${lang}`} className="flex flex-col mb-8">
             <span className="text-4xl font-serif text-white tracking-tighter leading-none">Real Estate</span>
@@ -36,16 +37,16 @@ export default function Footer({ dict, lang }: FooterProps) {
           </div>
         </div>
         <div>
-          <h2 className="font-serif text-xl mb-8 gold-gradient italic">Agency</h2>
+          <h2 className="font-serif text-xl mb-8 gold-gradient italic">{dict.about_us}</h2>
           <ul className="space-y-4">
-            <li><Link href={`/${lang}/about-us`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">About Us</Link></li>
-            <li><Link href={`/${lang}/meet-the-team`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Meet The Team</Link></li>
-            <li><Link href={`/${lang}/contact`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Contact</Link></li>
-            <li><Link href={`/${lang}/terms-of-service`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Terms of Service</Link></li>
-            <li><Link href={`/${lang}/privacy-policy`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Privacy Policy</Link></li>
-            <li><Link href={`/${lang}/cookie-policy`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Cookie Policy</Link></li>
-            <li><Link href={`/${lang}/gdpr`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">GDPR</Link></li>
-            <li><Link href={`/${lang}/sitemap`} className="text-gray-100 hover:text-primary-accent transition-all font-bold">Sitemap</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'about-us')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.about_us}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'meet-the-team')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.team}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'contact')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.contact_nav}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'terms-of-service')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.tos}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'privacy-policy')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.privacy}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'cookie-policy')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.cookie_policy}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'gdpr')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.gdpr}</Link></li>
+            <li><Link href={getLocalizedPath(lang, 'rentals')} className="text-gray-100 hover:text-primary-accent transition-all font-bold">{dict.rentals}</Link></li>
           </ul>
         </div>
         <div>
@@ -60,7 +61,7 @@ export default function Footer({ dict, lang }: FooterProps) {
           </div>
         </div>
         {dict.citations && (
-          <div className="md:col-span-1 lg:col-span-1">
+          <div className="sm:col-span-2 lg:col-span-1">
             <h2 className="font-serif text-xl mb-8 gold-gradient italic">{dict.citations_title || 'Market Intelligence'}</h2>
             <ul className="space-y-4">
               {dict.citations.map((cite: { text: string; url: string }) => (
@@ -82,8 +83,8 @@ export default function Footer({ dict, lang }: FooterProps) {
       <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
         <p className="text-gray-400 text-xs font-bold uppercase tracking-widest">© 2026 {dict.excellence}. All rights reserved.</p>
         <div className="flex gap-8">
-            <Link href={`/${lang}/sitemap`} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Sitemap</Link>
-            <Link href={`/${lang}/privacy-policy`} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Privacy</Link>
+            <Link href={getLocalizedPath(lang, 'sitemap')} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Sitemap</Link>
+            <Link href={getLocalizedPath(lang, 'privacy-policy')} className="text-gray-400 hover:text-white transition-all text-xs font-black uppercase tracking-tighter">Privacy</Link>
         </div>
       </div>
     </footer>

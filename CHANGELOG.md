@@ -1,4 +1,9 @@
 
+## [1.8.0] - 2026-04-02
+### Added
+- **CDN Image Migration**: Updated `luxury-facade` image reference to the premium high-resolution CDN version.
+- **Next.js Performance Fix**: Renamed the `CatchAll` component to `NotFoundHandler` to resolve a conflict with internal performance marks during navigation/notFound triggers.
+
 ## [1.7.0] - 2026-04-01
 ### Added
 - **Image Quality Whitelisting**: Added `65`, `70`, and `75` towhitelisted `qualities` in `next.config.ts` to enable effective compression-based bandwidth savings (~265 KiB).

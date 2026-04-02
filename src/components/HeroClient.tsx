@@ -117,7 +117,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
           </p>
           <div className="flex flex-col sm:flex-row gap-6">
             <Link 
-              href={getLocalizedPath(lang, 'propiedades')} 
+              href={getLocalizedPath(lang, 'listings')} 
               className="bg-primary-accent text-primary px-10 py-5 rounded-2xl flex items-center justify-center gap-3 font-black uppercase text-xs tracking-widest hover:scale-105 transition-all group shadow-2xl"
             >
               {dict.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -171,7 +171,7 @@ export default function HeroClient({ dict, lang, properties }: HeroProps) {
                     {filteredSearch.map((property) => (
                       <Link 
                         key={property.id}
-                        href={`${getLocalizedPath(lang, 'propiedades')}/${property.id}`}
+                        href={`${getLocalizedPath(lang, 'listings')}/${property.id}`}
                         className="flex items-center gap-4 p-3 hover:bg-primary/5 rounded-2xl transition-all group"
                       >
                         <div className="relative w-16 h-16 rounded-xl overflow-hidden shadow-sm flex-shrink-0">
