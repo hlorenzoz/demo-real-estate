@@ -57,12 +57,18 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const checkScroll = () => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current as any;
       setCanScrollLeft(scrollLeft > 20);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 20);
+      
+      const maxScroll = scrollWidth - clientWidth;
+      if (maxScroll > 0) {
+        setScrollProgress(scrollLeft / maxScroll);
+      }
     }
   };
 
@@ -145,7 +151,7 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: i * 0.05 }}
-                className="flex-shrink-0 w-[380px] snap-center"
+                className="flex-shrink-0 w-[85vw] md:w-[400px] snap-center"
               >
                 <div className="h-[400px] bg-white border border-slate-100 rounded-[48px] p-10 shadow-[0_15px_60px_rgba(0,0,0,0.03)] hover:shadow-[0_25px_80px_rgba(0,0,0,0.08)] transition-all flex flex-col group/card relative">
                   
@@ -194,6 +200,22 @@ export default function ReviewsCarousel({ reviews, stats, dict }: ReviewsCarouse
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* 3. Modern Scroll Indicator (Google Reviews Style) */}
+          <div className="mt-8 flex items-center justify-center">
+            <div className="w-48 h-[2px] bg-slate-100 rounded-full relative overflow-hidden">
+              <motion.div 
+                className="absolute top-0 left-0 h-full bg-[#FACC15] shadow-[0_0_10px_rgba(250,204,21,1)]"
+                style={{
+                  width: "30%",
+                }}
+                animate={{
+                  left: `${scrollProgress * 70}%`
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+              />
+            </div>
           </div>
 
           {/* Controls Box */}
