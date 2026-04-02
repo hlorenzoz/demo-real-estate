@@ -84,7 +84,10 @@
     "asesoria_desc": "Tailored strategic plans adapted to your specific goals, whether for investment, relocation, or wealth expansion.",
     "legal": "Legal and Tax Advisory",
     "legal_desc": "Expert navigation of Ourense region regulations. Specialists in Galician real estate law, inheritances, and tax optimization for large estates.",
-    "legal_expertise": "Specialists in the Xinzo de Limia zone."
+    "legal_expertise": "Specialists in the Xinzo de Limia zone.",
+    "tasacion_stat": "500+ properties valued annually",
+    "venta_stat": "Properties sold 20% faster",
+    "alquiler_stat": "98% satisfaction rate"
   },
   "reviews": {
     "title": "Verified Trust",
@@ -115,7 +118,13 @@
     "excellence": "Real Estate Excellence",
     "address": "Main Street, 123, 28001 City, Region",
     "phone": "+34 900 000 000",
-    "email": "contact@youragency.com"
+    "email": "contact@youragency.com",
+    "citations_title": "Market Intelligence",
+    "citations": [
+      { "text": "Local Property Market Data 2024", "url": "https://www.ine.es/dyngs/INEbase/en/categoria.htm?c=Estadistica_P&cid=1254735576757" },
+      { "text": "Regional Property Regulatory Authority", "url": "https://www.cgcoapi.es/" },
+      { "text": "Housing Price Index", "url": "https://www.mitma.gob.es/vivienda/alquiler/indice-alquiler" }
+    ]
   },
   "contact_page": {
     "title": "Contact Us",
@@ -138,8 +147,8 @@
   },
   "metadata": {
     "title": "Demo Website | Real Estate",
-    "description": "Your trusted real estate agency with personalized attention, free appraisals and guaranteed professionalism.",
-    "keywords": "real estate, homes, rentals, property appraisal, real estate demo"
+    "description": "Luxury real estate agency in your city. Specialists in high-end properties, free professional appraisals, and 100% transparent management with 98% client satisfaction.",
+    "keywords": "luxury real estate, homes, rentals, property appraisal, high-end real estate"
   },
   "faq": {
     "title": "Frequently Asked Questions",
@@ -151,7 +160,7 @@
         "a": "The first step is a free professional appraisal. Our expert team will visit your property to carry out a detailed market study and advise you on the optimal asking price."
       },
       {
-        "q": "What documents do I need to prepare for the sale?",
+        "q": "What do I need to prepare for the sale?",
         "a": "You will need the owners' ID (DNI), the Property Deed, the latest IBI receipt, the Energy Efficiency Certificate, and the Habitability Certificate (if applicable). We help you process whatever you are missing."
       },
       {

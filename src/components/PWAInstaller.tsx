@@ -74,8 +74,8 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
     if (typeof (globalThis as any).window === "undefined") return;
 
     const handleScroll = () => {
-      // Show after scrolling 400px which is generally past the hero/search area
-      setIsScrolledPastHero((globalThis as any).window.scrollY > 400);
+      // Show after scrolling 600px which is generally past the hero/search area
+      setIsScrolledPastHero((globalThis as any).window.scrollY > 600);
     };
 
     (globalThis as any).window.addEventListener("scroll", handleScroll, { passive: true });
@@ -147,12 +147,12 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
               {/* Content Area */}
               <div className="flex-1 min-w-0 py-1">
                 <p className="text-[#001D19] text-base sm:text-lg font-bold leading-tight mb-0.5 truncate tracking-tight">
-                  {lang === 'es' ? 'Añadir a Inicio' : 'Add to Home Screen'}
+                  {lang === 'es' ? 'Acceso Inmediato' : 'Access Luxury Living'}
                 </p>
                 <p className="text-[#374151] text-xs sm:text-sm font-medium leading-snug lg:leading-tight decoration-0">
                   {lang === 'es' 
-                    ? 'Accede a Luxury Living al instante, incluso offline' 
-                    : 'Access Luxury Living instantly, even offline'}
+                    ? 'Instala nuestro catálogo premium para navegar sin conexión.' 
+                    : 'Install our premium properties catalog for offline browsing.'}
                 </p>
               </div>
 

@@ -7,7 +7,7 @@ test.describe("PWA Installer E2E", () => {
     // We need to wait for the scroll trigger too
     await page.evaluate(() => {
       // @ts-expect-error - window is available in browser context
-      window.scrollTo(0, 500);
+      window.scrollTo(0, 700);
     });
   });
 
@@ -16,15 +16,15 @@ test.describe("PWA Installer E2E", () => {
     await page.waitForTimeout(10000);
 
     // Assert by presence in DOM 
-    const installer = page.getByText('Add to Home Screen');
+    const installer = page.getByText('Access Luxury Living');
     await expect(installer).toBeAttached({ timeout: 15000 });
 
     // Verify brand assets
     const logo = page.locator('img[alt="Luxury Living logo"]');
     await expect(logo).toBeAttached();
 
-    // Close button should work
-    const closeBtn = page.getByLabel("Close installer");
+    // Close button should work (ensure we click the visible one, desktop or mobile)
+    const closeBtn = page.getByLabel("Close installer").filter({ visible: true }).first();
     await closeBtn.click();
 
     // Should be removed from DOM (because of AnimatePresence exit)
@@ -54,7 +54,7 @@ test.describe("PWA Installer E2E", () => {
     await page.setViewportSize({ width: 375, height: 667 });
     await page.waitForTimeout(10000);
     
-    const installer = page.getByText('Add to Home Screen');
+    const installer = page.getByText('Access Luxury Living');
     await expect(installer).toBeAttached({ timeout: 15000 });
     
     const box = await installer.boundingBox();

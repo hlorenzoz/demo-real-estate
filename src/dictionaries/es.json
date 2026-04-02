@@ -84,7 +84,10 @@
     "asesoria_desc": "Planes estratégicos a medida adaptados a tus objetivos específicos, ya sea para inversión, reubicación o expansión de patrimonio.",
     "legal": "Asesoramiento Legal y Fiscal",
     "legal_desc": "Navegamos las complejas normativas de la región de Ourense. Especialistas en derecho inmobiliario gallego, herencias y optimización fiscal para grandes patrimonios.",
-    "legal_expertise": "Especialistas en la zona de Xinzo de Limia."
+    "legal_expertise": "Especialistas en la zona de Xinzo de Limia.",
+    "tasacion_stat": "Más de 500 propiedades valoradas anualmente",
+    "venta_stat": "Vendido un 20% más rápido que la media",
+    "alquiler_stat": "98% de tasa de satisfacción"
   },
   "reviews": {
     "title": "Confianza verificada",
@@ -115,7 +118,13 @@
     "excellence": "Real Estate Excellence",
     "address": "Calle Principal, 123, 28001 Ciudad, Provincia",
     "phone": "+34 900 000 000",
-    "email": "contacto@tuinmobiliaria.com"
+    "email": "contacto@tuinmobiliaria.com",
+    "citations_title": "Inteligencia de Mercado",
+    "citations": [
+      { "text": "Datos del Mercado Inmobiliario Local 2024", "url": "https://www.ine.es/dyngs/INEbase/es/categoria.htm?c=Estadistica_P&cid=1254735576757" },
+      { "text": "Colegio Oficial de Agentes de la Propiedad", "url": "https://www.cgcoapi.es/" },
+      { "text": "Índice de Precios de Vivienda", "url": "https://www.mitma.gob.es/vivienda/alquiler/indice-alquiler" }
+    ]
   },
   "contact_page": {
     "title": "Contacta con nosotros",
@@ -138,8 +147,8 @@
   },
   "metadata": {
     "title": "Demo Website | Real Estate",
-    "description": "Tu inmobiliaria de confianza con atención personalizada, tasaciones gratuitas y profesionalismo garantizado.",
-    "keywords": "inmobiliaria, viviendas, alquiler, tasacion propiedades, real estate demo"
+    "description": "Inmobiliaria de lujo líder en tu ciudad. Especialistas en propiedades exclusivas, valoraciones gratuitas y gestión 100% transparente con un 98% de satisfacción.",
+    "keywords": "inmobiliaria de lujo, viviendas exclusivas, alquiler, tasacion propiedades, real estate premium"
   },
   "faq": {
     "title": "Preguntas Frecuentes",

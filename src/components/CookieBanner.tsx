@@ -87,6 +87,7 @@ export function CookieBanner({ dict }: { dict: Dictionary }) {
               </button>
               <button
                 onClick={handleAccept}
+                data-testid="cookie-accept-btn"
                 className="flex-1 sm:flex-none px-6 py-3 rounded-xl bg-primary text-white text-sm font-bold hover:bg-primary-accent transition-colors"
               >
                 {dict.cookie_banner.accept}

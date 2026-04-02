@@ -53,6 +53,9 @@ interface ServiceDictionary {
   legal: string;
   legal_desc: string;
   legal_expertise: string;
+  tasacion_stat?: string;
+  venta_stat?: string;
+  alquiler_stat?: string;
 }
 
 export default async function Home({
@@ -174,9 +177,14 @@ export default async function Home({
                   <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
                     {services.tasacion}
                   </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
                     {services.tasacion_desc}
                   </p>
+                  {services.tasacion_stat && (
+                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
+                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.tasacion_stat}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </MotionWrapper>
@@ -192,9 +200,14 @@ export default async function Home({
                   <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
                     {services.venta}
                   </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic">
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
                     {services.venta_desc}
                   </p>
+                  {services.venta_stat && (
+                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors">
+                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.venta_stat}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </MotionWrapper>
@@ -209,9 +222,14 @@ export default async function Home({
                   <h3 className="text-3xl font-serif mb-6 text-primary group-hover:text-white leading-tight italic">
                     {services.alquiler}
                   </h3>
-                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-8">
+                  <p className="text-text-muted font-bold group-hover:text-gray-300 leading-relaxed italic mb-4">
                     {services.alquiler_desc}
                   </p>
+                  {services.alquiler_stat && (
+                    <div className="inline-flex items-center gap-2 bg-primary-accent/10 group-hover:bg-white/10 px-4 py-2 rounded-full transition-colors mb-6">
+                      <span className="text-xs font-black text-primary group-hover:text-primary-accent uppercase tracking-wider">{services.alquiler_stat}</span>
+                    </div>
+                  )}
                   <ul className="space-y-3">
                     {services.alquiler_pillars.map((p: string) => (
                       <li key={p} className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-primary-accent-dark group-hover:text-primary-accent">

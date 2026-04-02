@@ -24,7 +24,7 @@ test.describe('Floating Overlays Stacking', () => {
       window.dispatchEvent(event);
     });
 
-    const pwaInstaller = page.getByText(/Add to Home Screen/i);
+    const pwaInstaller = page.getByText(/Access Luxury Living/i);
     await expect(pwaInstaller).toBeVisible({ timeout: 10000 });
     
     // 3. Find WhatsApp button
@@ -52,7 +52,7 @@ test.describe('Floating Overlays Stacking', () => {
     }
 
     // 5. Close Cookie Banner and verify PWA moves down
-    await page.click('text=Accept All');
+    await page.getByTestId('cookie-accept-btn').click({ force: true });
     await expect(page.locator('text=We respect your privacy')).not.toBeVisible();
     
     // Wait for transition

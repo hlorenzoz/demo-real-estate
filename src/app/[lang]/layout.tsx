@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { notFound } from "next/navigation";
 import { Playfair_Display, Inter } from "next/font/google";
 import { PWAProvider } from "../../components/PWAProvider";
@@ -112,7 +113,8 @@ export default async function RootLayout({
         {process.env.NODE_ENV === "production" ? (
           <PWAProvider swUrl="/sw.js" />
         ) : (
-          <script
+          <Script
+            id="sw-unregister"
             dangerouslySetInnerHTML={{
               __html: `
                 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {

@@ -24,7 +24,7 @@ describe("PWAInstaller", () => {
     // Default window mocks
     Object.defineProperty(window, 'scrollY', {
       writable: true,
-      value: 500,
+      value: 700,
     });
 
     Object.defineProperty(window, 'matchMedia', {
@@ -51,19 +51,19 @@ describe("PWAInstaller", () => {
 
   it("is not visible by default", () => {
     renderWithProvider(<PWAInstaller {...mockPropsEn} />);
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("shows installer automatically after 7 seconds delay", async () => {
     renderWithProvider(<PWAInstaller {...mockPropsEn} />);
     
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
     
     await act(async () => {
       vi.advanceTimersByTime(7000);
     });
     
-    expect(screen.getByText(/Add to Home Screen/)).toBeInTheDocument();
+    expect(screen.getByText(/Access Luxury Living/)).toBeInTheDocument();
     const logo = screen.getByAltText("Luxury Living logo");
     expect(logo).toBeInTheDocument();
   });
@@ -75,7 +75,7 @@ describe("PWAInstaller", () => {
       vi.advanceTimersByTime(7000);
     });
     
-    expect(screen.getByText(/Añadir a Inicio/)).toBeInTheDocument();
+    expect(screen.getByText(/Acceso Inmediato/)).toBeInTheDocument();
   });
 
   it("shows installer when beforeinstallprompt is triggered", async () => {
@@ -90,7 +90,7 @@ describe("PWAInstaller", () => {
       window.dispatchEvent(promptEvent);
     });
     
-    expect(screen.getByText(/Add to Home Screen/)).toBeInTheDocument();
+    expect(screen.getByText(/Access Luxury Living/)).toBeInTheDocument();
     expect(promptEvent.preventDefault).toHaveBeenCalled();
   });
 
@@ -115,7 +115,7 @@ describe("PWAInstaller", () => {
       vi.advanceTimersByTime(7000);
     });
     
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("does not reappear after dismissal", async () => {
@@ -127,7 +127,7 @@ describe("PWAInstaller", () => {
     
     const xBtn = screen.getAllByLabelText("Close installer")[0];
     fireEvent.click(xBtn);
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
 
     // Trigger event again
     const promptEvent = new Event("beforeinstallprompt");
@@ -135,7 +135,7 @@ describe("PWAInstaller", () => {
       window.dispatchEvent(promptEvent);
     });
     
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("handles install button click (accepted)", async () => {
@@ -158,7 +158,7 @@ describe("PWAInstaller", () => {
     });
     
     expect(promptEvent.prompt).toHaveBeenCalled();
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("handles install button click (dismissed)", async () => {
@@ -183,7 +183,7 @@ describe("PWAInstaller", () => {
     expect(promptEvent.prompt).toHaveBeenCalled();
     expect(console.log).toHaveBeenCalledWith("PWA Install dismissed");
     // Should still be in document if dismissed (based on logic)
-    expect(screen.getByText(/Add to Home Screen/)).toBeInTheDocument();
+    expect(screen.getByText(/Access Luxury Living/)).toBeInTheDocument();
   });
 
   it("handles install button click error", async () => {
@@ -249,7 +249,7 @@ describe("PWAInstaller", () => {
       vi.advanceTimersByTime(7000);
     });
     
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("does not show after delay if dismissed during delay", async () => {
@@ -265,14 +265,14 @@ describe("PWAInstaller", () => {
     // It showed because event fired, now dismiss
     const xBtn = screen.getAllByLabelText("Close installer")[0];
     fireEvent.click(xBtn);
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
 
     // Now finish the 7s delay
     await act(async () => {
       vi.advanceTimersByTime(6000);
     });
     
-    expect(screen.queryByText(/Add to Home Screen/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 
   it("has correct accessible text colors for contrast", async () => {
@@ -281,7 +281,7 @@ describe("PWAInstaller", () => {
       vi.advanceTimersByTime(7000);
     });
     
-    const description = screen.getByText(/Access Luxury Living instantly/);
+    const description = screen.getByText(/Install our premium properties catalog/);
     expect(description).toHaveClass('text-[#374151]');
     expect(description).not.toHaveClass('opacity-80');
   });

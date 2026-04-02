@@ -11,8 +11,8 @@ interface FooterProps {
 export default function Footer({ dict, lang }: FooterProps) {
   return (
     <footer className="bg-[#111111] text-white py-24 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-12 lg:gap-16">
-        <div className="md:col-span-2">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-x-12 gap-y-16 lg:gap-x-16">
+        <div className="sm:col-span-2 md:col-span-2 lg:col-span-2">
           <Link href={`/${lang}`} className="flex flex-col mb-8">
             <span className="text-4xl font-serif text-white tracking-tighter leading-none">Real Estate</span>
             <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-primary-accent mt-2">{dict.excellence}</span>
@@ -28,11 +28,11 @@ export default function Footer({ dict, lang }: FooterProps) {
               <Phone size={18} /> {dict.phone}
             </a>
             <p className="flex items-start gap-3 text-gray-300 font-bold">
-              <MapPin size={18} className="mt-1" /> {dict.address}
+              <MapPin size={18} className="mt-1 shrink-0" /> {dict.address}
             </p>
-            <p className="flex items-start gap-3 text-gray-300 font-bold">
-              <Mail size={18} className="mt-1" /> {dict.email}
-            </p>
+            <a href={`mailto:${dict.email}`} className="flex items-start gap-3 text-gray-300 hover:text-primary-accent transition-all font-bold break-all">
+              <Mail size={18} className="mt-1 shrink-0" /> {dict.email}
+            </a>
           </div>
         </div>
         <div>
@@ -58,6 +58,32 @@ export default function Footer({ dict, lang }: FooterProps) {
               <Facebook className="w-5 h-5" />
             </Link>
           </div>
+        </div>
+        {dict.citations && (
+          <div className="md:col-span-1 lg:col-span-1">
+            <h2 className="font-serif text-xl mb-8 gold-gradient italic">{dict.citations_title || 'Market Intelligence'}</h2>
+            <ul className="space-y-4">
+              {dict.citations.map((cite: { text: string; url: string }) => (
+                <li key={cite.text} className="border-l border-white/10 pl-4">
+                  <a 
+                    href={cite.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 text-xs font-medium hover:text-primary-accent transition-all italic block"
+                  >
+                    {cite.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">© 2026 {dict.excellence}. All rights reserved.</p>
+        <div className="flex gap-8">
+            <Link href={`/${lang}/sitemap`} className="text-gray-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-tighter">Sitemap</Link>
+            <Link href={`/${lang}/privacy-policy`} className="text-gray-500 hover:text-white transition-all text-[10px] font-black uppercase tracking-tighter">Privacy</Link>
         </div>
       </div>
     </footer>

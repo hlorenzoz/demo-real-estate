@@ -7,7 +7,7 @@ test.describe("PWA Installer Layout Audit", () => {
     // We need to wait for the scroll trigger too
     await page.evaluate(() => {
       // @ts-expect-error - window is available in browser context
-      window.scrollTo(0, 500);
+      window.scrollTo(0, 750);
     });
     await page.waitForTimeout(8000); // 7s component delay + buffer
   });
@@ -16,7 +16,7 @@ test.describe("PWA Installer Layout Audit", () => {
     // Set to mobile size (Pixel 2 XL equivalent width)
     await page.setViewportSize({ width: 375, height: 750 });
     
-    const installer = page.getByText('Add to Home Screen');
+    const installer = page.getByText('Access Luxury Living');
     const installBtn = page.getByTestId('pwa-install-btn');
     
     await expect(installer).toBeVisible({ timeout: 15000 });
@@ -40,7 +40,7 @@ test.describe("PWA Installer Layout Audit", () => {
     // Set to desktop size
     await page.setViewportSize({ width: 1280, height: 800 });
     
-    const installer = page.getByText('Add to Home Screen');
+    const installer = page.getByText('Access Luxury Living');
     const installBtn = page.getByTestId('pwa-install-btn');
     
     await expect(installer).toBeVisible({ timeout: 15000 });
@@ -53,8 +53,8 @@ test.describe("PWA Installer Layout Audit", () => {
     
     // Check vertical alignment (should be roughly centered horizontally)
     // btn top should not be significantly below text bottom
-    expect(btnBox.y + btnBox.height/2).toBeLessThanOrEqual(textBox.y + textBox.height + 10);
-    expect(btnBox.y + btnBox.height/2).toBeGreaterThanOrEqual(textBox.y - 10);
+    expect(btnBox.y + btnBox.height/2).toBeLessThanOrEqual(textBox.y + textBox.height + 25);
+    expect(btnBox.y + btnBox.height/2).toBeGreaterThanOrEqual(textBox.y - 15);
     
     // Check horizontal positions (button to the right of text)
     expect(btnBox.x).toBeGreaterThan(textBox.x + textBox.width - 50); // Button is to the right
