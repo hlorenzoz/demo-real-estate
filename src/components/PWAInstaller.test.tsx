@@ -4,7 +4,7 @@ import { render, screen, fireEvent, act } from "@testing-library/react";
 import { PWAInstaller, BeforeInstallPromptEvent } from "./PWAInstaller";
 import { UIOverlayProvider } from "../context/UIOverlayContext";
 
-declare const window: Window & typeof globalThis & { alert: any };
+declare const window: Window & typeof globalThis & { alert: any; localStorage: any };
 
 describe("PWAInstaller", () => {
   const renderWithProvider = (ui: React.ReactElement) => {
@@ -20,6 +20,7 @@ describe("PWAInstaller", () => {
     vi.useFakeTimers();
     vi.spyOn(console, 'log').mockImplementation(() => {});
     vi.spyOn(console, 'error').mockImplementation(() => {});
+    window.localStorage.clear();
     
     // Default window mocks
     Object.defineProperty(window, 'scrollY', {
@@ -284,5 +285,97 @@ describe("PWAInstaller", () => {
     const description = screen.getByText(/Install our premium properties catalog/);
     expect(description).toHaveClass('text-[#374151]');
     expect(description).not.toHaveClass('opacity-80');
+  });
+
+  it("sets suppression timestamp in localStorage when dismissed", async () => {
+    const setItemSpy = vi.spyOn(window.localStorage, 'setItem');
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    
+    await act(async () => {
+      vi.advanceTimersByTime(7000);
+    });
+    
+    const xBtn = screen.getAllByLabelText("Close installer")[0];
+    fireEvent.click(xBtn);
+    
+    expect(setItemSpy).toHaveBeenCalledWith("pwa-suppressed-until", expect.any(String));
+    const savedValue = parseInt(setItemSpy.mock.calls[0][1] as string, 10);
+    // Should be roughly 7 days from now
+    const sevenDaysInMs = 7 * 24 * 60 * 60 * 1000;
+    expect(savedValue).toBeGreaterThanOrEqual(Date.now() + sevenDaysInMs - 1000);
+  });
+
+  it("does not show if suppression is active in localStorage", async () => {
+    const futureDate = Date.now() + 100000;
+    vi.spyOn(window.localStorage, 'getItem').mockReturnValue(futureDate.toString());
+    
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    
+    await act(async () => {
+      vi.advanceTimersByTime(7000);
+    });
+    
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
+  });
+
+  it("shows if suppression in localStorage has expired", async () => {
+    const pastDate = Date.now() - 100000;
+    vi.spyOn(window.localStorage, 'getItem').mockReturnValue(pastDate.toString());
+    
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    
+    await act(async () => {
+      vi.advanceTimersByTime(7000);
+    });
+    
+    expect(screen.getByText(/Access Luxury Living/)).toBeInTheDocument();
+  });
+
+  it("updates visibility based on scroll position", async () => {
+    // Start at top (0px)
+    Object.defineProperty(window, 'scrollY', { writable: true, value: 0 });
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    
+    await act(async () => {
+      vi.advanceTimersByTime(7000);
+    });
+    
+    // Should NOT be in document even after timer because scroll < 900
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
+
+    // Scroll down to 1000px
+    await act(async () => {
+      Object.defineProperty(window, 'scrollY', { value: 1000 });
+      window.dispatchEvent(new Event('scroll'));
+    });
+
+    // Should appear now
+    expect(screen.getByText(/Access Luxury Living/)).toBeInTheDocument();
+  });
+
+  it("cleans up event listeners on unmount", async () => {
+    const removeSpy = vi.spyOn(window, 'removeEventListener');
+    const { unmount } = renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    
+    unmount();
+    
+    expect(removeSpy).toHaveBeenCalledWith("beforeinstallprompt", expect.any(Function));
+    expect(removeSpy).toHaveBeenCalledWith("scroll", expect.any(Function));
+  });
+
+  it("can be dismissed using the mobile button", async () => {
+    // Force mobile view or just specifically click the first one
+    renderWithProvider(<PWAInstaller {...mockPropsEn} />);
+    await act(async () => { vi.advanceTimersByTime(7000); });
+    
+    // There are 2 close buttons (sm:hidden and hidden sm:flex)
+    const mobileCloseBtn = screen.getAllByLabelText("Close installer")[0];
+    const desktopCloseBtn = screen.getAllByLabelText("Close installer")[1];
+    
+    expect(mobileCloseBtn).toHaveClass('sm:hidden');
+    expect(desktopCloseBtn).toHaveClass('hidden sm:flex');
+
+    fireEvent.click(mobileCloseBtn);
+    expect(screen.queryByText(/Access Luxury Living/)).not.toBeInTheDocument();
   });
 });

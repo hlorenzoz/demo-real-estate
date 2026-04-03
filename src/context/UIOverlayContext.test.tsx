@@ -1,5 +1,6 @@
-import { describe, it, expect } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { renderHook, act } from "@testing-library/react";
+import React from "react";
 import { 
   UIOverlayProvider, 
   useUIOverlay, 
@@ -8,82 +9,54 @@ import {
   getWhatsAppOffset 
 } from "./UIOverlayContext";
 
-const TestComponent = () => {
-    const { 
-        cookieBannerVisible, 
-        setCookieBannerVisible,
-        pwaInstallerVisible,
-        setPwaInstallerVisible
-    } = useUIOverlay();
-
-    return (
-        <div>
-            <div data-testid="cookie-visible">{cookieBannerVisible.toString()}</div>
-            <div data-testid="pwa-visible">{pwaInstallerVisible.toString()}</div>
-            <button onClick={() => setCookieBannerVisible(true)}>Show Cookie</button>
-            <button onClick={() => setPwaInstallerVisible(true)}>Show PWA</button>
-        </div>
-    );
-};
-
 describe("UIOverlayContext", () => {
-    it("provides the initial state", () => {
-        render(
-            <UIOverlayProvider>
-                <TestComponent />
-            </UIOverlayProvider>
-        );
+  it("provides default values", () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <UIOverlayProvider>{children}</UIOverlayProvider>
+    );
 
-        expect(screen.getByTestId("cookie-visible")).toHaveTextContent("false");
-        expect(screen.getByTestId("pwa-visible")).toHaveTextContent("false");
+    const { result } = renderHook(() => useUIOverlay(), { wrapper });
+
+    expect(result.current.cookieBannerVisible).toBe(false);
+    expect(result.current.pwaInstallerVisible).toBe(false);
+  });
+
+  it("updates values correctly", () => {
+    const wrapper = ({ children }: { children: React.ReactNode }) => (
+      <UIOverlayProvider>{children}</UIOverlayProvider>
+    );
+
+    const { result } = renderHook(() => useUIOverlay(), { wrapper });
+
+    act(() => {
+      result.current.setCookieBannerVisible(true);
+      result.current.setPwaInstallerVisible(true);
     });
 
-    it("updates the state - cookie banner", async () => {
-        render(
-            <UIOverlayProvider>
-                <TestComponent />
-            </UIOverlayProvider>
-        );
+    expect(result.current.cookieBannerVisible).toBe(true);
+    expect(result.current.pwaInstallerVisible).toBe(true);
+  });
 
-        const btn = screen.getByText("Show Cookie");
-        fireEvent.click(btn);
+  it("throws error when used outside provider", () => {
+    // Suppress console error for expected error
+    const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    
+    expect(() => renderHook(() => useUIOverlay())).toThrow("useUIOverlay must be used within a UIOverlayProvider");
+    
+    consoleSpy.mockRestore();
+  });
 
-        expect(screen.getByTestId("cookie-visible")).toHaveTextContent("true");
-    });
-
-    it("updates the state - pwa installer", async () => {
-        render(
-            <UIOverlayProvider>
-                <TestComponent />
-            </UIOverlayProvider>
-        );
-
-        const btn = screen.getByText("Show PWA");
-        fireEvent.click(btn);
-
-        expect(screen.getByTestId("pwa-visible")).toHaveTextContent("true");
-    });
-
-    it("throws error when used outside provider", () => {
-        const t = () => render(<TestComponent />);
-        expect(t).toThrow("useUIOverlay must be used within a UIOverlayProvider");
-    });
-
-    describe("Utility Offset Functions", () => {
-        it("getCookieOffset returns static 16", () => {
-            expect(getCookieOffset()).toBe(16);
-        });
-
-        it("getPWAOffset returns correct heights", () => {
-            expect(getPWAOffset(false)).toBe(16);
-            expect(getPWAOffset(true)).toBe(16 + 200 + 12);
-        });
-
-        it("getWhatsAppOffset returns correct heights for all cases", () => {
-            expect(getWhatsAppOffset(false, false)).toBe(20);
-            expect(getWhatsAppOffset(true, false)).toBe(20 + 200 + 12);
-            expect(getWhatsAppOffset(false, true)).toBe(20 + 180 + 12);
-            expect(getWhatsAppOffset(true, true)).toBe(20 + 200 + 12 + 180 + 12);
-        });
-    });
+  it("calculates offsets correctly", () => {
+    expect(getCookieOffset()).toBe(16);
+    
+    // getPWAOffset
+    expect(getPWAOffset(false)).toBe(16);
+    expect(getPWAOffset(true)).toBe(16 + 200 + 12);
+    
+    // getWhatsAppOffset
+    expect(getWhatsAppOffset(false, false)).toBe(20);
+    expect(getWhatsAppOffset(true, false)).toBe(20 + 200 + 12);
+    expect(getWhatsAppOffset(false, true)).toBe(20 + 180 + 12);
+    expect(getWhatsAppOffset(true, true)).toBe(20 + 200 + 12 + 180 + 12);
+  });
 });

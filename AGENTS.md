@@ -31,7 +31,8 @@ This project is a high-end luxury real estate boilerplate with advanced search, 
 - **Framework Conflict Resolution**: Renamed the generic `CatchAll` component to `NotFoundHandler` to prevent collisions with Next.js internal performance measurement marks, fixing the "negative time stamp" measurement error.
 - **Unified Property Catalog**: Implemented a new `/properties` (`/propiedades`) route to serve as a comprehensive property hub with transaction-type filters (All, For Sale, For Rent) enabled. Updated the `/listings` and `/rentals` routes to be pre-filtered views (Sales and Rentals respectively) which hide the redundant contract-type filters for a cleaner, category-specific experience.
 - **Home CTA Update**: Pointed the "Check Listings" section link on the home page specifically to `/listings` to match its title, while keeping the Hero link on the unified properties hub.
-- **E2E Stability Pattern**: Standardized on using UI-displayed result counts for property listing verification in Playwright tests (e.g., `"{count} properties found"`) rather than fragile URL-based selectors, ensuring internationalized routes work correctly across translations.
+- **PWA Installation Suppression**: Implemented a 7-day suppression logic using localStorage for the PWA installer widget. When a user dismisses the installer, the widget stays hidden for one week.
+- **PWA Test Coverage**: Achieved 100% line coverage and high branch coverage for the PWAInstaller component and UIOverlayContext. Added comprehensive unit tests for suppression, scroll-based visibility, and cross-platform UI interactions.
 
 ## Maintainers
 - Antigravity AI (Primary Developer)

@@ -25,7 +25,15 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
     null
   );
   const [showInstaller, setShowInstaller] = useState(false);
-  const [hasDismissed, setHasDismissed] = useState(false);
+  const [hasDismissed, setHasDismissed] = useState(() => {
+    if (typeof (globalThis as any).window !== "undefined") {
+      const suppressedUntil = (globalThis as any).window.localStorage.getItem("pwa-suppressed-until");
+      if (suppressedUntil && Date.now() < parseInt(suppressedUntil, 10)) {
+        return true;
+      }
+    }
+    return false;
+  });
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const { cookieBannerVisible, setPwaInstallerVisible } = useUIOverlay();
 
@@ -34,6 +42,9 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
   useEffect(() => {
     setPwaInstallerVisible(isVisible);
   }, [isVisible, setPwaInstallerVisible]);
+
+  const SUPPRESSED_UNTIL_KEY = "pwa-suppressed-until";
+  const SUPPRESS_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 7 Days
 
   useEffect(() => {
     // Check if already installed
@@ -45,7 +56,7 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
       const pwaEvent = e as BeforeInstallPromptEvent;
       pwaEvent.preventDefault();
       setDeferredPrompt(pwaEvent);
-      // If we haven't dismissed it, show it when the prompt is ready
+      // If we haven't dismissed it (or suppressed it), show it when the prompt is ready
       if (!hasDismissed) {
         setShowInstaller(true);
       }
@@ -116,6 +127,12 @@ export function PWAInstaller({ lang }: PWAInstallerProps) {
   const handleDismiss = () => {
     setShowInstaller(false);
     setHasDismissed(true);
+    
+    // Set suppression for 7 days
+    if (typeof (globalThis as any).window !== "undefined") {
+      const until = Date.now() + SUPPRESS_DURATION_MS;
+      (globalThis as any).window.localStorage.setItem(SUPPRESSED_UNTIL_KEY, until.toString());
+    }
   };
 
   return (
